@@ -1,7 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from "./features/login/Login";
 import './App.css'
+
+import Login from "./features/login/Login";
+import Cadastro from "./features/cadastro/Cadastro";
 
 function App() {
 
@@ -9,7 +11,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        {/* <Route path="/cadastro-aluno" element={} /> */}
+        <Route path="/cadastro-aluno" element={<Cadastro/>} />
       </Routes>
     </BrowserRouter>
   );

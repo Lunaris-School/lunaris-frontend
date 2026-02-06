@@ -3,14 +3,27 @@ import "./TextInput.css";
 
 export default function TextInput({ 
   label, 
-  type = "text", 
+  type, 
   value, 
   onChange, 
+  maxLength,
   placeholder = "",
   name,
   id,
-  required = false
+  required = false,
+  inputMode,
+  digitsOnly = false
 }) {
+  const handleChange = (e) => {
+    let next = e.target.value;
+    if (digitsOnly) {
+      next = next.replace(/\D/g, "").slice(0, maxLength ?? undefined);
+    }
+    if (onChange) {
+      onChange({ ...e, target: { ...e.target, value: next } });
+    }
+  };
+
   return (
     <div className="text-input-container">
       {label && (
@@ -23,9 +36,11 @@ export default function TextInput({
         id={id || name}
         name={name}
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
         placeholder={placeholder}
+        maxLength={maxLength}
         required={required}
+        inputMode={inputMode}
         className="text-input-field"
       />
     </div>

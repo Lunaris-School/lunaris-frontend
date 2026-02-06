@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import "./Login.css";
 import LargeButton from "../../components/LargeButton";
 import TextInput from "../../components/TextInput";
-import "./Login.css";
 import loginImg from "../../assets/loginImg.jpg";
 import logo from "../../assets/logo.svg";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();  
+
 
   return (
     <div className="login-container">
@@ -44,7 +47,7 @@ export default function Login() {
           <span className="divider-text">Aluno novo?</span>
           <div className="divider-line"></div>
         </div>
-        <LargeButton label="Primeiro Acesso" onClick={() => {}} />
+        <LargeButton label="Primeiro Acesso" onClick={() => navigate('/cadastro-aluno')} />
 
 
       </div>
