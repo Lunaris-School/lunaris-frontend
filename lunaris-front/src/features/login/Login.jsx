@@ -39,14 +39,15 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="********"
         />
-        <LargeButton label="Entrar" color="#001E3A" onClick={() => {}} />
 
+        <LargeButton label="Entrar" color="#001E3A" onClick={() => {}} />
 
         <div className="text-divider">
           <div className="divider-line"></div>
           <span className="divider-text">Aluno novo?</span>
           <div className="divider-line"></div>
         </div>
+
         <LargeButton label="Primeiro Acesso" onClick={() => navigate('/cadastro-aluno')} />
 
 
