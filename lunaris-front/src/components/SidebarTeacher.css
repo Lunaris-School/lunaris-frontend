@@ -1,0 +1,97 @@
+* {
+font-family: "Poppins", sans-serif;
+}
+
+.sidebar {
+width: 240px;
+height: 100vh;
+background: #ffffff;
+padding: 20px;
+}
+
+.logo-area {
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 40px;
+}
+
+.sidebar-logo {
+width: 76px;
+height:72px;
+padding:50px 10px 0px 5px;
+}
+
+.logo-text {
+margin-top: 45px;
+font-size: 30px;
+font-weight: 700;
+line-height: 1;
+display: flex;
+align-items: center;
+}
+
+.logo-dark {
+color: #0b2a4a;
+}
+
+.logo-light {
+color: #6fb6e6;
+}
+
+.item {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 12px;
+margin-bottom: 10px;
+border-radius: 10px;
+text-decoration: none;
+background: #ffffff;
+}
+
+.item-text {
+color: #0b2a4a;
+font-size: 14px;
+font-weight: 500;
+}
+
+.icon {
+width: 30px;
+}
+
+.icon.light {
+display: none;
+}
+
+.item:hover {
+background: #0b2a4a;
+}
+
+.item:hover .item-text {
+color: #ffffff;
+}
+
+.item:hover .icon.dark {
+display: none;
+}
+
+.item:hover .icon.light {
+display: block;
+}
+
+.item.active {
+background: #0b2a4a;
+}
+
+.item.active .item-text {
+color: #ffffff;
+}
+
+.item.active .icon.dark {
+display: none;
+}
+
+.item.active .icon.light {
+display: block;
+}
