@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./features/login/Login";
 import Sidebar from "./components/SidebarTeacher";
 
-import Desempenho from "./features/desempenho/Desempenho";
+import DesempenhoProfessor from "./features/desempenho-professor/DesempenhoProfessor";
 import Notas from "./features/notas/Notas";
 import Alunos from "./features/alunos/Alunos";
 
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
 
-        <Route path="/desempenho" element={  <div style={{ display: "flex" }}>  <Sidebar/> <Desempenho /> </div>}/>
+        <Route path="/desempenho-professor" element={  <div style={{ display: "flex" }}>  <Sidebar/> <DesempenhoProfessor /> </div>}/>
 
         <Route path="/notas" element={ <div style={{ display: "flex" }}> <Sidebar /> <Notas /> </div> }/>
 

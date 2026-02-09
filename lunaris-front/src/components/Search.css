@@ -1,0 +1,35 @@
+.search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .search-lupa {
+    width: 45px;
+    height: 45px;
+    background: #7aa9b3;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .search-lupa img {
+    width: 16px;
+  }
+  
+  .search-input {
+    width: 330px;
+    height: 45px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    padding: 0 12px;
+    background: white;
+    color: #000;
+  }
+  
+  .search-filtro {
+    width: 24px;
+  }
+  
