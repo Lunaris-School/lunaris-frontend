@@ -1,0 +1,77 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.sidebar.sidebar--student {
+  width: 240px;
+  height: 100vh;
+  background: #001E3A;
+  padding: 20px;
+}
+
+.sidebar.sidebar--student .logo-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.sidebar.sidebar--student .sidebar-logo {
+  width: 76px;
+  height: 72px;
+  padding: 50px 10px 0px 5px;
+}
+
+.sidebar.sidebar--student .logo-text {
+  margin-top: 45px;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar.sidebar--student .logo-dark {
+  color: #ffffff;
+}
+
+.sidebar.sidebar--student .logo-light {
+  color: #4D8EA2;
+}
+
+.sidebar.sidebar--student .item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  background: none;
+}
+
+.sidebar.sidebar--student .item-text {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sidebar.sidebar--student .icon {
+  width: 30px;
+}
+
+.sidebar.sidebar--student .item:hover {
+  background: #094174;
+}
+
+.sidebar.sidebar--student .item:hover .item-text {
+  color: #ffffff;
+}
+
+.sidebar.sidebar--student .item.active {
+  background: #094174;
+}
+
+.sidebar.sidebar--student .item.active .item-text {
+  color: #ffffff;
+}

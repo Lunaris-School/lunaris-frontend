@@ -42,6 +42,20 @@ export default function Login() {
 
         <LargeButton label="Entrar" color="#001E3A" onClick={() => {}} />
 
+      ---- Remover após testes
+        <div style={{ display: "flex", gap: 12, marginTop: 12 }}>
+          <LargeButton
+            label="Teste: Professor"
+            color="#001E3A"
+            onClick={() => navigate("/desempenho")}
+          />
+          <LargeButton
+            label="Teste: Aluno"
+            color="#2A1B4A"
+            onClick={() => navigate("/aluno/dashboard")}
+          />
+        </div>
+
         <div className="text-divider">
           <div className="divider-line"></div>
           <span className="divider-text">Aluno novo?</span>

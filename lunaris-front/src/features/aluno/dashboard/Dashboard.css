@@ -1,0 +1,9 @@
+.aluno-page {
+  padding-right: 300px;
+}
+
+@media (max-width: 1024px) {
+  .aluno-page {
+    padding-right: 0;
+  }
+}

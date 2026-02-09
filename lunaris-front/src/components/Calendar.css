@@ -1,0 +1,186 @@
+.right-calendar {
+  width: 300px;
+  min-width: 300px;
+  height: 100vh;
+  padding: 24px;
+  background: #001e3a;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 50;
+  border-top-left-radius: 22px;
+  border-bottom-left-radius: 22px;
+}
+
+.right-calendar__profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-top: 8px;
+}
+
+.right-calendar__avatar-wrap {
+  width: 150px;
+  height: 150px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(9, 65, 116, 0.35);
+}
+
+.right-calendar__avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  object-fit: cover;
+  background: #ffffff;
+  display: block;
+}
+
+.right-calendar__name {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 14px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.right-calendar__grade {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.right-calendar__card {
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(9, 65, 116, 0.35);
+  padding: 14px;
+  backdrop-filter: blur(8px);
+}
+
+.right-calendar__header {
+  display: grid;
+  grid-template-columns: 36px 1fr 36px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.right-calendar__title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+  text-transform: capitalize;
+  font-size: 14px;
+  text-align: center;
+}
+
+.right-calendar__nav {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  cursor: pointer;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  transition: background 150ms ease, border-color 150ms ease, transform 120ms ease;
+}
+
+.right-calendar__nav:hover {
+  background: #094174;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.right-calendar__nav:active {
+  transform: scale(0.96);
+}
+
+.right-calendar__nav:focus-visible {
+  outline: 3px solid rgba(77, 142, 162, 0.45);
+  outline-offset: 2px;
+}
+
+.right-calendar__nav-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.right-calendar__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.right-calendar__weekday {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  padding: 4px 0;
+}
+
+.right-calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.right-calendar__day {
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: rgba(9, 65, 116, 0.45);
+  color: rgba(255, 255, 255, 0.92);
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.right-calendar__day:hover {
+  background: rgba(9, 65, 116, 0.7);
+}
+
+.right-calendar__day.is-out {
+  opacity: 0.55;
+}
+
+.right-calendar__day.is-today {
+  border-color: rgba(77, 142, 162, 0.85);
+  background: rgba(77, 142, 162, 0.22);
+}
+
+.right-calendar__day.is-selected {
+  background: #094174;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+@media (max-width: 1024px) {
+  .right-calendar {
+    display: none;
+  }
+}
