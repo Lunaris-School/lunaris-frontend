@@ -6,7 +6,7 @@ import Sidebar from "./components/SidebarTeacher";
 import DesempenhoProfessor from "./features/desempenho-professor/DesempenhoProfessor";
 import Notas from "./features/notas/Notas";
 import Alunos from "./features/alunos/Alunos";
-
+import PerfilProfessor from "./features/perfil-professor/PerfilProfessor";
 import "./App.css";
 
 function App() {
@@ -14,6 +14,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
+
+        <Route path="/perfil-professor" element={ <div style={{ display: "flex" }}> <Sidebar /> <PerfilProfessor /> </div> }/>
 
         <Route path="/desempenho-professor" element={  <div style={{ display: "flex" }}>  <Sidebar/> <DesempenhoProfessor /> </div>}/>
 
