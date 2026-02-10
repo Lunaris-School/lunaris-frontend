@@ -72,6 +72,15 @@ input {
   font-weight: 600;
   font-size: 16px;
   color: #0b2a4a;
+} 
+a.perfil-professor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  outline: none;
 }
 
 .bolinha {
@@ -131,7 +140,7 @@ input {
   margin-bottom: 12px;
 }
 
-.aluno {
+.notas-aluno {
   width: 45%;
   display: flex;
   gap: 12px;
