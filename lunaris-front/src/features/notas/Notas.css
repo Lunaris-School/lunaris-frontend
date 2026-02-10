@@ -1,0 +1,201 @@
+input {
+  padding: 0 6px;
+  background: white;    
+  font-size: 12px;
+  color: black;
+}
+
+.status.Aprovado {
+  background: #59c11a;
+}
+
+.status.Reprovado {
+  background: #e20000;
+}
+
+.status.Processando {
+  background: #555;
+}
+
+.notas {
+  width: 100%;
+  min-height: 100vh;
+  background: #eceef2;
+  padding: 20px;
+}
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  margin-top: 30px;
+}
+
+.busca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lupa {
+  width: 45px;
+  height: 45px;
+  background: #7aa9b3;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lupa img {
+  width: 16px;
+}
+
+.busca input {
+  width: 330px;
+  height: 45px;
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  padding: 0 12px;
+}
+
+.filtro {
+  width: 24px;
+}
+
+.perfil {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #0b2a4a;
+}
+
+.bolinha {
+  width: 44px;
+  height: 44px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bolinha img {
+  width: 42px;
+}
+
+.cabecalho {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+  font-weight: 700;
+  font-size: 16px;
+  color: #0b2a4a;
+}
+
+.c1 { 
+  width: 45%; 
+}
+
+.c2 { 
+  width: 12%; 
+  text-align: center; 
+}
+
+.c3 { 
+  width: 12%; 
+  text-align: center; 
+}
+
+.c4 { 
+  width: 10%; 
+  text-align: center; 
+}
+
+.c5 { 
+  width: 21%; 
+  text-align: center; 
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border-radius: 18px;
+  padding: 15px;
+  margin-bottom: 12px;
+}
+
+.aluno {
+  width: 45%;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.avatar {
+  width: 35px;
+}
+
+.nome {
+  font-weight: 700;
+  color: #0b2a4a;
+  font-size: 13px;
+}
+
+.matricula {
+  font-size: 11px;
+  color: #7b8794;
+}
+
+.n1, .n2 { 
+  width: 12%; 
+  text-align: center; 
+}
+.n1 input, .n2 input {
+  width: 45px;
+  height: 24px;
+  border-radius: 10px;
+  border: 1px solid #222;
+  outline: none;
+  padding: 0 8px;
+  margin-left:25px
+}
+
+.media {
+  margin-left:20px;
+  width: 10%;
+  text-align: center;
+  font-weight: 700;
+  color: #0b2a4a;
+}
+
+.status-div {
+  width: 17%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 40px;
+}
+
+.status {
+  padding: 7px 14px;
+  border-radius: 999px;
+  color: white;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.status.verde { 
+  background: #59c11a; 
+}
+.status.vermelho { 
+  background: #e20000; 
+}
+.status.cinza { 
+  background: #555; 
+}

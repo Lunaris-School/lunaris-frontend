@@ -22,6 +22,7 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Login />} />
+
         <Route path="/cadastro-aluno" element={<Cadastro />} />
 
         <Route path="/desempenho-adm" element={  <div style={{ display: "flex" }}>  <SidebarAdm/> <DesempenhoAdm /> </div>}/>

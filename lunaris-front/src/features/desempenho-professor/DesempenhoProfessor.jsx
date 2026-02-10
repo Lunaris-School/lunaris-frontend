@@ -1,4 +1,3 @@
 export default function DesempenhoProfessor() {
-    return <h1>Professor</h1>;
-  }
-  
+  return <h1>Professor</h1>;
+}

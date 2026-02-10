@@ -1,11 +1,11 @@
 .desempenho-adm-container{
-    background-color: #FEFAEF;
     font-family: "Poppins", sans-serif;
     color: #001E3A;
     width: 100%;
-    padding: 3rem;
-    position: relative;
-    z-index: 1;   
+    min-height: 100vh;
+    background: #eceef2;
+    padding: 20px;
+    overflow-x: hidden; 
 }
 
 .media-title{
@@ -14,7 +14,7 @@
 
 .media-disciplina {
     width: 100%;
-    height: 500px;
+    height: 400px;
     position: relative;
     overflow: visible; 
     justify-content: center;
@@ -37,7 +37,7 @@
     padding-bottom: 20px;
     text-align: center;
     line-height: 100px;
-    background: #FEFAEF;
+    background: white;
 
     box-shadow:
         0 4px 12px rgba(0, 30, 58, 0.08),
@@ -62,9 +62,68 @@
     overflow-x: auto;
     display: none;
 }
-  
-.scroll-container::after{
-    content: "";
-    flex: 0 0 300px; 
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    gap: 20px;
 }
 
+.busca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lupa {
+    width: 45px;
+    height: 45px;
+    background: #7aa9b3;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lupa img {
+    width: 16px;
+}
+
+.busca input {
+    width: 330px;
+    height: 45px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    padding: 0 12px;
+}
+
+.filtro {
+    width: 24px;
+}
+
+.perfil {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #0b2a4a;
+    flex-shrink: 0;
+}
+
+.bolinha {
+    width: 44px;
+    height: 44px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bolinha img {
+    width: 42px;
+}
