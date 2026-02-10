@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./features/login/Login";
 import Sidebar from "./components/SidebarTeacher";
 
+import DesempenhoProfessor from "./features/desempenho-professor/DesempenhoProfessor";
 import Cadastro from "./features/cadastro/Cadastro";
-import Desempenho from "./features/desempenho/Desempenho";
 import Notas from "./features/notas/Notas";
 import Alunos from "./features/alunos/Alunos";
 
@@ -16,9 +16,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
 
+        <Route path="/desempenho-professor" element={  <div style={{ display: "flex" }}>  <Sidebar/> <DesempenhoProfessor /> </div>}/>
+
         <Route path="/cadastro-aluno" element={<Cadastro />} />
 
-        <Route path="/desempenho" element={  <div style={{ display: "flex" }}>  <Sidebar/> <Desempenho /> </div>}/>
 
         <Route path="/notas" element={ <div style={{ display: "flex" }}> <Sidebar /> <Notas /> </div> }/>
 
