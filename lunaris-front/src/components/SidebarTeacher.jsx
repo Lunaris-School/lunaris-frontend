@@ -24,7 +24,7 @@ export default function SidebarTeacher() {
         </span>
       </div>
 
-      <NavLink to="/desempenho" className="item">
+      <NavLink to="/desempenho-professor" className="item">
         <img src={desempenhoEscuro} className="icon dark" alt="" />
         <img src={desempenhoClaro} className="icon light" alt="" />
         <span className="item-text">Desempenho</span>
