@@ -5,6 +5,7 @@ import iconePerfil from "../../assets/icone-perfil.png";
 import iconeMasculino from "../../assets/icone-masculino.png";
 import iconeFeminino from "../../assets/icone-feminino.png";
 import Search from "../../components/Search";
+import { Link } from "react-router-dom";
 
 
 export default function Notas() {
@@ -83,7 +84,9 @@ export default function Notas() {
           {/* depois substituir pelo nome do professor atual (mock) */}
           <span>Prof. João Jonas</span> 
           <div className="bolinha">
+          <Link className="perfil-professor" to="/perfil-professor">
             <img src={iconePerfil} alt="" />
+          </Link>
           </div>
         </div>
       </div>
@@ -112,7 +115,7 @@ export default function Notas() {
 
         return (
           <div key={i.id} className="card">
-            <div className="aluno">
+            <div className="notas-aluno">
               <img
                 className="avatar"
                 src={i.genero === "M" ? iconeMasculino : iconeFeminino}
