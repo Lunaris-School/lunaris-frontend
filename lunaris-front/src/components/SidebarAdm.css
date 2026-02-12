@@ -7,6 +7,9 @@
     height: 100vh;
     background: #6EA1B2;
     padding: 20px;
+    position: sticky;
+    top: 0;
+    left: 0;
 }
 
 .logo-area {

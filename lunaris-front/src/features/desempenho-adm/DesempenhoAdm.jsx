@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./DesempenhoAdm.css";
 import Search from "../../components/Search";
+
 import iconePerfil from "../../assets/icone-perfil.png";
+import iconeMasculino from "../../assets/icone-masculino.png";
+import iconeFeminino from "../../assets/icone-feminino.png";
 
 import { Bar, Doughnut } from 'react-chartjs-2';
 import {
@@ -33,6 +36,35 @@ export default function DesempenhoAdm() {
       a.nome.toLowerCase().includes(busca.toLowerCase())
     );
   });
+
+  const [alunos, setAlunos] = useState([
+    {
+      id: 1,
+      nome: "Clara Bartolini",
+      turma: turmas[0],
+      matricula: "123456432456",
+      genero: "F",
+      media: "7.5"
+    },
+    {
+      id: 2,
+      nome: "bea marioti",
+      turma: turmas[1],
+      matricula: "000000",
+      genero: "F",
+      media: "7.5"
+    },
+    {
+      id: 3,
+      nome: "Clara Bartolini",
+      turma: turmas[2],
+      matricula: "33333333",
+      genero: "F",
+      media: "7.5"
+    },
+  ]);
+
+  // Mock grafico
 
   const data = {
     labels: ['Matemática', 'Português', 'História', 'Geografia'],
@@ -90,6 +122,48 @@ export default function DesempenhoAdm() {
 
         </div>
       </div>
+
+      <h1 className="media-title">Ranking Alunos</h1>
+
+      <div className="cabecalho-desempenho">
+        <div className="c1">Nome e turma</div>
+        <div className="c2">Média</div>
+        <div className="c3">Disciplina</div>
+        <div className="c4">Professor</div>
+      </div>
+
+      {alunos.map((i) => (
+
+      <div key={i.id} className="card-desempenho">
+      <div className="aluno">
+        <img
+          className="avatar"
+          src={i.genero === "M" ? iconeMasculino : iconeFeminino}
+          alt=""
+        />
+
+        <div>
+          <div className="nome">
+            {i.nome}, {i.turma.nome}
+          </div>
+
+          <div className="matricula">{i.matricula}</div>
+        </div>
+      </div>
+
+      <div className="media">{i.media}</div>
+
+      <div className="coluna-texto">
+        <p>Matemática</p>
+      </div>
+
+      <div className="coluna-texto">
+        <p>Fulano de tal</p>
+      </div>
+
+    </div>
+
+    ))}
     </div>
   );
 }
