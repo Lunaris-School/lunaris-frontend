@@ -25,10 +25,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* sem sidebar */}
         <Route path="/" element={<Login />} />
         <Route path="/cadastro-aluno" element={<Cadastro />} />
 
-        {/*com sidebar do professor*/}
+        {/* com sidebar (professor) */}
         <Route
           path="/perfil-professor"
           element={
