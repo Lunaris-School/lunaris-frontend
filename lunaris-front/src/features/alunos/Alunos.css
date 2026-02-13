@@ -1,0 +1,39 @@
+.alunos-page {
+width: 100%;
+min-height: 100vh;
+background: #eceef2;
+padding: 20px;
+}
+
+.alunos-topo {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 30px;
+margin-bottom: 22px;
+}
+
+.alunos-perfil {
+display: flex;
+align-items: center;
+gap: 10px;
+font-weight: 600;
+font-size: 16px;
+color: #0b2a4a;
+}
+
+.alunos-perfil-link {
+width: 44px;
+height: 44px;
+background: white;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+text-decoration: none;
+}
+
+.alunos-perfil-link img {
+width: 42px;
+display: block;
+}

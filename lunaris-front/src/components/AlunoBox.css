@@ -1,0 +1,46 @@
+.aluno {
+display: flex;
+align-items: center;
+justify-content: space-between;
+background: white;
+border-radius: 18px;
+padding: 16px 20px;
+margin-bottom: 14px;
+text-decoration: none;
+}
+
+.aluno-left {
+display: flex;
+align-items: center;
+gap: 14px;
+}
+
+.aluno-avatar {
+width: 34px;
+}
+
+.aluno-nome {
+font-weight: 700;
+color: #0b2a4a;
+font-size: 13px;
+}
+
+.aluno-turma {
+font-weight: 700;
+}
+
+.aluno-matricula {
+font-size: 11px;
+color: #7b8794;
+margin-top: 2px;
+}
+
+.aluno-arrow {
+font-size: 22px;
+color: #0b2a4a;
+font-weight: 700;
+}
+
+.aluno:hover {
+background: #f3f5f7;
+}
