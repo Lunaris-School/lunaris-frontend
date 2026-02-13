@@ -7,7 +7,7 @@ import Login from "./features/login/Login";
 import Cadastro from "./features/cadastro/Cadastro";
 
 import Sidebar from "./components/SidebarTeacher";
-import Desempenho from "./features/desempenho-professor/DesempenhoProfessor";
+import DesempenhoProfessor from "./features/desempenho-professor/DesempenhoProfessor";
 import Notas from "./features/notas/Notas";
 import Alunos from "./features/alunos/Alunos";
 import PerfilProfessor from "./features/professor/PerfilProfessor";
