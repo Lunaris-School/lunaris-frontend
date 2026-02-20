@@ -92,7 +92,7 @@ export default function DesempenhoAdm() {
         <Search
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
-          placeholder="Buscar por turma"
+          placeholder="Buscar turma"
         />
 
         <div className="perfil">

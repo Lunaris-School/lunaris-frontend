@@ -1,0 +1,62 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.4);
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    z-index: 1000;
+  }
+  
+  .modal-container {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 420px;
+    animation: aparecer 0.2s ease-in-out;
+  }
+  
+  .modal-container h2 {
+    margin-bottom: 20px;
+    color: #0b2a4a;
+  }
+  
+  .modal-botoes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .btn-salvar {
+    background: #7aa9b3;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .btn-cancelar {
+    background: #ccc;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #0b2a4a;
+  }
+  
+  @keyframes aparecer {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  

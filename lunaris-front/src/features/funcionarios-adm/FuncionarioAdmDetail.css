@@ -1,0 +1,139 @@
+.funcionario-detail-page {
+    width: 100%;
+    height: 100vh;
+    background: #eceef2;
+    padding: 20px;
+  }
+  
+  .funcionario-detail-page h1 {
+    color: #0b2a4a;
+    margin-bottom: 30px;
+  }
+
+  .voltar {
+    font-size: 25px;
+    cursor: pointer;
+    color: #0b2a4a;
+    font-family: "Poppins", sans-serif;
+    margin: 10%;
+  }
+  
+  .funcionario-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    width: 70%;
+    margin: auto;
+    transition: all .25s ease;
+  }
+
+  .funcionario-card:hover{
+    transform: translateY(-6px);
+    box-shadow:
+    0 12px 24px rgba(0, 30, 58, 0.12);
+  }
+
+
+  .funcionario-profile{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .img-profile{
+    width: 70px;
+  }
+  
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .label {
+    font-size: 14px;
+    color: #7b8794;
+    margin-bottom: 4px;
+  }
+  
+  .valor {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0b2a4a;
+  }
+
+  .div-button-remover{
+    display: flex;
+    justify-content: end;
+    margin-top: 30px;
+    margin-right: 13%;
+}
+
+.button-remover{
+    background-color: #7aa9b3;
+    font-size: 15px;
+}
+
+/* Modal Remover */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  .modal {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+    color: #0b2a4a;
+  }
+  
+  .modal h2 {
+    margin-bottom: 10px;
+  }
+  
+  .modal p {
+    margin-bottom: 20px;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .btn-cancelar-remocao {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #0b2a4a;
+  }
+  
+  .btn-confirmar {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: #e20000;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .btn-confirmar:hover {
+    background: #b00000;
+  }
