@@ -6,11 +6,19 @@ import Login from "./features/login/Login";
 import Cadastro from "./features/cadastro/Cadastro";
 
 import Sidebar from "./components/SidebarTeacher";
+import SidebarAluno from "./components/SidebarAluno";
 import DesempenhoProfessor from "./features/desempenho-professor/DesempenhoProfessor";
 import Notas from "./features/notas/Notas";
 import Alunos from "./features/alunos/Alunos";
 import PerfilProfessor from "./features/professor/PerfilProfessor";
 import AlunoDetail from "./features/alunos/AlunoDetail";
+
+import PerfilAluno from "./features/aluno/PerfilAluno";
+import DesempenhoAluno from "./features/aluno/DesempenhoAluno";
+import NotasAluno from "./features/aluno/NotasAluno";
+import AlunoDashboard from "./features/aluno/AlunoDashboard";
+import AlunoMaterias from "./features/aluno/AlunoMaterias";
+import AlunoForum from "./features/aluno/AlunoForum";
 
 import SidebarAdm from "./components/SidebarAdm";
 import DesempenhoAdm from "./features/desempenho-adm/DesempenhoAdm";
@@ -19,8 +27,21 @@ import AlunosAdm from "./features/alunos-adm/AlunosAdm";
 
 function ProfessorLayout({ children }) {
   return (
-    <div style={{ display: "flex" }}>
+    <div className="professor-layout">
       <Sidebar />
+      {children}
+    </div>
+  );
+}
+
+function AdmLayout({ children }) {
+  return <div className="adm-layout">{children}</div>;
+}
+
+function AlunoLayout({ children }) {
+  return (
+    <div className="aluno-layout">
+      <SidebarAluno />
       {children}
     </div>
   );
@@ -34,9 +55,9 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/cadastro-aluno" element={<Cadastro />} />
 
-        <Route path="/desempenho-adm" element={  <div style={{ display: "flex" }}>  <SidebarAdm/> <DesempenhoAdm /> </div>}/>
-        <Route path="/alunos-adm" element={ <div style={{ display: "flex" }}> <SidebarAdm /> <AlunosAdm /> </div> } />
-        <Route path="/funcionarios-adm" element={ <div style={{ display: "flex" }}> <SidebarAdm /> <FuncionariosAdm /> </div> } />
+        <Route path="/desempenho-adm" element={<AdmLayout><SidebarAdm /><DesempenhoAdm /></AdmLayout>} />
+        <Route path="/alunos-adm" element={<AdmLayout><SidebarAdm /><AlunosAdm /></AdmLayout>} />
+        <Route path="/funcionarios-adm" element={<AdmLayout><SidebarAdm /><FuncionariosAdm /></AdmLayout>} />
 
         {/*com sidebar do professor*/}
         <Route
@@ -79,6 +100,58 @@ function App() {
             <ProfessorLayout>
               <AlunoDetail />
             </ProfessorLayout>
+          }
+        />
+
+        {/* com sidebar do aluno - novas telas */}
+        <Route
+          path="/aluno-dashboard"
+          element={
+            <AlunoLayout>
+              <AlunoDashboard />
+            </AlunoLayout>
+          }
+        />
+        <Route
+          path="/aluno-materias"
+          element={
+            <AlunoLayout>
+              <AlunoMaterias />
+            </AlunoLayout>
+          }
+        />
+        <Route
+          path="/aluno-forum"
+          element={
+            <AlunoLayout>
+              <AlunoForum />
+            </AlunoLayout>
+          }
+        />
+
+        {/* com sidebar do aluno - telas antigas de desempenho/notas/perfil */}
+        <Route
+          path="/perfil-aluno"
+          element={
+            <AlunoLayout>
+              <PerfilAluno />
+            </AlunoLayout>
+          }
+        />
+        <Route
+          path="/desempenho-aluno"
+          element={
+            <AlunoLayout>
+              <DesempenhoAluno />
+            </AlunoLayout>
+          }
+        />
+        <Route
+          path="/notas-aluno"
+          element={
+            <AlunoLayout>
+              <NotasAluno />
+            </AlunoLayout>
           }
         />
       </Routes>
