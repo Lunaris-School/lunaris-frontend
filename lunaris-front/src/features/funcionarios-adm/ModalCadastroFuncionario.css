@@ -41,12 +41,62 @@
   }
   
   .btn-cancelar {
-    background: #ccc;
+    margin-left: 90%;
     border: none;
     padding: 8px 16px;
     border-radius: 8px;
     cursor: pointer;
+  }
+
+  .tipo-selecao {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 0;
+  }
+  
+  .tipo-selecao p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .btn-tipo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
     color: #0b2a4a;
+  }
+  
+  .btn-tipo:hover {
+    border-color: #4CAF50;
+    background: #f5f5f5;
+  }
+  
+  .btn-tipo img {
+    width: 25px;
+  }
+  
+  .btn-voltar {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+  }
+  
+  .btn-voltar:hover {
+    background: #5a6268;
   }
   
   @keyframes aparecer {

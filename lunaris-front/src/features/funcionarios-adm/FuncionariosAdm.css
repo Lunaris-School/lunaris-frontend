@@ -16,6 +16,12 @@
     text-decoration: none;
 }
 
+.cargo{
+    font-weight: 700;
+    font-size: 16px;
+    color: #0b2a4a;
+}
+
 .scroll-funcionarios {
     height: 65%;
     overflow: hidden;

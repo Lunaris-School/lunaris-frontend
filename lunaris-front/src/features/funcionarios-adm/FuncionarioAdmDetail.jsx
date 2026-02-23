@@ -39,17 +39,16 @@ export default function FuncionarioAdmDetail() {
 
   return (
     <div className="funcionario-detail-page">
+      <div className="topo">
+          <div className="perfil"  style={{marginLeft: "85%"}}>
+              <span>Prof. João Jonas</span>
+              <div className="bolinha">
+                  <img src={iconePerfil} alt="" />
+              </div>
+          </div>
+      </div>
 
-        <div className="topo">
-            <div className="perfil"  style={{marginLeft: "85%"}}>
-                <span>Prof. João Jonas</span>
-                <div className="bolinha">
-                    <img src={iconePerfil} alt="" />
-                </div>
-            </div>
-        </div>
-
-        <span className="voltar" onClick={() => navigate("/funcionarios-adm")}>&lt;</span>
+      <span className="voltar" onClick={() => navigate("/funcionarios-adm")}>&lt;</span>
 
       <div className="funcionario-card">
 
@@ -80,35 +79,32 @@ export default function FuncionarioAdmDetail() {
 
 
       {abrirModal && (
-  <div className="modal-overlay">
-    <div className="modal">
-      <h2>Confirmar remoção</h2>
-      <p>
-        Tem certeza que deseja remover o professor{" "}
-        <strong>{funcionario.nome}</strong>?
-      </p>
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Confirmar remoção</h2>
+            <p>
+              Tem certeza que deseja remover o professor{" "}
+              <strong>{funcionario.nome}</strong>?
+            </p>
 
-      <div className="modal-buttons">
-        <button
-          className="btn-cancelar-remocao"
-          onClick={() => setAbrirModal(false)}
-        >
-          Cancelar
-        </button>
+            <div className="modal-buttons">
+              <button
+                className="btn-cancelar-remocao"
+                onClick={() => setAbrirModal(false)}
+              >
+                Cancelar
+              </button>
 
-        <button
-          className="btn-confirmar"
-          onClick={confirmarRemocao}
-        >
-          Confirmar
-        </button>
-      </div>
+              <button
+                className="btn-confirmar"
+                onClick={confirmarRemocao}
+              >
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
-  </div>
-)}
-    </div>
-
-    
   );
-
 }
