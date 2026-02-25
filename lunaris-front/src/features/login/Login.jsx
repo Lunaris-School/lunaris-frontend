@@ -49,8 +49,6 @@ export default function Login() {
         </div>
 
         <LargeButton label="Primeiro Acesso" onClick={() => navigate('/cadastro-aluno')} />
-
-
       </div>
     </div>
   );
