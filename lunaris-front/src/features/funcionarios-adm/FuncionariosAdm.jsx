@@ -81,6 +81,9 @@ export default function FuncionariosAdm() {
         </div>
       </div>
 
+      <h1 className="media-title" style={{marginBottom: "0px"}}>Funcionários</h1>
+      <p className="description">Visualize, gerencie e cadastre os funcionários.</p>
+
       <div className="scroll-funcionarios">
       <div className="funcionarios-lista">
 
@@ -110,7 +113,7 @@ export default function FuncionariosAdm() {
 
         {lista.length > 0 && (
           <>
-            <p className="cargo">Funcionários</p>
+            <p className="cargo">Professores</p>
             {lista.map((p) => (
               <Link key={p.id} to={`/funcionarios/${p.id}`} className="funcionario">
                 <div className="funcionario-left">

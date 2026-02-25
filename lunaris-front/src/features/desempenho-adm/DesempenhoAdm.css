@@ -156,6 +156,7 @@
 
 .aluno {
     width: 45%;
+    height: 10px;
     display: flex;
     gap: 12px;
     align-items: center;

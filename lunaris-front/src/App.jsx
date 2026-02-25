@@ -17,6 +17,8 @@ import DesempenhoAdm from "./features/desempenho-adm/DesempenhoAdm";
 import FuncionariosAdm from "./features/funcionarios-adm/FuncionariosAdm";
 import FuncionarioAdmDetail from "./features/funcionarios-adm/FuncionarioAdmDetail"
 import AlunosAdm from "./features/alunos-adm/AlunosAdm";
+import AlunosAdmDetail from "./features/alunos-adm/AlunosAdmDetail";
+
 
 function ProfessorLayout({ children }) {
   return (
@@ -39,6 +41,7 @@ function App() {
         <Route path="/alunos-adm" element={ <div style={{ display: "flex" }}> <SidebarAdm /> <AlunosAdm /> </div> } />
         <Route path="/funcionarios-adm" element={ <div style={{ display: "flex" }}> <SidebarAdm /> <FuncionariosAdm /> </div> } />
         <Route path="/funcionarios/:id"  element={ <div style={{ display: "flex" }}> <SidebarAdm /> <FuncionarioAdmDetail /> </div> } />
+        <Route path="/turma/:id"  element={ <div style={{ display: "flex" }}> <SidebarAdm /> <AlunosAdmDetail /> </div> } />
 
         {/*com sidebar do professor*/}
         <Route

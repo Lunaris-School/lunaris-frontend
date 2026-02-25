@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import "./AlunosAdm.css";
+import Search from "../../components/Search";
+
 
 import iconePerfil from "../../assets/icone-perfil.png";
 
@@ -9,16 +11,26 @@ export default function AlunosAdm() {
   const navigate = useNavigate();
   const [abrirModal, setAbrirModal] = useState(false);
   const [abrirModalRemocao, setAbrirModalRemocao] = useState(false)
+  const [busca, setBusca] = useState("");
+
 
   const [turmas, setTurmas] = useState(
     Array.from({ length: 6 }, (_, i) => ({
-      nome: `Turma ${String.fromCharCode(65 + i)}`
+      nome: `2º Ano ${String.fromCharCode(65 + i)}`
     }))
   );
 
+  const lista = turmas.filter((a) => {
+    if (busca.trim() === "") return true;
+    return (
+      a.nome.toLowerCase().includes(busca.toLowerCase())
+    );
+  });
+
+
   const confirmarAdicao = () => {
     const novaTurma = {
-      nome: `Turma ${String.fromCharCode(65 + turmas.length)}`
+      nome: `2º Ano ${String.fromCharCode(65 + turmas.length)}`
     };
   
     setTurmas(prev => [...prev, novaTurma]);
@@ -35,27 +47,33 @@ export default function AlunosAdm() {
 
 
   return (
-    <div className="alunos-adm-container">
-      <div className="topo" style={{marginBottom: "25px"}}>
-            <div className="perfil"  style={{marginLeft: "85%"}}>
-                <span>Prof. João Jonas</span>
-                <div className="bolinha">
-                    <img src={iconePerfil} alt="" />
-                </div>
-            </div>
+    <div className="turmas-adm-container">
+      <div className="topo">
+        <Search
+          value={busca}
+          onChange={(e) => setBusca(e.target.value)}
+          placeholder="Buscar turma por nome ou ano letivo"
+        />
+        <div className="perfil">
+          {/* depois substituir pelo nome do professor atual (mock) */}
+          <span>Prof. João Jonas</span>
+          <div className="bolinha">
+            <img src={iconePerfil} alt="" />
+          </div>
         </div>
+      </div>
       
       <h1 className="media-title">Turmas</h1>
       <p className="description">Visualize as turmas e tenha mais detalhes sobre elas.</p>
 
       <div className="turmas-container">
         <div className="scroll-container">
-          {turmas.map((turma, index) => (
+          {lista.map((turma, index) => (
             <div className="turmas-card" key={index}>
 
             <div className="turma-header">
               <h2>{turma.nome}</h2>
-              <span className="turma-serie">2º Ano</span>
+              <span className="turma-serie">2025</span>
             </div>
           
             <div className="turma-stats">
@@ -70,7 +88,7 @@ export default function AlunosAdm() {
                 className="btn-detalhes"
                 onClick={() => navigate(`/turma/${index}`)}
               >
-                Ver Detalhes
+                Ver Alunos
               </button>
           
               <button className="btn-remover" onClick={() => setAbrirModalRemocao(true)}>

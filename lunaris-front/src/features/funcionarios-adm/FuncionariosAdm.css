@@ -3,6 +3,7 @@
     height: 100vh;
     background: #eceef2;
     padding: 20px;
+    color: #0b2a4a;
 }
 
 .funcionario {
@@ -23,7 +24,7 @@
 }
 
 .scroll-funcionarios {
-    height: 65%;
+    height: 55%;
     overflow: hidden;
 }
 
@@ -37,39 +38,39 @@
 }
 
 .funcionario-left {
-display: flex;
-align-items: center;
-gap: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
 }
 
 .funcionario-avatar {
-width: 34px;
+    width: 34px;
 }
 
 .funcionario-nome {
-font-weight: 700;
-color: #0b2a4a;
-font-size: 13px;
+    font-weight: 700;
+    color: #0b2a4a;
+    font-size: 13px;
 }
 
 .funcionario-disciplina {
-font-weight: 700;
+    font-weight: 700;
 }
 
 .funcionario-email {
-font-size: 11px;
-color: #7b8794;
-margin-top: 2px;
+    font-size: 11px;
+    color: #7b8794;
+    margin-top: 2px;
 }
 
 .funcionario-arrow {
-font-size: 22px;
-color: #0b2a4a;
-font-weight: 700;
+    font-size: 22px;
+    color: #0b2a4a;
+    font-weight: 700;
 }
 
 .funcionario:hover {
-background: #f3f5f7;
+    background: #f3f5f7;
 }
 
 .div-button-cadastro{
