@@ -92,13 +92,13 @@ export default function Notas() {
       </div>
 
 
-      <div className="cabecalho">
-        <div className="c1">Nome e turma</div>
-        <div className="c2">Nota 1</div>
-        <div className="c3">Nota 2</div>
-        <div className="c4">Média</div>
-        <div className="c5">Status</div>
-      </div>
+        <div className="cabecalho">
+          <div className="c1">Nome e turma</div>
+          <div className="c2">Nota 1</div>
+          <div className="c3">Nota 2</div>
+          <div className="c4">Média</div>
+          <div className="c5">Status</div>
+        </div>
 
       {lista.map((i) => {
         let media = "-";
