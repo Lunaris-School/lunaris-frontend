@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+import {listarTurmas} from "../../services/turmaService"
 import "./AlunosAdm.css";
 import Search from "../../components/Search";
 
@@ -12,13 +13,22 @@ export default function AlunosAdm() {
   const [abrirModal, setAbrirModal] = useState(false);
   const [abrirModalRemocao, setAbrirModalRemocao] = useState(false)
   const [busca, setBusca] = useState("");
+  const [turmas, setTurmas] = useState([]);
 
 
-  const [turmas, setTurmas] = useState(
-    Array.from({ length: 6 }, (_, i) => ({
-      nome: `2º Ano ${String.fromCharCode(65 + i)}`
-    }))
-  );
+  async function carregarTurmas() {
+    try {
+      const responseTurma = await listarTurmas();
+      setTurmas(responseTurma.data);
+    } catch (error) {
+      console.error("Erro ao buscar turmas:", error);
+    }
+  }
+
+  useEffect(() => {
+    carregarTurmas();
+  }, []);
+
 
   const lista = turmas.filter((a) => {
     if (busca.trim() === "") return true;

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./FuncionariosAdm.css"
-
+import {listarProfessores} from "../../services/professorService"
+import {listarAdmins} from "../../services/adminService"
 import Search from "../../components/Search";
 
 import iconePerfil from "../../assets/icone-perfil.png";
@@ -17,28 +18,33 @@ export default function FuncionariosAdm() {
   const [busca, setBusca] = useState("");
   const [abrirModal, setAbrirModal] = useState(false);
   const [abrirModalRemocao, setAbrirModalRemocao] = useState(false);
+  const [professores, setProfessores] = useState([])
+  const [admins, setAdmins] = useState([])
 
 
-  const funcionarios = [
-    { id: 1, nome: "Alberto Carvalho", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 2, nome: "Maria Lizete", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "M", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 3, nome: "Alberto Carvalho", disciplina: "Português", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 4, nome: "Alberto Carvalho", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 5, nome: "Maria Lizete", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 6, nome: "Alberto Carvalho", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 7, nome: "Maria Lizete", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 8, nome: "Alberto Carvalho", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 9, nome: "Maria Lizete", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 10, nome: "Alberto Carvalho", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-  ];
+  useEffect(() => {
+    carregarAdmins();
+    carregarProfessores();
+  }, []);
 
-  const adms = [
-    {id: 1, nome: "Markus Fuza", email:"adm@gmail.com", cargo: "Administrador"},
-    {id: 2, nome: "Markus Fuza", email:"adm@gmail.com", cargo: "Administrador"},
-    {id: 3, nome: "Markus Fuza", email:"adm@gmail.com", cargo: "Administrador"}
-  ]
+  async function carregarProfessores() {
+    try {
+      const responseProfessor = await listarProfessores();
+      setProfessores(responseProfessor.data);
+    } catch (error) {
+      console.error("Erro ao buscar professores:", error);
+    }
+  }
+  async function carregarAdmins() {
+    try {
+      const responseAdmin = await listarAdmins();
+      setAdmins(responseAdmin.data);
+    } catch (error) {
+      console.error("Erro ao buscar adms:", error);
+    }
+  }
 
-  const lista = funcionarios.filter((p) => {
+  const lista = professores.filter((p) => {
     if (busca.trim() === "") return true;
   
     return (
@@ -48,7 +54,7 @@ export default function FuncionariosAdm() {
     );
   });
 
-  const lista_adm = adms.filter((a) => {
+  const lista_adm = admins.filter((a) => {
     if (busca.trim() === "") return true;
     return (
       a.email.toLowerCase().includes(busca.toLowerCase()) ||
@@ -117,7 +123,9 @@ export default function FuncionariosAdm() {
             {lista.map((p) => (
               <Link key={p.id} to={`/funcionarios/${p.id}`} className="funcionario">
                 <div className="funcionario-left">
+
                   <img className="funcionario-avatar" src={iconeProfessor} alt="" />
+
                   <div className="funcionario-texto">
                     <div className="funcionario-nome">
                       {p.nome},{" "}
