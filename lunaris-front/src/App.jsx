@@ -11,6 +11,7 @@ import Notas from "./features/notas/Notas";
 import Alunos from "./features/alunos/Alunos";
 import PerfilProfessor from "./features/professor/PerfilProfessor";
 import AlunoDetail from "./features/alunos/AlunoDetail";
+import Landing from "./features/landing/Landing";
 
 function ProfessorLayout({ children }) {
   return (
@@ -25,10 +26,16 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/cadastro-aluno" element={<Cadastro />} />
 
-        {/*com sidebar do professor*/}
+        <Route
+          path="/login"
+          element={   
+            <Login />
+          }
+        />
+
         <Route
           path="/perfil-professor"
           element={
