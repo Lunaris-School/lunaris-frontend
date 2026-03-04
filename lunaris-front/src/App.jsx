@@ -11,6 +11,7 @@ import Notas from "./features/notas/Notas";
 import Alunos from "./features/alunos/Alunos";
 import PerfilProfessor from "./features/professor/PerfilProfessor";
 import AlunoDetail from "./features/alunos/AlunoDetail";
+import Landing from "./features/landing/Landing";
 
 import SidebarAdm from "./components/SidebarAdm";
 import DesempenhoAdm from "./features/desempenho-adm/DesempenhoAdm";
@@ -33,10 +34,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/cadastro-aluno" element={<Cadastro />} />
 
+        <Route
+          path="/login"
+          element={   
+            <Login />
+          }
+        />
         <Route path="/desempenho-adm" element={  <div style={{ display: "flex" }}>  <SidebarAdm/> <DesempenhoAdm /> </div>}/>
         <Route path="/alunos-adm" element={ <div style={{ display: "flex" }}> <SidebarAdm /> <AlunosAdm /> </div> } />
         <Route path="/funcionarios-adm" element={ <div style={{ display: "flex" }}> <SidebarAdm /> <FuncionariosAdm /> </div> } />
