@@ -3,6 +3,7 @@ import TextInput from "../../components/TextInput";
 import Select from "../../components/Select";
 import "./ModalCadastroFuncionario.css";
 import {inserirProfessor} from "../../services/professorService"
+import {inserirAdmin} from "../../services/adminService"
 import {listarDisciplinas} from "../../services/disciplinaService"
 
 
@@ -11,14 +12,14 @@ import iconeAdm from "../../assets/icone-adm.svg";
 import iconeClose from "../../assets/icone-close.svg";
 
 
-export default function ModalCadastroFuncionario({ fechar }) {
+export default function ModalCadastroFuncionario({ fechar, onSucesso }) {
 
   const [tipoCadastro, setTipoCadastro] = useState("");
   const [form, setForm] = useState({
     nome: "",
     cpf: "",
     email: "",
-    disciplina: "",
+    disciplinaId: "",
     senha: "",
     dataContratacao: ""
   });
@@ -45,10 +46,26 @@ export default function ModalCadastroFuncionario({ fechar }) {
     e.preventDefault();
     try{
       if(tipoCadastro === "professor"){
-        await inserirProfessor({...form, dataContratacao: new Date().toDateString()});
+        const hoje = new Date();
+        const dataContratacao = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}-${String(hoje.getDate()).padStart(2, '0')}`;
+
+        await inserirProfessor({
+          ...form,
+          cpf: Number(form.cpf.replace(/\D/g, '')),
+          disciplinaId: Number(form.disciplinaId),
+          dataContratacao
+        });
+
+      } else if (tipoCadastro === "administrador") {
+        await inserirAdmin({
+          nome: form.nome,
+          email: form.email,
+          senha: form.senha
+        });
       }
 
       console.log("Funcionário cadastrado com sucesso!");
+      if (onSucesso) onSucesso();
       fechar();
     }catch (error){
       console.error("Erros ao cadastrar:", error)
@@ -61,7 +78,7 @@ export default function ModalCadastroFuncionario({ fechar }) {
       nome: "",
       cpf: "",
       email: "",
-      disciplina: "",
+      disciplinaId: "",
       senha: "",
       dataContratacao: ""
     });
@@ -137,8 +154,8 @@ export default function ModalCadastroFuncionario({ fechar }) {
             {tipoCadastro === "professor" && (
               <Select
                 label="Disciplina"
-                name="disciplina"
-                value={form.disciplina}
+                name="disciplinaId"
+                value={form.disciplinaId}
                 onChange={handleChange}
                 placeholder="Selecione a disciplina"
                 options={disciplinas.map(d => ({

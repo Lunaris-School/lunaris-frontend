@@ -9,7 +9,7 @@ export const buscarAdminPorId = (id) => {
 };
 
 export const inserirAdmin = (dados) => {
-  return api.post("/api/admin/", dados);
+  return api.post("/api/admin", dados);
 };
 
 export const atualizarAdmin = (id, dados) => {

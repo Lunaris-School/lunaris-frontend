@@ -8,7 +8,7 @@ export const buscarProfessorPorCpf = (cpf) => {
   return api.get(`/api/professor/${cpf}`);
 };
 
-export const bucarAlunosPorProfessor = (ano) => {
+export const bucarAlunosPorProfessor = (cpf) => {
     return api.get(`/api/professor/${cpf}/alunos`);
 };
 
