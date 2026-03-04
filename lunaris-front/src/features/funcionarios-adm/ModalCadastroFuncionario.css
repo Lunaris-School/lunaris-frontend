@@ -34,9 +34,22 @@
 .btn-salvar {
   background: #7aa9b3;
   border: none;
-  padding: 8px 16px;
+  padding: 12px 24px;
   border-radius: 8px;
   cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.btn-voltar {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
 }
 
 .btn-cancelar {
@@ -80,17 +93,6 @@
 
 .btn-tipo img {
   width: 25px;
-}
-
-.btn-voltar {
-  background: #6c757d;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s;
 }
 
 .btn-voltar:hover {

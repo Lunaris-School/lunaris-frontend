@@ -8,9 +8,9 @@ import Cadastro from "./features/cadastro/Cadastro";
 import Sidebar from "./components/SidebarTeacher";
 import DesempenhoProfessor from "./features/desempenho-professor/DesempenhoProfessor";
 import Notas from "./features/notas/Notas";
-import Alunos from "./features/alunos/Alunos";
+import Alunos from "./features/alunos-professor/Alunos";
 import PerfilProfessor from "./features/professor/PerfilProfessor";
-import AlunoDetail from "./features/alunos/AlunoDetail";
+import AlunoDetail from "./features/alunos-professor/AlunoDetail";
 import Landing from "./features/landing/Landing";
 
 import SidebarAdm from "./components/SidebarAdm";

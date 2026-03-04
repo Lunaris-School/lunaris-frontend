@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import {listarTurmas} from "../../services/turmaService"
+import {listarTurmas, inserirTurma} from "../../services/turmaService"
 import "./AlunosAdm.css";
 import Search from "../../components/Search";
+import TextInput from "../../components/TextInput";
 
 
 import iconePerfil from "../../assets/icone-perfil.png";
@@ -14,6 +15,7 @@ export default function AlunosAdm() {
   const [abrirModalRemocao, setAbrirModalRemocao] = useState(false)
   const [busca, setBusca] = useState("");
   const [turmas, setTurmas] = useState([]);
+  const [novaTurma, setNovaTurma] = useState("")
 
 
   async function carregarTurmas() {
@@ -23,6 +25,14 @@ export default function AlunosAdm() {
     } catch (error) {
       console.error("Erro ao buscar turmas:", error);
       console.log(error.response);
+    }
+  }
+
+  async function handleAdicionarTurma() {
+    try {
+      await inserirTurma({ nome: novaTurma, anoLetivo: new Date().getFullYear() });
+    } catch (error) {
+      console.error("Erro ao adicionar turma:", error);
     }
   }
 
@@ -37,16 +47,6 @@ export default function AlunosAdm() {
       a.nome.toLowerCase().includes(busca.toLowerCase())
     );
   });
-
-
-  const confirmarAdicao = () => {
-    const novaTurma = {
-      nome: `2º Ano ${String.fromCharCode(65 + turmas.length)}`
-    };
-  
-    setTurmas(prev => [...prev, novaTurma]);
-    setAbrirModal(false);
-  };
 
   const confirmarRemocao = () => {
     console.log("Turma removida!");
@@ -122,8 +122,18 @@ export default function AlunosAdm() {
           <div className="modal">
             <h2>Nova Turma</h2>
             <p>
-              Tem certeza que deseja adicionar uma nova turma?
+              Digite o nome da nova turma.
             </p>
+
+            <TextInput 
+              name="nome"
+              placeholder="Digite o nome da turma"
+              value={novaTurma}
+              onChange={(e) => setNovaTurma(e.target.value)}
+              required  
+            />
+
+            <br />
 
             <div className="modal-buttons">
               <button
@@ -136,7 +146,7 @@ export default function AlunosAdm() {
               <button
                 className="btn-confirmar"
                 style={{background: "#7aa9b3"}}
-                onClick={confirmarAdicao}
+                onClick={handleAdicionarTurma}
               >
                 Confirmar
               </button>
@@ -175,3 +185,4 @@ export default function AlunosAdm() {
   )
 }
   
+// ARRUMAR MARGIN DO TEXTIPNUT

@@ -176,12 +176,12 @@ export default function ModalCadastroFuncionario({ fechar, onSucesso }) {
             />
 
             <div className="modal-botoes">
-              <button type="submit" className="btn-salvar">
-                Salvar
-              </button>
               <button type="button" onClick={handleVoltar} className="btn-voltar">
                 Voltar
               </button>
+              <button type="submit" className="btn-salvar">
+                Salvar
+              </button>  
             </div>
           </form>
         )}
