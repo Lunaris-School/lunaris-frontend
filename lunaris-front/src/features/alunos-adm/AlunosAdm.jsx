@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+import {listarTurmas} from "../../services/turmaService"
 import "./AlunosAdm.css";
 import Search from "../../components/Search";
 
@@ -12,13 +13,23 @@ export default function AlunosAdm() {
   const [abrirModal, setAbrirModal] = useState(false);
   const [abrirModalRemocao, setAbrirModalRemocao] = useState(false)
   const [busca, setBusca] = useState("");
+  const [turmas, setTurmas] = useState([]);
 
 
-  const [turmas, setTurmas] = useState(
-    Array.from({ length: 6 }, (_, i) => ({
-      nome: `2º Ano ${String.fromCharCode(65 + i)}`
-    }))
-  );
+  async function carregarTurmas() {
+    try {
+      const responseTurma = await listarTurmas();
+      setTurmas(responseTurma.data);
+    } catch (error) {
+      console.error("Erro ao buscar turmas:", error);
+      console.log(error.response);
+    }
+  }
+
+  useEffect(() => {
+    carregarTurmas();
+  }, []);
+
 
   const lista = turmas.filter((a) => {
     if (busca.trim() === "") return true;
@@ -68,12 +79,12 @@ export default function AlunosAdm() {
 
       <div className="turmas-container">
         <div className="scroll-container">
-          {lista.map((turma, index) => (
-            <div className="turmas-card" key={index}>
+          {lista.map((turma) => (
+            <div className="turmas-card" key={turma.id}>
 
             <div className="turma-header">
               <h2>{turma.nome}</h2>
-              <span className="turma-serie">2025</span>
+              <span className="turma-serie">{turma.anoLetivo}</span>
             </div>
           
             <div className="turma-stats">
@@ -86,7 +97,7 @@ export default function AlunosAdm() {
             <div className="turma-actions">
               <button 
                 className="btn-detalhes"
-                onClick={() => navigate(`/turma/${index}`)}
+                onClick={() => navigate(`/turma/${turma.id}`)}
               >
                 Ver Alunos
               </button>

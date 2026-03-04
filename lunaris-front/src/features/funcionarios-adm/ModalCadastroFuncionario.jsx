@@ -1,32 +1,75 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextInput from "../../components/TextInput";
 import Select from "../../components/Select";
 import "./ModalCadastroFuncionario.css";
+import {inserirProfessor} from "../../services/professorService"
+import {inserirAdmin} from "../../services/adminService"
+import {listarDisciplinas} from "../../services/disciplinaService"
+
 
 import iconeProfessor from "../../assets/icone-professor.png";
 import iconeAdm from "../../assets/icone-adm.svg";
 import iconeClose from "../../assets/icone-close.svg";
 
 
-export default function ModalCadastroFuncionario({ fechar }) {
+export default function ModalCadastroFuncionario({ fechar, onSucesso }) {
 
   const [tipoCadastro, setTipoCadastro] = useState("");
   const [form, setForm] = useState({
     nome: "",
     cpf: "",
     email: "",
-    disciplina: "",
-    senha: ""
+    disciplinaId: "",
+    senha: "",
+    dataContratacao: ""
   });
+  const [disciplinas, setDisciplinas] = useState([])
+
+  useEffect(() => {
+    carregarDisciplinas()
+  },[]);
+
+  async function carregarDisciplinas() {
+    try {
+      const response = await listarDisciplinas();
+      setDisciplinas(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar disciplinas:", error);
+    }
+  }
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Dados enviados:", { tipo: tipoCadastro, ...form });
-    fechar();
+    try{
+      if(tipoCadastro === "professor"){
+        const hoje = new Date();
+        const dataContratacao = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}-${String(hoje.getDate()).padStart(2, '0')}`;
+
+        await inserirProfessor({
+          ...form,
+          cpf: Number(form.cpf.replace(/\D/g, '')),
+          disciplinaId: Number(form.disciplinaId),
+          dataContratacao
+        });
+
+      } else if (tipoCadastro === "administrador") {
+        await inserirAdmin({
+          nome: form.nome,
+          email: form.email,
+          senha: form.senha
+        });
+      }
+
+      console.log("Funcionário cadastrado com sucesso!");
+      if (onSucesso) onSucesso();
+      fechar();
+    }catch (error){
+      console.error("Erros ao cadastrar:", error)
+    }
   };
 
   const handleVoltar = () => {
@@ -35,8 +78,9 @@ export default function ModalCadastroFuncionario({ fechar }) {
       nome: "",
       cpf: "",
       email: "",
-      disciplina: "",
-      senha: ""
+      disciplinaId: "",
+      senha: "",
+      dataContratacao: ""
     });
   };
 
@@ -92,7 +136,7 @@ export default function ModalCadastroFuncionario({ fechar }) {
                 value={form.cpf}
                 onChange={handleChange}
                 placeholder="000.000.000-00"
-                maxLength={11}
+                maxLength={14}
                 digitsOnly
               />
             )}
@@ -110,15 +154,14 @@ export default function ModalCadastroFuncionario({ fechar }) {
             {tipoCadastro === "professor" && (
               <Select
                 label="Disciplina"
-                name="disciplina"
-                value={form.disciplina}
+                name="disciplinaId"
+                value={form.disciplinaId}
                 onChange={handleChange}
                 placeholder="Selecione a disciplina"
-                options={[
-                  { value: "portugues", label: "Português" },
-                  { value: "matematica", label: "Matemática" },
-                  { value: "historia", label: "História" }
-                ]}
+                options={disciplinas.map(d => ({
+                  value: d.id,
+                  label: d.nome
+                }))}
               />
             )}
 

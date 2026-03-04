@@ -1,0 +1,17 @@
+import api from "./api";
+
+export function listarTurmas(){
+  return api.get("/v1/turma/listarTodas");
+};
+
+export const buscarTurmaPorProfessor = (cpf) => {
+  return api.get(`/v1/turma/listarTurmaPorProfessor/${cpf}`);
+};
+
+export const inserirTurma = (dados) => {
+  return api.post("/v1/turma/", dados);
+};
+
+export const deletarTurma = (id) => {
+    return api.delete(`/v1/turma/${id}`);
+};

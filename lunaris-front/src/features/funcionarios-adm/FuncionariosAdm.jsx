@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./FuncionariosAdm.css"
-
+import {listarProfessores} from "../../services/professorService"
+import {listarAdmins, deletarAdmin} from "../../services/adminService"
 import Search from "../../components/Search";
 
 import iconePerfil from "../../assets/icone-perfil.png";
@@ -17,28 +19,33 @@ export default function FuncionariosAdm() {
   const [busca, setBusca] = useState("");
   const [abrirModal, setAbrirModal] = useState(false);
   const [abrirModalRemocao, setAbrirModalRemocao] = useState(false);
+  const [professores, setProfessores] = useState([])
+  const [admins, setAdmins] = useState([])
+  const [adminSelecionado, setAdminSelecionado] = useState("")
 
+  useEffect(() => {
+    carregarAdmins();
+    carregarProfessores();
+  }, []);
 
-  const funcionarios = [
-    { id: 1, nome: "Alberto Carvalho", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 2, nome: "Maria Lizete", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "M", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 3, nome: "Alberto Carvalho", disciplina: "Português", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 4, nome: "Alberto Carvalho", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 5, nome: "Maria Lizete", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 6, nome: "Alberto Carvalho", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 7, nome: "Maria Lizete", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 8, nome: "Alberto Carvalho", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 9, nome: "Maria Lizete", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-    { id: 10, nome: "Alberto Carvalho", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com", cargo: "Funcionário" },
-  ];
+  async function carregarProfessores() {
+    try {
+      const responseProfessor = await listarProfessores();
+      setProfessores(responseProfessor.data);
+    } catch (error) {
+      console.error("Erro ao buscar professores:", error);
+    }
+  }
+  async function carregarAdmins() {
+    try {
+      const responseAdmin = await listarAdmins();
+      setAdmins(responseAdmin.data);
+    } catch (error) {
+      console.error("Erro ao buscar adms:", error);
+    }
+  }
 
-  const adms = [
-    {id: 1, nome: "Markus Fuza", email:"adm@gmail.com", cargo: "Administrador"},
-    {id: 2, nome: "Markus Fuza", email:"adm@gmail.com", cargo: "Administrador"},
-    {id: 3, nome: "Markus Fuza", email:"adm@gmail.com", cargo: "Administrador"}
-  ]
-
-  const lista = funcionarios.filter((p) => {
+  const lista = professores.filter((p) => {
     if (busca.trim() === "") return true;
   
     return (
@@ -48,7 +55,7 @@ export default function FuncionariosAdm() {
     );
   });
 
-  const lista_adm = adms.filter((a) => {
+  const lista_adm = admins.filter((a) => {
     if (busca.trim() === "") return true;
     return (
       a.email.toLowerCase().includes(busca.toLowerCase()) ||
@@ -56,12 +63,17 @@ export default function FuncionariosAdm() {
     );
   });
 
-  const confirmarRemocao = () => {
-    console.log("Funcionário removido:", adms.nome);
+  const confirmarRemocao = async () => {
+    try {
+      console.log("Funcionário removido:", adminSelecionado?.nome);
   
-    setAbrirModalRemocao(false);
+      await deletarAdmin(adminSelecionado?.id);
   
-    navigate("/funcionarios-adm");
+      setAbrirModalRemocao(false);
+      carregarAdmins(); 
+    } catch (error) {
+      console.error("Erro ao remover:", error);
+    }
   };
 
   return(
@@ -94,7 +106,7 @@ export default function FuncionariosAdm() {
               <div 
                 key={p.id} 
                 className="funcionario" 
-                onClick={() => setAbrirModalRemocao(true)}
+                onClick={() => {setAdminSelecionado(p); setAbrirModalRemocao(true);}}
               >
                 <div className="funcionario-left">
                   <img className="funcionario-avatar" src={iconeAdm} alt="" />
@@ -115,9 +127,11 @@ export default function FuncionariosAdm() {
           <>
             <p className="cargo">Professores</p>
             {lista.map((p) => (
-              <Link key={p.id} to={`/funcionarios/${p.id}`} className="funcionario">
+              <Link key={p.cpf} to={`/funcionarios/${p.cpf}`} className="funcionario">
                 <div className="funcionario-left">
+
                   <img className="funcionario-avatar" src={iconeProfessor} alt="" />
+
                   <div className="funcionario-texto">
                     <div className="funcionario-nome">
                       {p.nome},{" "}
@@ -138,21 +152,20 @@ export default function FuncionariosAdm() {
       </div>
 
       <div className="div-button-cadastro">
-          <button className="button-cadastro" onClick={() => setAbrirModal(true)}>Cadastar Funcionário</button>
+          <button className="button-cadastro" onClick={() => {setAbrirModal(true);}}>Cadastar Funcionário</button>
       </div>
 
       {abrirModal && (
-        <ModalCadastroFuncionario fechar={() => setAbrirModal(false)} />
+        <ModalCadastroFuncionario fechar={() => setAbrirModal(false)} onSucesso={() => {carregarProfessores(); carregarAdmins();}} />
       )}
 
-    
       {abrirModalRemocao && (
         <div className="modal-overlay">
           <div className="modal">
             <h2>Confirmar remoção</h2>
             <p>
               Tem certeza que deseja remover o funcionário{" "}
-              <strong>{adms.nome}</strong>?
+              <strong>{adminSelecionado?.nome}</strong>            
             </p>
 
             <div className="modal-buttons">
@@ -173,8 +186,6 @@ export default function FuncionariosAdm() {
           </div>
         </div>
       )}
-          
     </div>
-
   )
 }

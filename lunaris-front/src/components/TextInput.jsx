@@ -14,13 +14,21 @@ export default function TextInput({
   inputMode,
   digitsOnly = false
 }) {
+  
   const handleChange = (e) => {
     let next = e.target.value;
+  
     if (digitsOnly) {
       next = next.replace(/\D/g, "").slice(0, maxLength ?? undefined);
     }
+  
     if (onChange) {
-      onChange({ ...e, target: { ...e.target, value: next } });
+      onChange({
+        target: {
+          name: e.target.name,
+          value: next
+        }
+      });
     }
   };
 
