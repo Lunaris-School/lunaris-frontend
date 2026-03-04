@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./FuncionariosAdm.css"
 import {listarProfessores} from "../../services/professorService"
@@ -20,7 +21,7 @@ export default function FuncionariosAdm() {
   const [abrirModalRemocao, setAbrirModalRemocao] = useState(false);
   const [professores, setProfessores] = useState([])
   const [admins, setAdmins] = useState([])
-
+  const [adminSelecionado, setAdminSelecionado] = useState("")
 
   useEffect(() => {
     carregarAdmins();
@@ -62,12 +63,17 @@ export default function FuncionariosAdm() {
     );
   });
 
-  const confirmarRemocao = () => {
-    console.log("Funcionário removido:", adms.nome);
+  const confirmarRemocao = async () => {
+    try {
+      console.log("Funcionário removido:", adminSelecionado?.nome);
   
-    setAbrirModalRemocao(false);
+      // depois você chama API aqui
   
-    navigate("/funcionarios-adm");
+      setAbrirModalRemocao(false);
+      carregarAdmins(); 
+    } catch (error) {
+      console.error("Erro ao remover:", error);
+    }
   };
 
   return(
@@ -100,7 +106,7 @@ export default function FuncionariosAdm() {
               <div 
                 key={p.id} 
                 className="funcionario" 
-                onClick={() => setAbrirModalRemocao(true)}
+                onClick={() => {setAdminSelecionado(p); setAbrirModalRemocao(true);}}
               >
                 <div className="funcionario-left">
                   <img className="funcionario-avatar" src={iconeAdm} alt="" />
@@ -121,7 +127,7 @@ export default function FuncionariosAdm() {
           <>
             <p className="cargo">Professores</p>
             {lista.map((p) => (
-              <Link key={p.id} to={`/funcionarios/${p.id}`} className="funcionario">
+              <Link key={p.cpf} to={`/funcionarios/${p.cpf}`} className="funcionario">
                 <div className="funcionario-left">
 
                   <img className="funcionario-avatar" src={iconeProfessor} alt="" />
@@ -146,7 +152,7 @@ export default function FuncionariosAdm() {
       </div>
 
       <div className="div-button-cadastro">
-          <button className="button-cadastro" onClick={() => setAbrirModal(true)}>Cadastar Funcionário</button>
+          <button className="button-cadastro" onClick={() => {setAbrirModal(true);}}>Cadastar Funcionário</button>
       </div>
 
       {abrirModal && (
@@ -160,7 +166,7 @@ export default function FuncionariosAdm() {
             <h2>Confirmar remoção</h2>
             <p>
               Tem certeza que deseja remover o funcionário{" "}
-              <strong>{adms.nome}</strong>?
+              <strong>{adminSelecionado?.nome}</strong>            
             </p>
 
             <div className="modal-buttons">
@@ -181,8 +187,6 @@ export default function FuncionariosAdm() {
           </div>
         </div>
       )}
-          
     </div>
-
   )
 }

@@ -22,6 +22,7 @@ export default function AlunosAdm() {
       setTurmas(responseTurma.data);
     } catch (error) {
       console.error("Erro ao buscar turmas:", error);
+      console.log(error.response);
     }
   }
 
@@ -78,12 +79,12 @@ export default function AlunosAdm() {
 
       <div className="turmas-container">
         <div className="scroll-container">
-          {lista.map((turma, index) => (
-            <div className="turmas-card" key={index}>
+          {lista.map((turma) => (
+            <div className="turmas-card" key={turma.id}>
 
             <div className="turma-header">
               <h2>{turma.nome}</h2>
-              <span className="turma-serie">2025</span>
+              <span className="turma-serie">{turma.anoLetivo}</span>
             </div>
           
             <div className="turma-stats">
@@ -96,7 +97,7 @@ export default function AlunosAdm() {
             <div className="turma-actions">
               <button 
                 className="btn-detalhes"
-                onClick={() => navigate(`/turma/${index}`)}
+                onClick={() => navigate(`/turma/${turma.id}`)}
               >
                 Ver Alunos
               </button>

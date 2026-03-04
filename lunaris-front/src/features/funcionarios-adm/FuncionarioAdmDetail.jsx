@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import {buscarProfessorPorCpf, deletarProfessor} from "../../services/professorService"
 import "./FuncionarioAdmDetail.css";
 
 import iconePerfil from "../../assets/icone-perfil.png";
@@ -8,33 +9,36 @@ import iconePerfil from "../../assets/icone-perfil.png";
 
 export default function FuncionarioAdmDetail() {
 
-  const { id } = useParams();
+  const { cpf } = useParams();
   const navigate = useNavigate();
   const [abrirModal, setAbrirModal] = useState(false);
+  const [funcionario, setFuncionario] = useState(null);
 
-  const funcionarios = [
-    { id: 1, nome: "Alberto Carvalho", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com" },
-    { id: 2, nome: "Maria Lizete", disciplina: "Matemática", dataContratacao: "27/05/2024", genero: "M", email:"prof@gmail.com" },
-    { id: 3, nome: "Alberto Carvalho", disciplina: "Português", dataContratacao: "27/05/2024", genero: "F", email:"prof@gmail.com" },
-  ];
+  useEffect(() => {
+    const fetchFuncionario = async () => {
+      const response = await buscarProfessorPorCpf(cpf);
+      setFuncionario(response.data);
+    };
+    fetchFuncionario();
+  }, [cpf]);
+
+
+  const confirmarRemocao = async () => {
+    try {
+      console.log("Funcionário removido:", funcionario.nome);
   
-  const confirmarRemocao = () => {
-    console.log("Funcionário removido:", funcionario.nome);
+      await deletarProfessor(cpf);
   
-    setAbrirModal(false);
+      setAbrirModal(false);
+      navigate("/funcionarios-adm");
   
-    // aqui você pode chamar API depois
-    navigate("/funcionarios-adm");
+    } catch (error) {
+      console.error("Erro ao remover professor:", error);
+    }
   };
 
-  
-
-  const funcionario = funcionarios.find(
-    (f) => f.id === Number(id)
-  );
-
   if (!funcionario) {
-    return <div>Funcionário não encontrado</div>;
+    return <div>Carregando...</div>;
   }
 
   return (
@@ -69,7 +73,7 @@ export default function FuncionarioAdmDetail() {
 
         <div className="info-item">
           <span className="label">Data de Contratação</span>
-          <span className="valor">{funcionario.dataContratacao}</span>
+          <span className="valor">{funcionario.dataContratacao[2]}/{funcionario.dataContratacao[1]}/{funcionario.dataContratacao[0]}</span>
         </div>
       </div>
 

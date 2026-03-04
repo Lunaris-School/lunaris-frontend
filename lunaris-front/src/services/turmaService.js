@@ -1,6 +1,6 @@
 import api from "./api";
 
-export const listarTurmas = () => {
+export function listarTurmas(){
   return api.get("/v1/turma/listarTodas");
 };
 
