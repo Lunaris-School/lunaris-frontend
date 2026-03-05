@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./AlunoPages.css";
-import AlunoRightPanel from "./AlunoRightPanel";
-import Search from "../../components/Search";
+import AlunoRightPanel from "../AlunoRightPanel";
+import Search from "../../../components/Search";
 
 export default function AlunoMaterias() {
   const [busca, setBusca] = useState("");

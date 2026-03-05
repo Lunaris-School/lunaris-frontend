@@ -23,7 +23,6 @@ export default function AlunoForum() {
   const [conteudo, setConteudo] = useState("");
 
   function handleEnviar() {
-    // depois integrar com backend
     console.log({ destinatario, assunto, conteudo });
   }
 

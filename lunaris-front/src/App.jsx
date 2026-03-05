@@ -16,8 +16,8 @@ import AlunoDetail from "./features/alunos/AlunoDetail";
 import PerfilAluno from "./features/aluno/PerfilAluno";
 import DesempenhoAluno from "./features/aluno/DesempenhoAluno";
 import NotasAluno from "./features/aluno/NotasAluno";
-import AlunoDashboard from "./features/aluno/AlunoDashboard";
-import AlunoMaterias from "./features/aluno/AlunoMaterias";
+import AlunoDashboard from "./features/aluno/dashboard/AlunoDashboard";
+import AlunoMaterias from "./features/aluno/materias/AlunoMaterias";
 import AlunoForum from "./features/aluno/AlunoForum";
 
 import SidebarAdm from "./components/SidebarAdm";
@@ -59,7 +59,6 @@ function App() {
         <Route path="/alunos-adm" element={<AdmLayout><SidebarAdm /><AlunosAdm /></AdmLayout>} />
         <Route path="/funcionarios-adm" element={<AdmLayout><SidebarAdm /><FuncionariosAdm /></AdmLayout>} />
 
-        {/*com sidebar do professor*/}
         <Route
           path="/perfil-professor"
           element={
@@ -103,7 +102,6 @@ function App() {
           }
         />
 
-        {/* com sidebar do aluno - novas telas */}
         <Route
           path="/aluno-dashboard"
           element={
@@ -129,7 +127,6 @@ function App() {
           }
         />
 
-        {/* com sidebar do aluno - telas antigas de desempenho/notas/perfil */}
         <Route
           path="/perfil-aluno"
           element={

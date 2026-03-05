@@ -32,7 +32,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Safe area para dispositivos com notch */
 @supports (padding: max(0px)) {
   body {
     padding-left: max(0px, env(safe-area-inset-left));
