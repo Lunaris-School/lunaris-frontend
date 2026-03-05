@@ -12,6 +12,7 @@ import Notas from "./features/notas/Notas";
 import Alunos from "./features/alunos/Alunos";
 import PerfilProfessor from "./features/professor/PerfilProfessor";
 import AlunoDetail from "./features/alunos/AlunoDetail";
+import Landing from "./features/landing/Landing";
 
 import PerfilAluno from "./features/aluno/PerfilAluno";
 import DesempenhoAluno from "./features/aluno/DesempenhoAluno";
@@ -23,7 +24,10 @@ import AlunoForum from "./features/aluno/AlunoForum";
 import SidebarAdm from "./components/SidebarAdm";
 import DesempenhoAdm from "./features/desempenho-adm/DesempenhoAdm";
 import FuncionariosAdm from "./features/funcionarios-adm/FuncionariosAdm";
+import FuncionarioAdmDetail from "./features/funcionarios-adm/FuncionarioAdmDetail"
 import AlunosAdm from "./features/alunos-adm/AlunosAdm";
+import AlunosAdmDetail from "./features/alunos-adm/AlunosAdmDetail";
+
 
 function ProfessorLayout({ children }) {
   return (
@@ -51,13 +55,20 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/cadastro-aluno" element={<Cadastro />} />
 
-        <Route path="/desempenho-adm" element={<AdmLayout><SidebarAdm /><DesempenhoAdm /></AdmLayout>} />
-        <Route path="/alunos-adm" element={<AdmLayout><SidebarAdm /><AlunosAdm /></AdmLayout>} />
-        <Route path="/funcionarios-adm" element={<AdmLayout><SidebarAdm /><FuncionariosAdm /></AdmLayout>} />
+        <Route
+          path="/login"
+          element={   
+            <Login />
+          }
+        />
+        <Route path="/desempenho-adm" element={  <div style={{ display: "flex" }}>  <SidebarAdm/> <DesempenhoAdm /> </div>}/>
+        <Route path="/alunos-adm" element={ <div style={{ display: "flex" }}> <SidebarAdm /> <AlunosAdm /> </div> } />
+        <Route path="/funcionarios-adm" element={ <div style={{ display: "flex" }}> <SidebarAdm /> <FuncionariosAdm /> </div> } />
+        <Route path="/funcionarios/:cpf"  element={ <div style={{ display: "flex" }}> <SidebarAdm /> <FuncionarioAdmDetail /> </div> } />
+        <Route path="/turma/:id"  element={ <div style={{ display: "flex" }}> <SidebarAdm /> <AlunosAdmDetail /> </div> } />
 
         <Route
           path="/perfil-professor"
