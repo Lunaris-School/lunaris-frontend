@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./FuncionariosAdm.css"
 import {listarProfessores} from "../../services/professorService"
-import {listarAdmins} from "../../services/adminService"
+import {listarAdmins, deletarAdmin} from "../../services/adminService"
 import Search from "../../components/Search";
 
 import iconePerfil from "../../assets/icone-perfil.png";
@@ -67,7 +67,7 @@ export default function FuncionariosAdm() {
     try {
       console.log("Funcionário removido:", adminSelecionado?.nome);
   
-      // depois você chama API aqui
+      await deletarAdmin(adminSelecionado?.id);
   
       setAbrirModalRemocao(false);
       carregarAdmins(); 
@@ -156,10 +156,9 @@ export default function FuncionariosAdm() {
       </div>
 
       {abrirModal && (
-        <ModalCadastroFuncionario fechar={() => setAbrirModal(false)} />
+        <ModalCadastroFuncionario fechar={() => setAbrirModal(false)} onSucesso={() => {carregarProfessores(); carregarAdmins();}} />
       )}
 
-    
       {abrirModalRemocao && (
         <div className="modal-overlay">
           <div className="modal">
