@@ -4,12 +4,17 @@
 
 .sidebar {
     width: 240px;
-    height: 100vh;
+    min-height: 100vh;
+    max-width: 100%;
     background: #6EA1B2;
     padding: 20px;
     position: sticky;
     top: 0;
     left: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .logo-area {
@@ -97,4 +102,90 @@
 
 .item.active .icon.light {
     display: block;
+}
+
+@media (max-width: 992px) {
+  .sidebar {
+    width: 72px;
+    padding: 16px 10px;
+  }
+
+  .logo-area {
+    flex-direction: column;
+    margin-bottom: 24px;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .sidebar-logo {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+  }
+
+  .item {
+    justify-content: center;
+    padding: 14px;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .item-text {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: auto;
+    padding: 12px 16px;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .logo-area {
+    flex-direction: row;
+    margin-bottom: 0;
+    margin-right: auto;
+  }
+
+  .logo-text {
+    display: flex;
+    font-size: 22px;
+  }
+
+  .sidebar-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .item {
+    flex: 0 0 auto;
+    margin-bottom: 0;
+    padding: 10px 14px;
+  }
+
+  .item-text {
+    display: block;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar .item-text {
+    display: none;
+  }
+
+  .sidebar .item {
+    padding: 12px;
+    min-height: 44px;
+    justify-content: center;
+  }
 }

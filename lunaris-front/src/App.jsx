@@ -6,12 +6,20 @@ import Login from "./features/login/Login";
 import Cadastro from "./features/cadastro/Cadastro";
 
 import Sidebar from "./components/SidebarTeacher";
+import SidebarAluno from "./components/SidebarAluno";
 import DesempenhoProfessor from "./features/desempenho-professor/DesempenhoProfessor";
 import Notas from "./features/notas/Notas";
 import Alunos from "./features/alunos/Alunos";
 import PerfilProfessor from "./features/professor/PerfilProfessor";
 import AlunoDetail from "./features/alunos/AlunoDetail";
 import Landing from "./features/landing/Landing";
+
+import PerfilAluno from "./features/aluno/PerfilAluno";
+import DesempenhoAluno from "./features/aluno/DesempenhoAluno";
+import NotasAluno from "./features/aluno/NotasAluno";
+import AlunoDashboard from "./features/aluno/dashboard/AlunoDashboard";
+import AlunoMaterias from "./features/aluno/materias/AlunoMaterias";
+import AlunoForum from "./features/aluno/AlunoForum";
 
 import SidebarAdm from "./components/SidebarAdm";
 import DesempenhoAdm from "./features/desempenho-adm/DesempenhoAdm";
@@ -23,8 +31,21 @@ import AlunosAdmDetail from "./features/alunos-adm/AlunosAdmDetail";
 
 function ProfessorLayout({ children }) {
   return (
-    <div style={{ display: "flex" }}>
+    <div className="professor-layout">
       <Sidebar />
+      {children}
+    </div>
+  );
+}
+
+function AdmLayout({ children }) {
+  return <div className="adm-layout">{children}</div>;
+}
+
+function AlunoLayout({ children }) {
+  return (
+    <div className="aluno-layout">
+      <SidebarAluno />
       {children}
     </div>
   );
@@ -49,7 +70,6 @@ function App() {
         <Route path="/funcionarios/:cpf"  element={ <div style={{ display: "flex" }}> <SidebarAdm /> <FuncionarioAdmDetail /> </div> } />
         <Route path="/turma/:id"  element={ <div style={{ display: "flex" }}> <SidebarAdm /> <AlunosAdmDetail /> </div> } />
 
-        {/*com sidebar do professor*/}
         <Route
           path="/perfil-professor"
           element={
@@ -90,6 +110,56 @@ function App() {
             <ProfessorLayout>
               <AlunoDetail />
             </ProfessorLayout>
+          }
+        />
+
+        <Route
+          path="/aluno-dashboard"
+          element={
+            <AlunoLayout>
+              <AlunoDashboard />
+            </AlunoLayout>
+          }
+        />
+        <Route
+          path="/aluno-materias"
+          element={
+            <AlunoLayout>
+              <AlunoMaterias />
+            </AlunoLayout>
+          }
+        />
+        <Route
+          path="/aluno-forum"
+          element={
+            <AlunoLayout>
+              <AlunoForum />
+            </AlunoLayout>
+          }
+        />
+
+        <Route
+          path="/perfil-aluno"
+          element={
+            <AlunoLayout>
+              <PerfilAluno />
+            </AlunoLayout>
+          }
+        />
+        <Route
+          path="/desempenho-aluno"
+          element={
+            <AlunoLayout>
+              <DesempenhoAluno />
+            </AlunoLayout>
+          }
+        />
+        <Route
+          path="/notas-aluno"
+          element={
+            <AlunoLayout>
+              <NotasAluno />
+            </AlunoLayout>
           }
         />
       </Routes>
