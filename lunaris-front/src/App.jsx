@@ -14,11 +14,11 @@ import AlunoDetail from "./features/alunos-professor/AlunoDetail";
 import Landing from "./features/landing/Landing";
 
 import SidebarAdm from "./components/SidebarAdm";
-import DesempenhoAdm from "./features/desempenho-adm/DesempenhoAdm";
-import FuncionariosAdm from "./features/funcionarios-adm/FuncionariosAdm";
-import FuncionarioAdmDetail from "./features/funcionarios-adm/FuncionarioAdmDetail"
-import AlunosAdm from "./features/alunos-adm/AlunosAdm";
-import AlunosAdmDetail from "./features/alunos-adm/AlunosAdmDetail";
+import DesempenhoAdm from "./features/adm/desempenho-adm/DesempenhoAdm";
+import FuncionariosAdm from "./features/adm/funcionarios-adm/FuncionariosAdm";
+import FuncionarioAdmDetail from "./features/adm/funcionarios-adm/FuncionarioAdmDetail"
+import AlunosAdm from "./features/adm/alunos-adm/AlunosAdm";
+import AlunosAdmDetail from "./features/adm/alunos-adm/AlunosAdmDetail";
 
 
 function ProfessorLayout({ children }) {

@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import {listarTurmas, inserirTurma} from "../../services/turmaService"
+import { inserirTurma } from "../../../services/turmaService"
+import { buscarAlunosPorTurma } from "../../../services/alunoService"
 import "./AlunosAdm.css";
-import Search from "../../components/Search";
-import TextInput from "../../components/TextInput";
 
+import Search from "../../../components/Search";
+import TextInput from "../../../components/TextInput";
 
-import iconePerfil from "../../assets/icone-perfil.png";
+import iconePerfil from "../../../assets/icone-perfil.png";
 
 export default function AlunosAdm() {
 
@@ -20,7 +21,7 @@ export default function AlunosAdm() {
 
   async function carregarTurmas() {
     try {
-      const responseTurma = await listarTurmas();
+      const responseTurma = await buscarAlunosPorTurma(2026);
       setTurmas(responseTurma.data);
     } catch (error) {
       console.error("Erro ao buscar turmas:", error);
@@ -83,13 +84,13 @@ export default function AlunosAdm() {
             <div className="turmas-card" key={turma.id}>
 
             <div className="turma-header">
-              <h2>{turma.nome}</h2>
+              <h2>{turma.turma}</h2>
               <span className="turma-serie">{turma.anoLetivo}</span>
             </div>
           
             <div className="turma-stats">
               <div className="stat-box">
-                <span className="stat-number">24</span>
+                <span className="stat-number">{turma.quantidadeAlunos}</span>
                 <span className="stat-label">Alunos</span>
               </div>
             </div>

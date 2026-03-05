@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./DesempenhoAdm.css";
-import Search from "../../components/Search";
+import Search from "../../../components/Search";
+import { listarDisciplinas } from "../../../services/disciplinaService";
 
-import iconePerfil from "../../assets/icone-perfil.png";
-import iconeMasculino from "../../assets/icone-masculino.png";
-import iconeFeminino from "../../assets/icone-feminino.png";
+import iconePerfil from "../../../assets/icone-perfil.png";
+import iconeMasculino from "../../../assets/icone-masculino.png";
+import iconeFeminino from "../../../assets/icone-feminino.png";
 
-import { Bar, Doughnut } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -23,12 +24,26 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, ArcElem
 export default function DesempenhoAdm() {
 
   const [busca, setBusca] = useState("");
+  const [disciplinas, setDisciplinas] = useState([])
 
   const quantidadeTurmas = 6;
 
   const turmas = Array.from({ length: quantidadeTurmas }, (_, i) => ({
     nome: `Turma ${String.fromCharCode(65 + i)}`
   }));
+
+  useEffect(() => {
+    carregarDisciplinas()
+  },[]);
+
+  async function carregarDisciplinas() {
+    try {
+      const response = await listarDisciplinas();
+      setDisciplinas(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar disciplinas:", error);
+    }
+  }
 
   const lista = turmas.filter((a) => {
     if (busca.trim() ==="") return true;
@@ -64,15 +79,24 @@ export default function DesempenhoAdm() {
     },
   ]);
 
-  // Mock grafico
 
   const data = {
-    labels: ['Matemática', 'Português', 'História', 'Geografia'],
+    labels: disciplinas.map((d) => (d.nome)),
     datasets: [
       {
         data: [8.5, 7.2, 9.0, 6.8],
-        backgroundColor: '#49769F',
-        borderColor: '#001E3A',
+        backgroundColor: [
+          "#0b6e75",
+          "#1b9aaa",
+          "#2fa4b6",
+          "#44c2dd",
+          "#5fd0e6",
+          "#7adceb",
+          "#94e6ef",
+          "#3a8ca1",
+          "#2c7f91",
+          "#145f66"
+        ],   
         borderWidth: 1,
       },
     ],
@@ -80,9 +104,22 @@ export default function DesempenhoAdm() {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    plugins: {
-      legend: { position: 'bottom' },
+    layout: {
+      padding: {
+        top: 10,
+        bottom: 10
+      }
     },
+    plugins: {
+      legend: {
+        position: "right",
+        labels: {
+          padding: 12,
+          boxWidth: 15
+        }
+      }
+    },
+    cutout: "55%"
   };
 
   return (

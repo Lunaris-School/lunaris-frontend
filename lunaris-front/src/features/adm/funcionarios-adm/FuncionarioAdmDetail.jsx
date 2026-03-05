@@ -1,10 +1,10 @@
 import React, { useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import {buscarProfessorPorCpf, deletarProfessor} from "../../services/professorService"
+import {buscarProfessorPorCpf, deletarProfessor} from "../../../services/professorService"
 import "./FuncionarioAdmDetail.css";
 
-import iconePerfil from "../../assets/icone-perfil.png";
+import iconePerfil from "../../../assets/icone-perfil.png";
 
 
 export default function FuncionarioAdmDetail() {

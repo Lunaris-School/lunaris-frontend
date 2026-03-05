@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import "./AlunosAdmDetail.css";
 
-import Search from "../../components/Search";
-import TextInput from "../../components/TextInput";
+import Search from "../../../components/Search";
+import TextInput from "../../../components/TextInput";
 
-import iconePerfil from "../../assets/icone-perfil.png";
-import iconeMasculino from "../../assets/icone-masculino.png";
-import iconeFeminino from "../../assets/icone-feminino.png";
+import iconePerfil from "../../../assets/icone-perfil.png";
+import iconeMasculino from "../../../assets/icone-masculino.png";
+import iconeFeminino from "../../../assets/icone-feminino.png";
 
 export default function Alunos() {
   const [busca, setBusca] = useState("");

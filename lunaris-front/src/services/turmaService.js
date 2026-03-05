@@ -9,7 +9,7 @@ export const buscarTurmaPorProfessor = (cpf) => {
 };
 
 export const inserirTurma = (dados) => {
-  return api.post("/v1/turma/", dados);
+  return api.post("/v1/turma", dados);
 };
 
 export const deletarTurma = (id) => {

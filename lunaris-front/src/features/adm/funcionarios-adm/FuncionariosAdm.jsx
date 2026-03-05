@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./FuncionariosAdm.css"
-import {listarProfessores} from "../../services/professorService"
-import {listarAdmins, deletarAdmin} from "../../services/adminService"
-import Search from "../../components/Search";
+import {listarProfessores} from "../../../services/professorService"
+import {listarAdmins, deletarAdmin} from "../../../services/adminService"
+import Search from "../../../components/Search";
 
-import iconePerfil from "../../assets/icone-perfil.png";
-import iconeProfessor from "../../assets/icone-professor.png";
-import iconeAdm from "../../assets/icone-adm.svg";
-import iconeLixo from "../../assets/icone-lixo.png";
+import iconePerfil from "../../../assets/icone-perfil.png";
+import iconeProfessor from "../../../assets/icone-professor.png";
+import iconeAdm from "../../../assets/icone-adm.svg";
+import iconeLixo from "../../../assets/icone-lixo.png";
 
 import ModalCadastroFuncionario from "./ModalCadastroFuncionario";
 

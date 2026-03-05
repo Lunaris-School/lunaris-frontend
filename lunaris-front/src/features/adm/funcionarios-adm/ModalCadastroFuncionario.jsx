@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import TextInput from "../../components/TextInput";
-import Select from "../../components/Select";
+import TextInput from "../../../components/TextInput";
+import Select from "../../../components/Select";
 import "./ModalCadastroFuncionario.css";
-import {inserirProfessor} from "../../services/professorService"
-import {inserirAdmin} from "../../services/adminService"
-import {listarDisciplinas} from "../../services/disciplinaService"
+import {inserirProfessor} from "../../../services/professorService"
+import {inserirAdmin} from "../../../services/adminService"
+import {listarDisciplinas} from "../../../services/disciplinaService"
 
 
-import iconeProfessor from "../../assets/icone-professor.png";
-import iconeAdm from "../../assets/icone-adm.svg";
-import iconeClose from "../../assets/icone-close.svg";
+import iconeProfessor from "../../../assets/icone-professor.png";
+import iconeAdm from "../../../assets/icone-adm.svg";
+import iconeClose from "../../../assets/icone-close.svg";
 
 
 export default function ModalCadastroFuncionario({ fechar, onSucesso }) {

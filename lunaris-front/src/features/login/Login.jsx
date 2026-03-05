@@ -22,7 +22,7 @@ export default function Login() {
       localStorage.setItem("role", role);
 
       if (role === "ALUNO") {
-        navigate("/cadastro-aluno");
+        navigate("/desempenho-aluno");
       } else if (role === "PROFESSOR") {
         navigate("/desempenho-professor");
       } else if (role === "ADMIN") {
