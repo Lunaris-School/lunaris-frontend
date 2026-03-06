@@ -14,6 +14,8 @@ export default function FuncionarioAdmDetail() {
   const [abrirModal, setAbrirModal] = useState(false);
   const [funcionario, setFuncionario] = useState(null);
 
+  const userName = localStorage.getItem("userName");
+
   useEffect(() => {
     const fetchFuncionario = async () => {
       const response = await buscarProfessorPorCpf(cpf);
@@ -45,42 +47,42 @@ export default function FuncionarioAdmDetail() {
     <div className="funcionario-detail-page">
       <div className="topo">
           <div className="perfil"  style={{marginLeft: "85%"}}>
-              <span>Prof. João Jonas</span>
+              <span>{userName}</span>
               <div className="bolinha">
                   <img src={iconePerfil} alt="" />
               </div>
           </div>
       </div>
 
-      <span className="voltar" onClick={() => navigate("/funcionarios-adm")}>&lt;</span>
+      <div className="funcionario-detail-container">
 
-      <div className="funcionario-card">
+        <span className="voltar" onClick={() => navigate("/funcionarios-adm")}>&lt;</span>
 
-        <div className="funcionario-profile">
-            <img className="img-profile" src={iconePerfil} alt="" />
-            <h1 className="media-title">Professor(a) {funcionario.nome}</h1>
+        <div className="funcionario-card">
+          <div className="funcionario-profile">
+              <img className="img-profile" src={iconePerfil} alt="" />
+              <h1 className="media-title">Professor(a) {funcionario.nome}</h1>
+          </div>
+          <div className="info-item">
+            <span className="label">Disciplina</span>
+            <span className="valor">{funcionario.disciplina}</span>
+          </div>
+          <div className="info-item">
+            <span className="label">Email</span>
+            <span className="valor">{funcionario.email}</span>
+          </div>
+          <div className="info-item">
+            <span className="label">Data de Contratação</span>
+            <span className="valor">{funcionario.dataContratacao[2]}/{funcionario.dataContratacao[1]}/{funcionario.dataContratacao[0]}</span>
+          </div>
         </div>
 
-        <div className="info-item">
-          <span className="label">Disciplina</span>
-          <span className="valor">{funcionario.disciplina}</span>
-        </div>
-
-        <div className="info-item">
-          <span className="label">Email</span>
-          <span className="valor">{funcionario.email}</span>
-        </div>
-
-        <div className="info-item">
-          <span className="label">Data de Contratação</span>
-          <span className="valor">{funcionario.dataContratacao[2]}/{funcionario.dataContratacao[1]}/{funcionario.dataContratacao[0]}</span>
-        </div>
+        
       </div>
 
       <div className="div-button-remover">
           <button className="button-remover" onClick={() => setAbrirModal(true)}>Remover Funcionário</button>
       </div>
-
 
       {abrirModal && (
         <div className="modal-overlay">

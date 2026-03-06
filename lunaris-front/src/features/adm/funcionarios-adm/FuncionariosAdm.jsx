@@ -22,6 +22,8 @@ export default function FuncionariosAdm() {
   const [admins, setAdmins] = useState([])
   const [adminSelecionado, setAdminSelecionado] = useState("")
 
+  const userName = localStorage.getItem("userName");
+
   useEffect(() => {
     carregarAdmins();
     carregarProfessores();
@@ -84,8 +86,7 @@ export default function FuncionariosAdm() {
           placeholder="Buscar funcionário por nome, email ou disciplina"
         />
         <div className="perfil">
-          {/* depois substituir pelo nome do professor atual (mock) */}
-          <span>Prof. João Jonas</span>
+          <span>{userName}</span>
           <div className="bolinha">
             <img src={iconePerfil} alt="" />
           </div>

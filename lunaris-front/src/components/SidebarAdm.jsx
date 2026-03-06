@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./SidebarAdm.css";
 
-import logo from "../assets/logo-escura.png";
+import logo from "../assets/logo-clara.svg";
 
 import desempenhoClaro from "../assets/icone-desempenho-claro.png";
 import desempenhoEscuro from "../assets/icone-desempenho-escuro.png";
@@ -17,11 +17,11 @@ export default function SidebarAdm() {
     return (
       <div className="sidebar">
         <div className="logo-area">
-          <img src={logo} className="sidebar-logo" alt="Logo" />
-          <span className="logo-text">
+          <img src={logo} className="sidebar-adm-logo" alt="Logo" />
+          {/* <span className="logo-text">
             <span className="logo-dark">Luna</span>
             <span className="logo-light">ris</span>
-          </span>
+          </span> */}
         </div>
   
         <NavLink to="/desempenho-adm" className="item">

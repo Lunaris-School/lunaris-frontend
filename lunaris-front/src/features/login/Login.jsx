@@ -15,11 +15,15 @@ export default function Login() {
   const handleLogin = async () => {
     try {
       const response = await login(email, senha);
+
       const token = response.data.token;
       localStorage.setItem("token", token);
+
       const detalhes = await buscarDetalhesUsuario(token);
       const role = detalhes.data.role;
       localStorage.setItem("role", role);
+      const userName = detalhes.data.name;
+      localStorage.setItem("userName", userName);
 
       if (role === "ALUNO") {
         navigate("/desempenho-aluno");
@@ -34,15 +38,6 @@ export default function Login() {
       alert("E-mail ou senha inválidos");
     }
   };
-
-  // const handleLogin = async () => {
-  //   try {
-  //     const response = await login(email, password);
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error.response);
-  //   }
-  // };
 
   return (
     <div className="login-container">

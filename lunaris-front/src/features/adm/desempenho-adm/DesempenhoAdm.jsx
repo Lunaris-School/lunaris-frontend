@@ -26,6 +26,9 @@ export default function DesempenhoAdm() {
   const [busca, setBusca] = useState("");
   const [disciplinas, setDisciplinas] = useState([])
 
+  const userName = localStorage.getItem("userName");
+
+
   const quantidadeTurmas = 6;
 
   const turmas = Array.from({ length: quantidadeTurmas }, (_, i) => ({
@@ -91,7 +94,6 @@ export default function DesempenhoAdm() {
           "#2fa4b6",
           "#44c2dd",
           "#5fd0e6",
-          "#7adceb",
           "#94e6ef",
           "#3a8ca1",
           "#2c7f91",
@@ -110,9 +112,7 @@ export default function DesempenhoAdm() {
         bottom: 10
       }
     },
-    plugins: {
-      legend: {
-        position: "right",
+    plugins: { legend: { position: "right",
         labels: {
           padding: 12,
           boxWidth: 15
@@ -133,8 +133,7 @@ export default function DesempenhoAdm() {
         />
 
         <div className="perfil">
-          {/* depois substituir pelo nome do professor atual (mock) */}
-          <span>Prof. João Jonas</span> 
+          <span>{userName}</span>
           <div className="bolinha">
             <img src={iconePerfil} alt="" />
           </div>
@@ -144,9 +143,7 @@ export default function DesempenhoAdm() {
       <h1 className="media-title">Média por disciplinas</h1>
 
       <div className="media-disciplina">
-
         <div className="scroll-container">
-
           {lista.map((turma, index) => (
             <div className="media-turma" key={index}>
               <p>{turma.nome}</p>

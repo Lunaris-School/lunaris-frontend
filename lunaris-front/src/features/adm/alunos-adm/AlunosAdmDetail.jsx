@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "./AlunosAdmDetail.css";
+import { listarAlunos } from "../../../services/alunoService";
 
 import Search from "../../../components/Search";
 import TextInput from "../../../components/TextInput";
@@ -9,21 +11,34 @@ import iconeMasculino from "../../../assets/icone-masculino.png";
 import iconeFeminino from "../../../assets/icone-feminino.png";
 
 export default function Alunos() {
+
+  const { turmaId } = useParams();
   const [busca, setBusca] = useState("");
   const [cpf, setCpf] = useState("");
   const [name, setName] = useState("");
   const [abrirModal, setAbrirModal] = useState(false);
+  const [alunos, setAlunos] = useState([]);
 
-  //mocjk
-  const alunos = [
-    { id: 1, nome: "Clara Bartolini", turma: "3ºE", matricula: "123456432456", genero: "F" , cpf: "00012345677"},
-    { id: 2, nome: "Breno Silva", turma: "3ºE", matricula: "123456432456", genero: "M", cpf: "00012345677"},
-  ];
+  const userName = localStorage.getItem("userName");
+
+  useEffect(() => {
+    carregarAlunos();
+  }, [turmaId]);
+
+  async function carregarAlunos() {
+    try {
+      const response = await listarAlunos();
+      const filtrados = response.data.filter((a) => a.turmaId === Number(turmaId));
+      setAlunos(filtrados);
+    } catch (error) {
+      console.error("Erro ao buscar alunos:", error);
+    }
+  }
 
   const lista = alunos.filter((a) => {
     if (busca.trim() === "") return true;
     return (
-      a.matricula.includes(busca) ||
+      String(a.matricula).includes(busca) ||
       a.nome.toLowerCase().includes(busca.toLowerCase())
     );
   });
@@ -42,11 +57,10 @@ export default function Alunos() {
         <Search
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
-          placeholder="Buscar funcionário por nome, email ou disciplina"
+          placeholder="Buscar aluno por nome ou CPF"
         />
         <div className="perfil">
-          {/* depois substituir pelo nome do professor atual (mock) */}
-          <span>Prof. João Jonas</span>
+          <span>{userName}</span>
           <div className="bolinha">
             <img src={iconePerfil} alt="" />
           </div>
@@ -59,21 +73,20 @@ export default function Alunos() {
       <div className="scroll-alunos">
        <div className="alunos-lista">
            {lista.map((i) => (
-                <div key={i.id} className="card-aluno">
+                <div key={i.cpf} className="card-aluno">
                     <div className="aluno-adm-detail">
                         <img
                             className="avatar"
-                            src={i.genero === "M" ? iconeMasculino : iconeFeminino}
+                            src={i.generoId === 1 ? iconeMasculino : iconeFeminino}
                             alt=""
                         />
                         <div>
                             <div className="nome">
-                            {i.nome}, {i.turma}
+                            {i.nome}
                         </div>
-                        <div className="matricula">{i.cpf}</div>
+                        <div className="matricula">CPF: {i.cpf}</div>
                     </div>
                 </div>
-                <div className="funcionario-arrow">{">"}</div>
                 </div>
                 ))}
        </div>

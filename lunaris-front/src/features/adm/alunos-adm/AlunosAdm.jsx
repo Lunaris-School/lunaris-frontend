@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import { inserirTurma } from "../../../services/turmaService"
 import { buscarAlunosPorTurma } from "../../../services/alunoService"
+import { inserirTurma, listarTurmas } from "../../../services/turmaService"
 import "./AlunosAdm.css";
 
 import Search from "../../../components/Search";
@@ -18,11 +18,24 @@ export default function AlunosAdm() {
   const [turmas, setTurmas] = useState([]);
   const [novaTurma, setNovaTurma] = useState("")
 
+  const userName = localStorage.getItem("userName");
 
   async function carregarTurmas() {
     try {
-      const responseTurma = await buscarAlunosPorTurma(2026);
-      setTurmas(responseTurma.data);
+      const [responseTurmas, responseAlunos] = await Promise.all([
+        listarTurmas(),
+        buscarAlunosPorTurma(new Date().getFullYear())
+      ]);
+
+      const turmasComAlunos = responseTurmas.data.map((turma) => {
+        const match = responseAlunos.data.find((a) => a.turma === turma.nome);
+        return {
+          ...turma,
+          quantidadeAlunos: match ? match.quantidadeAlunos : 0
+        };
+      });
+
+      setTurmas(turmasComAlunos);
     } catch (error) {
       console.error("Erro ao buscar turmas:", error);
       console.log(error.response);
@@ -45,7 +58,7 @@ export default function AlunosAdm() {
   const lista = turmas.filter((a) => {
     if (busca.trim() === "") return true;
     return (
-      a.nome.toLowerCase().includes(busca.toLowerCase())
+      a.nome?.toLowerCase().includes(busca.toLowerCase())
     );
   });
 
@@ -67,8 +80,7 @@ export default function AlunosAdm() {
           placeholder="Buscar turma por nome ou ano letivo"
         />
         <div className="perfil">
-          {/* depois substituir pelo nome do professor atual (mock) */}
-          <span>Prof. João Jonas</span>
+          <span>{userName}</span>
           <div className="bolinha">
             <img src={iconePerfil} alt="" />
           </div>
@@ -84,10 +96,10 @@ export default function AlunosAdm() {
             <div className="turmas-card" key={turma.id}>
 
             <div className="turma-header">
-              <h2>{turma.turma}</h2>
+              <h2>{turma.nome}</h2>
               <span className="turma-serie">{turma.anoLetivo}</span>
             </div>
-          
+
             <div className="turma-stats">
               <div className="stat-box">
                 <span className="stat-number">{turma.quantidadeAlunos}</span>
@@ -185,5 +197,7 @@ export default function AlunosAdm() {
     </div>
   )
 }
-  
-// ARRUMAR MARGIN DO TEXTIPNUT
+
+// listar ranking e media de cada turma e filtro
+// adicionar materia para cada turma (ex: turma 2026 tem matematica, portugues, etc) 
+// arummar imagem de menino e menina
