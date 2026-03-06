@@ -7,6 +7,7 @@ import Search from "../../../components/Search";
 import TextInput from "../../../components/TextInput";
 
 import iconePerfil from "../../../assets/icone-perfil.png";
+import iconeLivro from "../../../assets/icone-livro.png";
 import iconeMasculino from "../../../assets/icone-masculino.png";
 import iconeFeminino from "../../../assets/icone-feminino.png";
 
@@ -92,8 +93,9 @@ export default function Alunos() {
        </div>
       </div>
 
-      <div className="div-button-cadastro">
-          <button className="button-cadastro" onClick={() => setAbrirModal(true)}>Matricular Aluno</button>
+      <div className="div-button-cadastro-aluno">
+        <img className="button-cadastro-aluno" src={iconeLivro} alt="" />
+        <button className="button-cadastro-aluno" onClick={() => setAbrirModal(true)}>Matricular Aluno</button>
       </div>
 
       {abrirModal && (

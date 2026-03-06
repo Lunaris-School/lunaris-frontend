@@ -50,3 +50,14 @@
 .alunos-lista::-webkit-scrollbar {
     display: none;
 }
+
+.div-button-cadastro-aluno {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.button-cadastro-aluno {
+    background-color: #7aa9b3;
+    font-size: 15px;
+}
