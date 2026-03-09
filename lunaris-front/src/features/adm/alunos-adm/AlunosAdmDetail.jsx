@@ -11,6 +11,7 @@ import iconePerfil from "../../../assets/icone-perfil.png";
 import iconeLivro from "../../../assets/icone-livro.png";
 import iconeMasculino from "../../../assets/icone-masculino.png";
 import iconeFeminino from "../../../assets/icone-feminino.png";
+import ModalCadastroDisciplinas from "./ModalCadastroDisciplinas";
 
 export default function Alunos() {
 
@@ -19,6 +20,7 @@ export default function Alunos() {
   const [cpf, setCpf] = useState("");
   const [name, setName] = useState("");
   const [abrirModal, setAbrirModal] = useState(false);
+    const [abrirModalMateria, setAbrirModalMateria] = useState(false);
   const [alunos, setAlunos] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -50,9 +52,7 @@ export default function Alunos() {
 
   const confirmar = () => {
     console.log("Aluno matriculado!");
-  
     setAbrirModal(false);
-  
     navigate("/alunos-adm");
   };
 
@@ -99,8 +99,8 @@ export default function Alunos() {
       </div>
 
       <div className="div-button-cadastro-aluno">
-        <img className="button-cadastro-aluno" src={iconeLivro} alt="" />
-        <button className="button-cadastro-aluno" onClick={() => setAbrirModal(true)}>Matricular Aluno</button>
+        <img className="icone-livro" src={iconeLivro} onClick={() => setAbrirModalMateria(true)} alt="" />
+        <button className="btn-matricular" onClick={() => setAbrirModal(true)}>Matricular Aluno</button>
       </div>
 
       {abrirModal && (
@@ -133,7 +133,7 @@ export default function Alunos() {
 
            <br /><br />
 
-           <div className="modal-buttons">
+           <div className="modal-botoes">
              <button
                className="btn-voltar"
                onClick={() => setAbrirModal(false)}
@@ -151,7 +151,12 @@ export default function Alunos() {
          </div>
        </div>
       )}
-
+      {abrirModalMateria && (
+        <ModalCadastroDisciplinas
+          fechar={() => setAbrirModal(true)}
+          onSucesso={(ids) => console.log("Disciplinas selecionadas:", ids)}
+        />
+      )}
 
     </div>
   );

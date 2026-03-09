@@ -15,6 +15,7 @@ export default function Login() {
   const navigate = useNavigate();  
 
   const handleLogin = async () => {
+    setLoading(true);
     try {
       const response = await login(email, senha);
 
@@ -39,7 +40,7 @@ export default function Login() {
       console.error("Erro ao fazer login:", error);
       alert("E-mail ou senha inválidos");
     }finally{
-      setLoading(true);
+      setLoading(false);
     }
   };
   

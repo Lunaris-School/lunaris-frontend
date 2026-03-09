@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import TextInput from "../../../components/TextInput";
 import Select from "../../../components/Select";
 import "./ModalCadastroFuncionario.css";

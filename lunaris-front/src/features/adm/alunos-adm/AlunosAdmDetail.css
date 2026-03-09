@@ -37,6 +37,13 @@
     text-decoration: none;
 }
 
+.avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
 .scroll-alunos {
     height: 55%;
     overflow: hidden;
@@ -55,9 +62,96 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 30px;
+    gap: 16px;
+    font-size: 15px;
 }
 
-.button-cadastro-aluno {
+.div-button-cadastro-aluno img {
+    padding: 8px;
+    width: 34px;
+    border-radius: 8px;
+    transition: border-color 0.25s;
+}
+
+.div-button-cadastro-aluno img:hover {
+  border-color: #213547;
+}
+
+.icone-livro {
+    padding: 8px;
+    width: 34px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.25s;
     background-color: #7aa9b3;
+}
+
+.icone-livro:hover {
+    background-color: #5e8f99;
+}
+
+.btn-matricular {
+    background-color: #7aa9b3;
+    color: white;
     font-size: 15px;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-matricular:hover {
+    background-color: #5e8f99;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-container {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    width: 420px;
+    max-width: 90%;
+    box-shadow: 0 8px 32px rgba(0, 30, 58, 0.15);
+    color: #0b2a4a;
+}
+
+.modal-botoes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-salvar {
+    background: #7aa9b3;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.btn-voltar {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.btn-voltar:hover {
+    background: #5a6268;
 }
