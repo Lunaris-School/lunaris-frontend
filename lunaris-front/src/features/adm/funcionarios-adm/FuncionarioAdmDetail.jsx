@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {buscarProfessorPorCpf, deletarProfessor} from "../../../services/professorService"
 import "./FuncionarioAdmDetail.css";
+import Loading from "../../../components/Loading";
 
 import iconePerfil from "../../../assets/icone-perfil.png";
 
@@ -13,6 +14,7 @@ export default function FuncionarioAdmDetail() {
   const navigate = useNavigate();
   const [abrirModal, setAbrirModal] = useState(false);
   const [funcionario, setFuncionario] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const userName = localStorage.getItem("userName");
 
@@ -20,6 +22,7 @@ export default function FuncionarioAdmDetail() {
     const fetchFuncionario = async () => {
       const response = await buscarProfessorPorCpf(cpf);
       setFuncionario(response.data);
+      setLoading(false);
     };
     fetchFuncionario();
   }, [cpf]);
@@ -36,15 +39,15 @@ export default function FuncionarioAdmDetail() {
   
     } catch (error) {
       console.error("Erro ao remover professor:", error);
+    }finally{
+      setLoading(false);
     }
   };
 
-  if (!funcionario) {
-    return <div>Carregando...</div>;
-  }
-
   return (
     <div className="funcionario-detail-page">
+      {loading && <Loading />}
+
       <div className="topo">
           <div className="perfil"  style={{marginLeft: "85%"}}>
               <span>{userName}</span>
@@ -61,19 +64,19 @@ export default function FuncionarioAdmDetail() {
         <div className="funcionario-card">
           <div className="funcionario-profile">
               <img className="img-profile" src={iconePerfil} alt="" />
-              <h1 className="media-title">Professor(a) {funcionario.nome}</h1>
+              <h1 className="media-title">Professor(a) {funcionario?.nome}</h1>
           </div>
           <div className="info-item">
             <span className="label">Disciplina</span>
-            <span className="valor">{funcionario.disciplina}</span>
+            <span className="valor">{funcionario?.disciplina}</span>
           </div>
           <div className="info-item">
             <span className="label">Email</span>
-            <span className="valor">{funcionario.email}</span>
+            <span className="valor">{funcionario?.email}</span>
           </div>
           <div className="info-item">
             <span className="label">Data de Contratação</span>
-            <span className="valor">{funcionario.dataContratacao[2]}/{funcionario.dataContratacao[1]}/{funcionario.dataContratacao[0]}</span>
+            <span className="valor">{funcionario?.dataContratacao[2]}/{funcionario?.dataContratacao[1]}/{funcionario?.dataContratacao[0]}</span>
           </div>
         </div>
 

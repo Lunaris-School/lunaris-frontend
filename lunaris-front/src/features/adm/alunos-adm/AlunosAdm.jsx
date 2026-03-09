@@ -6,6 +6,7 @@ import "./AlunosAdm.css";
 
 import Search from "../../../components/Search";
 import TextInput from "../../../components/TextInput";
+import Loading from "../../../components/Loading";
 
 import iconePerfil from "../../../assets/icone-perfil.png";
 
@@ -17,6 +18,7 @@ export default function AlunosAdm() {
   const [busca, setBusca] = useState("");
   const [turmas, setTurmas] = useState([]);
   const [novaTurma, setNovaTurma] = useState("")
+  const [loading, setLoading] = useState(true);
 
   const userName = localStorage.getItem("userName");
 
@@ -39,6 +41,8 @@ export default function AlunosAdm() {
     } catch (error) {
       console.error("Erro ao buscar turmas:", error);
       console.log(error.response);
+    }finally{
+      setLoading(false);
     }
   }
 
@@ -73,6 +77,7 @@ export default function AlunosAdm() {
 
   return (
     <div className="turmas-adm-container">
+      {loading && <Loading />}
       <div className="topo">
         <Search
           value={busca}

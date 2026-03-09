@@ -5,6 +5,7 @@ import { listarAlunos } from "../../../services/alunoService";
 
 import Search from "../../../components/Search";
 import TextInput from "../../../components/TextInput";
+import Loading from "../../../components/Loading";
 
 import iconePerfil from "../../../assets/icone-perfil.png";
 import iconeLivro from "../../../assets/icone-livro.png";
@@ -19,6 +20,7 @@ export default function Alunos() {
   const [name, setName] = useState("");
   const [abrirModal, setAbrirModal] = useState(false);
   const [alunos, setAlunos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const userName = localStorage.getItem("userName");
 
@@ -33,6 +35,8 @@ export default function Alunos() {
       setAlunos(filtrados);
     } catch (error) {
       console.error("Erro ao buscar alunos:", error);
+    }finally{
+      setLoading(false);
     }
   }
 
@@ -54,6 +58,7 @@ export default function Alunos() {
 
   return (
     <div className="alunos-adm-container">
+      {loading && <Loading />}
       <div className="topo">
         <Search
           value={busca}

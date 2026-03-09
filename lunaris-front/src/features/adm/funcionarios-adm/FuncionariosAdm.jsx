@@ -4,6 +4,7 @@ import "./FuncionariosAdm.css"
 import {listarProfessores} from "../../../services/professorService"
 import {listarAdmins, deletarAdmin} from "../../../services/adminService"
 import Search from "../../../components/Search";
+import Loading from "../../../components/Loading";
 
 import iconePerfil from "../../../assets/icone-perfil.png";
 import iconeProfessor from "../../../assets/icone-professor.png";
@@ -21,6 +22,7 @@ export default function FuncionariosAdm() {
   const [professores, setProfessores] = useState([])
   const [admins, setAdmins] = useState([])
   const [adminSelecionado, setAdminSelecionado] = useState("")
+  const [loading, setLoading] = useState(true);
 
   const userName = localStorage.getItem("userName");
 
@@ -35,8 +37,11 @@ export default function FuncionariosAdm() {
       setProfessores(responseProfessor.data);
     } catch (error) {
       console.error("Erro ao buscar professores:", error);
+    }finally{
+      setLoading(false);
     }
   }
+
   async function carregarAdmins() {
     try {
       const responseAdmin = await listarAdmins();
@@ -79,6 +84,8 @@ export default function FuncionariosAdm() {
 
   return(
     <div className="funcionarios-page">
+      {loading && <Loading />}
+
       <div className="topo">
         <Search
           value={busca}
