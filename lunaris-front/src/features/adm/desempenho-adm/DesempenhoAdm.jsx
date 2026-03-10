@@ -98,15 +98,8 @@ export default function DesempenhoAdm() {
   });
 
   const cores = [
-    "#0b6e75",
-    "#1b9aaa",
-    "#2fa4b6",
-    "#44c2dd",
-    "#5fd0e6",
-    "#94e6ef",
-    "#3a8ca1",
-    "#2c7f91",
-    "#145f66",
+    "#0b6e75", "#1b9aaa", "#2fa4b6", "#44c2dd", "#5fd0e6",
+    "#94e6ef", "#3a8ca1", "#2c7f91", "#145f66",
   ];
 
   const options = {

@@ -75,6 +75,10 @@ export default function FuncionarioAdmDetail() {
             <span className="valor">{funcionario?.email}</span>
           </div>
           <div className="info-item">
+            <span className="label">CPF</span>
+            <span className="valor">{funcionario?.cpf}</span>
+          </div>
+          <div className="info-item">
             <span className="label">Data de Contratação</span>
             <span className="valor">{funcionario?.dataContratacao[2]}/{funcionario?.dataContratacao[1]}/{funcionario?.dataContratacao[0]}</span>
           </div>

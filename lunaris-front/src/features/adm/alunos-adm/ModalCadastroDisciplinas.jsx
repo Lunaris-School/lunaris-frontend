@@ -1,39 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { listarDisciplinas } from "../../../services/disciplinaService";
+import { atualizarDisciplinasTurma } from "../../../services/turmaService";
 import "./ModalCadastroDisciplinas.css";
 
-export default function ModalCadastroDisciplinas({ fechar, onSucesso }) {
+export default function ModalCadastroDisciplinas({ fechar, onSucesso, turmaId }) {
   const [disciplinas, setDisciplinas] = useState([]);
   const [selecionadas, setSelecionadas] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function buscarDisciplinas() {
-      try {
-        const response = await listarDisciplinas();
-        setDisciplinas(response.data);
-      } catch (error) {
-        console.error("Erro ao buscar disciplinas:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
     buscarDisciplinas();
   }, []);
+
+  async function buscarDisciplinas() {
+    try {
+      const response = await listarDisciplinas();
+      setDisciplinas(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar disciplinas:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function atualizarDisciplinas() {
+    setLoading(true);
+    try {
+      await atualizarDisciplinasTurma(turmaId, selecionadas);
+      onSucesso();
+      fechar();
+    } catch (error) {
+      console.error("Erro ao atualizar disciplinas:", error);
+      alert("Ocorreu um erro ao atualizar as disciplinas. Tente novamente.");
+    }finally {
+      setLoading(false);
+    }
+  }
 
   const toggleDisciplina = (id) => {
     setSelecionadas((prev) =>
       prev.includes(id) ? prev.filter((d) => d !== id) : [...prev, id]
     );
-  };
-
-  const confirmar = () => {
-    if (selecionadas.length === 0) {
-      alert("Selecione ao menos uma disciplina.");
-      return;
-    }
-    onSucesso(selecionadas);
-    fechar();
   };
 
   return (
@@ -60,11 +67,11 @@ export default function ModalCadastroDisciplinas({ fechar, onSucesso }) {
         )}
 
         <div className="modal-buttons">
-          <button className="btn-cancelar-remocao" onClick={fechar}>
+          <button className="btn-cancelar-remocao" onClick={fechar} disabled={loading}>
             Cancelar
           </button>
-          <button className="btn-confirmar" onClick={confirmar}>
-            Confirmar
+          <button className="btn-confirmar" onClick={atualizarDisciplinas} disabled={loading}>
+            {loading ? "Salvando..." : "Confirmar"}
           </button>
         </div>
       </div>

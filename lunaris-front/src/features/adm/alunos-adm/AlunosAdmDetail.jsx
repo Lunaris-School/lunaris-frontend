@@ -154,8 +154,9 @@ export default function Alunos() {
       )}
       {abrirModalMateria && (
         <ModalCadastroDisciplinas
-          fechar={() => setAbrirModal(true)}
-          onSucesso={(ids) => console.log("Disciplinas selecionadas:", ids)}
+          turmaId={turmaId}
+          fechar={() => setAbrirModalMateria(false)}
+          onSucesso={() => setAbrirModalMateria(false)}
         />
       )}
 

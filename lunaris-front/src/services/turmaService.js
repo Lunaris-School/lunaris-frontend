@@ -16,6 +16,10 @@ export const inserirTurma = (dados) => {
   return api.post("/v1/turma", dados);
 };
 
+export const atualizarDisciplinasTurma = (id, dados) => {
+  return api.patch(`/v1/turma/${id}`, dados);
+};
+
 export const deletarTurma = (id) => {
   return api.delete(`/v1/turma/deletar/${id}`);
 };
