@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import TextInput from "../../../components/TextInput";
 import Select from "../../../components/Select";
+import Loading from "../../../components/Loading";
 import "./ModalCadastroFuncionario.css";
 import {inserirProfessor} from "../../../services/professorService"
 import {inserirAdmin} from "../../../services/adminService"
@@ -24,17 +25,21 @@ export default function ModalCadastroFuncionario({ fechar, onSucesso }) {
     dataContratacao: ""
   });
   const [disciplinas, setDisciplinas] = useState([])
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     carregarDisciplinas()
   },[]);
 
   async function carregarDisciplinas() {
+    setLoading(true);
     try {
       const response = await listarDisciplinas();
       setDisciplinas(response.data);
     } catch (error) {
       console.error("Erro ao buscar disciplinas:", error);
+    }finally{
+      setLoading(false);
     }
   }
 
@@ -44,6 +49,7 @@ export default function ModalCadastroFuncionario({ fechar, onSucesso }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try{
       if(tipoCadastro === "professor"){
         const hoje = new Date();
@@ -69,6 +75,8 @@ export default function ModalCadastroFuncionario({ fechar, onSucesso }) {
       fechar();
     }catch (error){
       console.error("Erros ao cadastrar:", error)
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -118,6 +126,7 @@ export default function ModalCadastroFuncionario({ fechar, onSucesso }) {
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
+            {loading && <Loading />}
             <TextInput
               label="Nome"
               name="nome"
@@ -176,10 +185,10 @@ export default function ModalCadastroFuncionario({ fechar, onSucesso }) {
             />
 
             <div className="modal-botoes">
-              <button type="button" onClick={handleVoltar} className="btn-voltar">
+              <button type="button" onClick={handleVoltar} className="btn-voltar" disabled={loading}>
                 Voltar
               </button>
-              <button type="submit" className="btn-salvar">
+              <button type="submit" className="btn-salvar" disabled={loading}>
                 Salvar
               </button>  
             </div>

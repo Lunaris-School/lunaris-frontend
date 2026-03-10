@@ -39,6 +39,7 @@
   cursor: pointer;
   font-size: 14px;
   transition: background 0.3s;
+  width: 120px;
 }
 
 .btn-voltar {
@@ -50,6 +51,7 @@
   cursor: pointer;
   font-size: 14px;
   transition: background 0.3s;
+  width: 120px;
 }
 
 .btn-cancelar {

@@ -4,6 +4,10 @@ export function listarTurmas(){
   return api.get("/v1/turma/listarTodas");
 };
 
+export const listarMediasPorTurma = () => {
+  return api.get("/v1/turma/listarMedias");
+};
+
 export const buscarTurmaPorProfessor = (cpf) => {
   return api.get(`/v1/turma/listarTurmaPorProfessor/${cpf}`);
 };
@@ -13,5 +17,5 @@ export const inserirTurma = (dados) => {
 };
 
 export const deletarTurma = (id) => {
-    return api.delete(`/v1/turma/${id}`);
+  return api.delete(`/v1/turma/deletar/${id}`);
 };

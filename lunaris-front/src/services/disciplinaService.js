@@ -1,7 +1,7 @@
 import api from "./api";
 
 export const listarDisciplinas = () => {
-  return api.get("/api/disciplina");
+  return api.get("/api/disciplina/list");
 };
 
 export const inserirDisciplina = () => {

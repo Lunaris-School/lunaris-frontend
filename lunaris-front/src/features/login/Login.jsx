@@ -25,7 +25,7 @@ export default function Login() {
       const detalhes = await buscarDetalhesUsuario(token);
       const role = detalhes.data.role;
       localStorage.setItem("role", role);
-      const userName = detalhes.data.name;
+      const userName = detalhes.data.nome;
       localStorage.setItem("userName", userName);
 
       if (role === "ALUNO") {

@@ -138,12 +138,12 @@
   flex: 1;
   padding: 10px;
   border: none;
-  background: #e20000;
+  background: #b00000;
   color: white;
   border-radius: 8px;
   cursor: pointer;
 }
 
 .btn-confirmar:hover {
-  background: #b00000;
+  background: #e20000;
 }

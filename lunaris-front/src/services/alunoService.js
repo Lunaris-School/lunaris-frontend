@@ -4,6 +4,10 @@ export const listarAlunos = () => {
   return api.get("/aluno");
 };
 
+export const listarRankingAlunos = (disciplinaId, quantidade) => {
+  return api.get(`/aluno/listarRanking?disciplinaId=${disciplinaId}&quantidade=${quantidade}`);
+};
+
 export const buscarAlunoPorCpf = (cpf) => {
   return api.get(`/aluno/buscar/${cpf}`);
 };

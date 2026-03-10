@@ -143,6 +143,7 @@ export default function Alunos() {
 
              <button
                className="btn-salvar"
+               style={{background: "#7aa9b3"}}
                onClick={confirmar}
              >
                Confirmar

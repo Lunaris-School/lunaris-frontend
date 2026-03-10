@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { buscarAlunosPorTurma } from "../../../services/alunoService"
-import { inserirTurma, listarTurmas } from "../../../services/turmaService"
+import { inserirTurma, listarTurmas, deletarTurma } from "../../../services/turmaService"
 import "./AlunosAdm.css";
 
 import Search from "../../../components/Search";
@@ -13,12 +13,17 @@ import iconePerfil from "../../../assets/icone-perfil.png";
 export default function AlunosAdm() {
 
   const navigate = useNavigate();
+
   const [abrirModal, setAbrirModal] = useState(false);
   const [abrirModalRemocao, setAbrirModalRemocao] = useState(false)
+
   const [busca, setBusca] = useState("");
   const [turmas, setTurmas] = useState([]);
   const [novaTurma, setNovaTurma] = useState("")
+  const [turmaSelecionada, setTurmaSelecionada] = useState(null);
+
   const [loading, setLoading] = useState(true);
+  const [loadingAdd, setLoadingAdd] = useState(false);
 
   const userName = localStorage.getItem("userName");
 
@@ -41,16 +46,39 @@ export default function AlunosAdm() {
     } catch (error) {
       console.error("Erro ao buscar turmas:", error);
       console.log(error.response);
-    }finally{
+    } finally {
       setLoading(false);
     }
   }
 
-  async function handleAdicionarTurma() {
+  async function handleRemoverTurma(id) {
+    setLoadingAdd(true);
     try {
-      await inserirTurma({ nome: novaTurma, anoLetivo: new Date().getFullYear() });
+      await deletarTurma(id);
+      carregarTurmas();
+    } catch (error) {
+      console.error("Erro ao remover turma:", error);
+    } finally {
+      setAbrirModalRemocao(false);
+      setTurmaSelecionada(null);
+      setLoadingAdd(false);
+    }
+  }
+
+  async function handleAdicionarTurma() {
+    setLoadingAdd(true);
+    try {
+      await inserirTurma({
+        nome: novaTurma,
+        anoLetivo: new Date().getFullYear()
+      });
+      setNovaTurma("");
+      setAbrirModal(false);
+      carregarTurmas();
     } catch (error) {
       console.error("Erro ao adicionar turma:", error);
+    } finally {
+      setLoadingAdd(false);
     }
   }
 
@@ -60,24 +88,17 @@ export default function AlunosAdm() {
 
 
   const lista = turmas.filter((a) => {
+
     if (busca.trim() === "") return true;
-    return (
-      a.nome?.toLowerCase().includes(busca.toLowerCase())
-    );
+
+    return a.nome?.toLowerCase().includes(busca.toLowerCase());
+
   });
-
-  const confirmarRemocao = () => {
-    console.log("Turma removida!");
-  
-    setAbrirModalRemocao(false);
-  
-    navigate("/alunos-adm");
-  };
-
 
   return (
     <div className="turmas-adm-container">
       {loading && <Loading />}
+
       <div className="topo">
         <Search
           value={busca}
@@ -91,47 +112,66 @@ export default function AlunosAdm() {
           </div>
         </div>
       </div>
-      
+
       <h1 className="media-title">Turmas</h1>
-      <p className="description">Visualize as turmas e tenha mais detalhes sobre elas.</p>
+
+      <p className="description">
+        Visualize as turmas e tenha mais detalhes sobre elas.
+      </p>
 
       <div className="turmas-container">
         <div className="scroll-container">
           {lista.map((turma) => (
             <div className="turmas-card" key={turma.id}>
 
-            <div className="turma-header">
-              <h2>{turma.nome}</h2>
-              <span className="turma-serie">{turma.anoLetivo}</span>
-            </div>
-
-            <div className="turma-stats">
-              <div className="stat-box">
-                <span className="stat-number">{turma.quantidadeAlunos}</span>
-                <span className="stat-label">Alunos</span>
+              <div className="turma-header">
+                <h2>{turma.nome}</h2>
+                <span className="turma-serie">{turma.anoLetivo}</span>
               </div>
+
+              <div className="turma-stats">
+                <div className="stat-box">
+                  <span className="stat-number">
+                    {turma.quantidadeAlunos}
+                  </span>
+
+                  <span className="stat-label">
+                    Alunos
+                  </span>
+                </div>
+              </div>
+
+              <div className="turma-actions">
+                <button
+                  className="btn-detalhes"
+                  onClick={() => navigate(`/turma/${turma.id}`)}
+                >
+                  Ver Alunos
+                </button>
+
+                <button
+                  className="btn-remover"
+                  onClick={() => {
+                    setTurmaSelecionada(turma);
+                    setAbrirModalRemocao(true);
+                  }}
+                >
+                  Remover
+                </button>
+              </div>
+
             </div>
-          
-            <div className="turma-actions">
-              <button 
-                className="btn-detalhes"
-                onClick={() => navigate(`/turma/${turma.id}`)}
-              >
-                Ver Alunos
-              </button>
-          
-              <button className="btn-remover" onClick={() => setAbrirModalRemocao(true)}>
-                Remover
-              </button>
-            </div>
-          
-          </div>
           ))}
         </div>
       </div>
 
       <div className="div-button-cadastro">
-          <button className="button-cadastro" onClick={() => setAbrirModal(true)}>Cadastar Turma</button>
+        <button
+          className="button-cadastro"
+          onClick={() => setAbrirModal(true)}
+        >
+          Cadastrar Turma
+        </button>
       </div>
 
 
@@ -139,16 +179,16 @@ export default function AlunosAdm() {
         <div className="modal-overlay">
           <div className="modal">
             <h2>Nova Turma</h2>
-            <p>
-              Digite o nome da nova turma.
-            </p>
+            <p>Digite o nome da nova turma.</p>
 
-            <TextInput 
+            {loadingAdd && <Loading />}
+
+            <TextInput
               name="nome"
               placeholder="Digite o nome da turma"
               value={novaTurma}
               onChange={(e) => setNovaTurma(e.target.value)}
-              required  
+              required
             />
 
             <br />
@@ -157,6 +197,7 @@ export default function AlunosAdm() {
               <button
                 className="btn-cancelar-remocao"
                 onClick={() => setAbrirModal(false)}
+                disabled={loadingAdd}
               >
                 Cancelar
               </button>
@@ -165,6 +206,7 @@ export default function AlunosAdm() {
                 className="btn-confirmar"
                 style={{background: "#7aa9b3"}}
                 onClick={handleAdicionarTurma}
+                disabled={loadingAdd}
               >
                 Confirmar
               </button>
@@ -178,7 +220,9 @@ export default function AlunosAdm() {
           <div className="modal">
             <h2>Confirmar remoção</h2>
             <p>
-              Tem certeza que deseja remover a turma?</p>
+              Tem certeza que deseja remover a turma
+              <strong> {turmaSelecionada?.nome}</strong>?
+            </p>
 
             <div className="modal-buttons">
               <button
@@ -190,7 +234,7 @@ export default function AlunosAdm() {
 
               <button
                 className="btn-confirmar"
-                onClick={confirmarRemocao}
+                onClick={() => handleRemoverTurma(turmaSelecionada?.id)}
               >
                 Confirmar
               </button>
@@ -198,11 +242,7 @@ export default function AlunosAdm() {
           </div>
         </div>
       )}
-          
+
     </div>
   )
 }
-
-// listar ranking e media de cada turma e filtro
-// adicionar materia para cada turma (ex: turma 2026 tem matematica, portugues, etc) 
-// arummar imagem de menino e menina

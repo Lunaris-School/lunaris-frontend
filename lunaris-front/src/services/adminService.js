@@ -17,5 +17,5 @@ export const atualizarAdmin = (id, dados) => {
 };
 
 export const deletarAdmin = (id) => {
-    return api.delete(`/api/admin/${id}`);
+  return api.delete(`/api/admin/${id}`);
 };
