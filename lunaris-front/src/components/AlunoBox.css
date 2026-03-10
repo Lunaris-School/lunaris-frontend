@@ -2,11 +2,16 @@
 display: flex;
 align-items: center;
 justify-content: space-between;
+
+width: 100%;      
 background: white;
 border-radius: 18px;
-padding: 16px 20px;
-margin-bottom: 14px;
+
+padding: 22px 26px;  
+margin-bottom: 16px;
+
 text-decoration: none;
+box-sizing: border-box; 
 }
 
 .aluno-left {

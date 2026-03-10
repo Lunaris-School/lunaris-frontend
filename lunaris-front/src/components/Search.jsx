@@ -2,7 +2,6 @@ import React from "react";
 import "./Search.css";
 
 import iconeLupa from "../assets/icone-lupa.png";
-import iconeFiltro from "../assets/icone-filtro.png";
 
 export default function Search({ value, onChange, placeholder }) {
   return (
@@ -17,8 +16,6 @@ export default function Search({ value, onChange, placeholder }) {
         onChange={onChange}
         placeholder={placeholder}
       />
-    {/* depois fazer filtro por turma */}
-      <img className="search-filtro" src={iconeFiltro} alt="" />
     </div>
   );
 }

@@ -1,21 +1,14 @@
 input {
   padding: 0 6px;
-  background: white;    
+  background: white;
   font-size: 12px;
   color: black;
+  box-sizing: border-box;
 }
 
-.status.Aprovado {
-  background: #59c11a;
-}
-
-.status.Reprovado {
-  background: #e20000;
-}
-
-.status.Processando {
-  background: #555;
-}
+.status.Aprovado { background: #59c11a; }
+.status.Reprovado { background: #e20000; }
+.status.Processando { background: #555; }
 
 .notas {
   width: 100%;
@@ -48,9 +41,7 @@ input {
   justify-content: center;
 }
 
-.lupa img {
-  width: 16px;
-}
+.lupa img { width: 16px; }
 
 .busca input {
   width: 330px;
@@ -61,9 +52,7 @@ input {
   padding: 0 12px;
 }
 
-.filtro {
-  width: 24px;
-}
+.filtro { width: 24px; }
 
 .perfil {
   display: flex;
@@ -72,7 +61,8 @@ input {
   font-weight: 600;
   font-size: 16px;
   color: #0b2a4a;
-} 
+}
+
 a.perfil-professor {
   display: flex;
   align-items: center;
@@ -93,9 +83,7 @@ a.perfil-professor {
   justify-content: center;
 }
 
-.bolinha img {
-  width: 42px;
-}
+.bolinha img { width: 42px; }
 
 .cabecalho {
   display: flex;
@@ -106,29 +94,12 @@ a.perfil-professor {
   color: #0b2a4a;
 }
 
-.c1 { 
-  width: 45%; 
-}
-
-.c2 { 
-  width: 12%; 
-  text-align: center; 
-}
-
-.c3 { 
-  width: 12%; 
-  text-align: center; 
-}
-
-.c4 { 
-  width: 10%; 
-  text-align: center; 
-}
-
-.c5 { 
-  width: 21%; 
-  text-align: center; 
-}
+.c1 { width: 45%; }
+.c2 { width: 12%; text-align: center; }
+.c3 { width: 12%; text-align: center; }
+.c4 { width: 10%; text-align: center; }
+.c5 { width: 15%; text-align: center; margin-right: 110px;}
+.c6 { width: 6%;  text-align: center; }
 
 .card {
   display: flex;
@@ -147,9 +118,7 @@ a.perfil-professor {
   align-items: center;
 }
 
-.avatar {
-  width: 35px;
-}
+.avatar { width: 35px; }
 
 .nome {
   font-weight: 700;
@@ -162,33 +131,39 @@ a.perfil-professor {
   color: #7b8794;
 }
 
-.n1, .n2 { 
-  width: 12%; 
-  text-align: center; 
+.n1, .n2 {
+  width: 12%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .n1 input, .n2 input {
   width: 45px;
   height: 24px;
   border-radius: 10px;
   border: 1px solid #222;
   outline: none;
-  padding: 0 8px;
-  margin-left:25px
+  padding: 0 6px;
+  text-align: center;
 }
 
 .media {
-  margin-left:20px;
   width: 10%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 700;
   color: #0b2a4a;
+  text-align: center;
 }
 
 .status-div {
-  width: 17%;
+  width: 15%;
   display: flex;
-  justify-content: flex-end;
-  margin-right: 40px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0;
 }
 
 .status {
@@ -199,12 +174,27 @@ a.perfil-professor {
   font-size: 11px;
 }
 
-.status.verde { 
-  background: #59c11a; 
+.btn-wrap {
+  width: 16%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.status.vermelho { 
-  background: #e20000; 
+
+.btn-salvar {
+  background: #49769F;
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  height: 34px;
+  white-space: nowrap;
+  margin-right: 30px;
 }
-.status.cinza { 
-  background: #555; 
+
+.btn-salvar:hover {
+  filter: brightness(0.95);
 }
