@@ -1,16 +1,43 @@
 .alunos-page {
-width: 100%;
-min-height: 100vh;
-background: #eceef2;
-padding: 20px;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  background: #eceef2;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .alunos-topo {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-top: 30px;
-margin-bottom: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+  margin-bottom: 22px;
+}
+
+@media (max-width: 768px) {
+  .alunos-page {
+    padding: 16px;
+  }
+
+  .alunos-topo {
+    margin-top: 20px;
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .alunos-page {
+    padding: 12px;
+  }
+
+  .alunos-topo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .alunos-perfil {

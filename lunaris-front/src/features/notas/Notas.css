@@ -19,15 +19,20 @@ input {
 
 .notas {
   width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   background: #eceef2;
   padding: 20px;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .topo {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
   margin-bottom: 15px;
   margin-top: 30px;
 }
@@ -36,11 +41,14 @@ input {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex: 1;
+  min-width: 0;
 }
 
 .lupa {
   width: 45px;
   height: 45px;
+  min-width: 45px;
   background: #7aa9b3;
   border-radius: 12px;
   display: flex;
@@ -53,12 +61,14 @@ input {
 }
 
 .busca input {
-  width: 330px;
+  max-width: 100%;
+  width: 280px;
   height: 45px;
   border: none;
   outline: none;
   border-radius: 12px;
   padding: 0 12px;
+  box-sizing: border-box;
 }
 
 .filtro {
@@ -207,4 +217,63 @@ a.perfil-professor {
 }
 .status.cinza { 
   background: #555; 
+}
+
+@media (max-width: 992px) {
+  .cabecalho,
+  .card {
+    flex-wrap: wrap;
+  }
+
+  .c1, .notas-aluno { width: 100%; max-width: 100%; }
+  .c2, .c3, .c4, .c5, .n1, .n2, .media, .status-div {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .notas {
+    padding: 16px;
+  }
+
+  .topo {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+
+  .busca input {
+    width: 100%;
+  }
+
+  .card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px;
+  }
+
+  .notas-aluno {
+    width: 100%;
+  }
+
+  .cabecalho {
+    display: none;
+  }
+
+  .n1, .n2, .media, .status-div {
+    width: 100%;
+    justify-content: flex-start;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .n1 input, .n2 input {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .notas {
+    padding: 12px;
+  }
 }
