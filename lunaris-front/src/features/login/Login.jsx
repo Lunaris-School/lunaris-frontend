@@ -27,9 +27,11 @@ export default function Login() {
       localStorage.setItem("role", role);
       const userName = detalhes.data.nome;
       localStorage.setItem("userName", userName);
+      const cpf = detalhes.data.id;
+      localStorage.setItem("cpf", cpf);
 
       if (role === "ALUNO") {
-        navigate("/desempenho-aluno");
+        navigate("/aluno-dashboard");
       } else if (role === "PROFESSOR") {
         navigate("/desempenho-professor");
       } else if (role === "ADMIN") {

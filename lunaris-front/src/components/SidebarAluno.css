@@ -1,4 +1,3 @@
-/* Tema aluno - cores da referência */
 .sidebar-aluno {
   width: 260px;
   min-height: 100vh;
@@ -106,6 +105,15 @@
 
 .sidebar-aluno .item.active .icon.light {
   display: none;
+}
+
+.sidebar-aluno .nav-items {
+  flex: 1;
+}
+
+.sidebar-aluno .logout-area {
+  margin-top: auto;
+  padding-bottom: 10px;
 }
 
 @media (max-width: 992px) {

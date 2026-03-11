@@ -15,7 +15,6 @@ export default function Landing() {
   const navigate = useNavigate();
   return (
     <div className="landing">
-      {/* NAV */}
       <header className="landing-nav">
         <div className="nav-left">
           <img className="nav-logo" src={logo} alt="Logo" />
@@ -59,7 +58,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* SOBRE */}
       <section id="sobre" className="sobre">
         <div className="sobre-top">
           <div className="sobre-col">
@@ -124,7 +122,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* PLANOS */}
       <section id="planos" className="planos">
         <h2 className="planos-title">Nossos planos</h2>
 

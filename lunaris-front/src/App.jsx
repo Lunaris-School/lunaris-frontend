@@ -15,8 +15,6 @@ import AlunoDetail from "./features/alunos-professor/AlunoDetail";
 import Landing from "./features/landing/Landing";
 
 import PerfilAluno from "./features/aluno/PerfilAluno";
-import DesempenhoAluno from "./features/aluno/DesempenhoAluno";
-import NotasAluno from "./features/aluno/NotasAluno";
 import AlunoDashboard from "./features/aluno/dashboard/AlunoDashboard";
 import AlunoMaterias from "./features/aluno/materias/AlunoMaterias";
 import AlunoForum from "./features/aluno/forum/AlunoForum";
@@ -143,22 +141,6 @@ function App() {
           element={
             <AlunoLayout>
               <PerfilAluno />
-            </AlunoLayout>
-          }
-        />
-        <Route
-          path="/desempenho-aluno"
-          element={
-            <AlunoLayout>
-              <DesempenhoAluno />
-            </AlunoLayout>
-          }
-        />
-        <Route
-          path="/notas-aluno"
-          element={
-            <AlunoLayout>
-              <NotasAluno />
             </AlunoLayout>
           }
         />
