@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Landing.css";
 
 import logo from "../../assets/logo-escura.png";
@@ -11,6 +12,7 @@ import icon3 from "../../assets/icon3.png";
 import icon4 from "../../assets/icon4.png";
 
 export default function Landing() {
+  const navigate = useNavigate();
   return (
     <div className="landing">
       {/* NAV */}
@@ -27,8 +29,12 @@ export default function Landing() {
         </nav>
 
         <div className="nav-actions">
-          <button className="btn-outline">Entrar</button>
-          <button className="btn-solid">Cadastre-se</button>
+          <button className="btn-outline" onClick={() => navigate('/login')}>
+            Entrar
+          </button>
+          <button className="btn-solid" onClick={() => navigate('/cadastro-aluno')}>
+            Cadastre-se
+          </button>
         </div>
       </header>
 

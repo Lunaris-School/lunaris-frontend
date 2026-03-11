@@ -19,7 +19,7 @@ import DesempenhoAluno from "./features/aluno/DesempenhoAluno";
 import NotasAluno from "./features/aluno/NotasAluno";
 import AlunoDashboard from "./features/aluno/dashboard/AlunoDashboard";
 import AlunoMaterias from "./features/aluno/materias/AlunoMaterias";
-import AlunoForum from "./features/aluno/AlunoForum";
+import AlunoForum from "./features/aluno/forum/AlunoForum";
 
 import SidebarAdm from "./components/SidebarAdm";
 import DesempenhoAdm from "./features/adm/desempenho-adm/DesempenhoAdm";

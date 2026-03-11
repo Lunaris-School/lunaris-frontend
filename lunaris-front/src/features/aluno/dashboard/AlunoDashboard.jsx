@@ -1,5 +1,5 @@
 import React from "react";
-import "./AlunoPages.css";
+import "../AlunoPages.css";
 import AlunoRightPanel from "../AlunoRightPanel";
 
 export default function AlunoDashboard() {

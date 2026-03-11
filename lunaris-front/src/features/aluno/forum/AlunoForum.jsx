@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./AlunoPages.css";
-import AlunoRightPanel from "./AlunoRightPanel";
-import Select from "../../components/Select";
-import LargeButton from "../../components/LargeButton";
+import "../AlunoPages.css";
+import AlunoRightPanel from "../AlunoRightPanel";
+import Select from "../../../components/Select";
+import LargeButton from "../../../components/LargeButton";
 
 const opcoesProfessores = [
   { value: "flavio", label: "Professor Flávio Xo" },

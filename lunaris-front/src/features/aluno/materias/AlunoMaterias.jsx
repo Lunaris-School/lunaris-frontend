@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./AlunoPages.css";
+import "../AlunoPages.css";
 import AlunoRightPanel from "../AlunoRightPanel";
 import Search from "../../../components/Search";
 
