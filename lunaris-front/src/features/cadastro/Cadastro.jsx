@@ -4,6 +4,7 @@ import LargeButton from "../../components/LargeButton";
 import TextInput from "../../components/TextInput";
 import Select from "../../components/Select";
 import logo from "../../assets/logo.svg";
+import Loading from "../../components/Loading";
 import { inserirAluno } from "../../services/alunoService";
 
 export default function Cadastro() {
@@ -14,8 +15,10 @@ export default function Cadastro() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
+    const [loading, setLoading] = useState(false);
 
     async function handleCadastro() {
+        setLoading(true);
         if(password !== password2){
             alert("As senhas não coincidem!");
             return;
@@ -39,11 +42,14 @@ export default function Cadastro() {
             console.error("Erro ao cadastrar aluno:", error);
             const mensagem = error.response?.data?.message || "Ocorreu um erro ao cadastrar. Tente novamente.";
             alert(mensagem);
+        } finally {
+            setLoading(false);
         }
     }
 
     return(
         <div className="cadastro-container">
+            {loading && <Loading />}
             <div className="cadastro-form">
                 <img src={logo} alt="Logo" />
                 <h1 className="cadastro-form-title">Seja Bem-vindo!</h1>

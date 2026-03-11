@@ -54,6 +54,10 @@
     background: #6EA1B2;
 }
 
+.logout {
+    margin-top: 320px;  
+}
+
 .item-text {
     color: #001E3A;
     font-size: 14px;
