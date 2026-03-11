@@ -9,9 +9,9 @@ import Sidebar from "./components/SidebarTeacher";
 import SidebarAluno from "./components/SidebarAluno";
 import DesempenhoProfessor from "./features/desempenho-professor/DesempenhoProfessor";
 import Notas from "./features/notas/Notas";
-import Alunos from "./features/alunos/Alunos";
+import Alunos from "./features/alunos-professor/Alunos";
 import PerfilProfessor from "./features/professor/PerfilProfessor";
-import AlunoDetail from "./features/alunos/AlunoDetail";
+import AlunoDetail from "./features/alunos-professor/AlunoDetail";
 import Landing from "./features/landing/Landing";
 
 import PerfilAluno from "./features/aluno/PerfilAluno";
@@ -22,11 +22,11 @@ import AlunoMaterias from "./features/aluno/materias/AlunoMaterias";
 import AlunoForum from "./features/aluno/AlunoForum";
 
 import SidebarAdm from "./components/SidebarAdm";
-import DesempenhoAdm from "./features/desempenho-adm/DesempenhoAdm";
-import FuncionariosAdm from "./features/funcionarios-adm/FuncionariosAdm";
-import FuncionarioAdmDetail from "./features/funcionarios-adm/FuncionarioAdmDetail"
-import AlunosAdm from "./features/alunos-adm/AlunosAdm";
-import AlunosAdmDetail from "./features/alunos-adm/AlunosAdmDetail";
+import DesempenhoAdm from "./features/adm/desempenho-adm/DesempenhoAdm";
+import FuncionariosAdm from "./features/adm/funcionarios-adm/FuncionariosAdm";
+import FuncionarioAdmDetail from "./features/adm/funcionarios-adm/FuncionarioAdmDetail"
+import AlunosAdm from "./features/adm/alunos-adm/AlunosAdm";
+import AlunosAdmDetail from "./features/adm/alunos-adm/AlunosAdmDetail";
 
 
 function ProfessorLayout({ children }) {
@@ -68,7 +68,7 @@ function App() {
         <Route path="/alunos-adm" element={ <div style={{ display: "flex" }}> <SidebarAdm /> <AlunosAdm /> </div> } />
         <Route path="/funcionarios-adm" element={ <div style={{ display: "flex" }}> <SidebarAdm /> <FuncionariosAdm /> </div> } />
         <Route path="/funcionarios/:cpf"  element={ <div style={{ display: "flex" }}> <SidebarAdm /> <FuncionarioAdmDetail /> </div> } />
-        <Route path="/turma/:id"  element={ <div style={{ display: "flex" }}> <SidebarAdm /> <AlunosAdmDetail /> </div> } />
+        <Route path="/turma/:turmaId"  element={ <div style={{ display: "flex" }}> <SidebarAdm /> <AlunosAdmDetail /> </div> } />
 
         <Route
           path="/perfil-professor"

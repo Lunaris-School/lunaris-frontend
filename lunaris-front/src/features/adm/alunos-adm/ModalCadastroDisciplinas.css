@@ -1,0 +1,118 @@
+.modal-overlay {
+ position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-disciplinas {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  width: 420px;
+  max-width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 30, 58, 0.15);
+  color: #0b2a4a;
+}
+
+.modal-disciplinas h2 {
+  margin-bottom: 6px;
+  font-size: 20px;
+}
+
+.modal-disciplinas p {
+  font-size: 14px;
+  color: #6b7a8d;
+  margin-bottom: 20px;
+}
+
+.disciplinas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 260px;
+  overflow-y: auto;
+  margin-bottom: 24px;
+  padding-right: 4px;
+}
+
+.disciplinas-lista::-webkit-scrollbar {
+  width: 4px;
+}
+
+.disciplinas-lista::-webkit-scrollbar-thumb {
+  background: #c0cdd8;
+  border-radius: 4px;
+}
+
+.disciplina-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #f0f4f8;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.disciplina-item:hover {
+  background: #dce8f0;
+}
+
+.disciplina-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #0b2a4a;
+  cursor: pointer;
+}
+
+.modal-disc-loading {
+  text-align: center;
+  color: #6b7a8d;
+  margin-bottom: 24px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-cancelar-remocao {
+  background: #6c757d;
+  color: white;
+  border: 1px solid transparent;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.btn-cancelar-remocao:hover {
+  background: #5a6268;
+}
+
+.btn-confirmar {
+  background: #7aa9b3;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-confirmar:hover {
+  background: #213547;
+}

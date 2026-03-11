@@ -5,11 +5,11 @@ export const listarProfessores = () => {
 };
 
 export const buscarProfessorPorCpf = (cpf) => {
-  return api.get(`/api/professor/${cpf}`);
+  return api.get(`/api/professor/buscar/${cpf}`);
 };
 
 export const bucarAlunosPorProfessor = (cpf) => {
-    return api.get(`/api/professor/${cpf}/alunos`);
+    return api.get(`/api/professor/alunos/${cpf}`);
 };
 
 export const inserirProfessor = (dados) => {
@@ -23,6 +23,4 @@ export const atualizarProfessor = (cpf, dados) => {
 export const deletarProfessor = (cpf) => {
     return api.delete(`/api/professor/deletar/${cpf}`);
 };
-
-// não foi add o endpoit de patch do ProfessorController
 

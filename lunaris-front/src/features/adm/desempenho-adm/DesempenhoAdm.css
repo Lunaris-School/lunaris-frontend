@@ -23,6 +23,16 @@
     margin-bottom: 70px;
 }
 
+.div-ranking-desempenho{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.div-ranking-desempenho img {
+    width: 28px;
+}
 .scroll-container {
     display: flex;
     overflow-x: auto;
@@ -56,7 +66,7 @@
 .grafico-container{
     height: 260px;
     width: 100%;
-    margin: 0 auto;
+    margin: auto;
 }
 
 .scroll-container::-webkit-scrollbar {
@@ -180,4 +190,34 @@
 .matricula {
     font-size: 11px;
     color: #7b8794;
+}
+
+.modal-desempenho {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content-desempenho {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  width: 420px;
+  max-width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 30, 58, 0.15);
+  color: #0b2a4a;
+}
+
+.aluno-desempenho {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
 }
