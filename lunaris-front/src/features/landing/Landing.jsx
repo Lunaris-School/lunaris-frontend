@@ -28,12 +28,8 @@ export default function Landing() {
         </nav>
 
         <div className="nav-actions">
-          <button className="btn-outline" onClick={() => navigate('/login')}>
-            Entrar
-          </button>
-          <button className="btn-solid" onClick={() => navigate('/cadastro-aluno')}>
-            Cadastre-se
-          </button>
+          <button className="btn-outline" onClick={() => navigate('/login')}>Entrar</button>
+          <button className="btn-solid" onClick={() => navigate('/cadastro-aluno')}>Cadastre-se</button>
         </div>
       </header>
 
