@@ -1,51 +1,55 @@
-.aluno {
+.aluno-box {
 display: flex;
-align-items: center;
 justify-content: space-between;
-
-width: 100%;      
+align-items: center;
 background: white;
 border-radius: 18px;
-
 padding: 22px 26px;  
 margin-bottom: 16px;
-
 text-decoration: none;
-box-sizing: border-box; 
+box-shadow: 0 4px 12px rgba(0, 30, 58, 0.08);
+transition: all 0.25s ease;
+}
+
+.aluno:hover {
+transform: translateY(-3px);
+box-shadow: 0 12px 24px rgba(0, 30, 58, 0.12);
 }
 
 .aluno-left {
 display: flex;
 align-items: center;
-gap: 14px;
+gap: 12px;
 }
 
 .aluno-avatar {
-width: 34px;
+width: 35px;
+height: 35px;
+}
+
+.aluno-texto {
+display: flex;
+flex-direction: column;
 }
 
 .aluno-nome {
 font-weight: 700;
+font-size: 14px;
 color: #0b2a4a;
-font-size: 13px;
 }
 
 .aluno-turma {
-font-weight: 700;
+font-weight: 500;
+color: #7b8794;
 }
 
 .aluno-matricula {
 font-size: 11px;
 color: #7b8794;
-margin-top: 2px;
 }
 
 .aluno-arrow {
-font-size: 22px;
-color: #0b2a4a;
+font-size: 18px;
 font-weight: 700;
-}
-
-.aluno:hover {
-background: #f3f5f7;
+color: #7b8794;
 }

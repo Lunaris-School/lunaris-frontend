@@ -4,7 +4,7 @@ export const listarAlunos = () => {
   return api.get("/aluno");
 };
 
-export const listarRankingAlunos = (disciplinaId, quantidade) => {
+export const listarRankingAlunosAdm = (disciplinaId, quantidade) => {
   return api.get(`/aluno/listarRanking?disciplinaId=${disciplinaId}&quantidade=${quantidade}`);
 };
 

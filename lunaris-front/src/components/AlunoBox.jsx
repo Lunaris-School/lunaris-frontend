@@ -36,7 +36,7 @@ export default function AlunoBox({
   }
 
   return (
-    <Link to={`/alunos/${id}`} className="aluno">
+    <Link to={`/alunos/${id}`} className="aluno-box">
       <div className="aluno-left">
         <img
           className="aluno-avatar"

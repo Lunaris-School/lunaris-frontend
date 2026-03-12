@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PerfilAluno.css";
 import iconePerfil from "../../assets/icone-perfil.png";
-import { buscarBoletimAluno } from "../../services/boletimService";
+import { buscarBoletinsPorAluno } from "../../services/boletimService";
 import Loading from "../../components/Loading";
 
 const gerarAvatarUrl = (cpf) => {
@@ -30,7 +30,7 @@ export default function PerfilAluno() {
           return;
         }
 
-        const response = await buscarBoletimAluno(cpf);
+        const response = await buscarBoletinsPorAluno(cpf);
         console.log("Boletim recebido:", response.data);
         
         if (Array.isArray(response.data) && response.data.length > 0) {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./AlunoRightPanel.css";
-import { buscarBoletimAluno } from "../../services/boletimService";
+import { buscarBoletinsPorAluno } from "../../services/boletimService";
 
 import iconePerfil from "../../assets/icone-perfil.png";
 
@@ -25,7 +25,7 @@ export default function AlunoRightPanel() {
       try {
         const cpf = localStorage.getItem("cpf");
         if (cpf) {
-          const response = await buscarBoletimAluno(cpf);
+          const response = await buscarBoletinsPorAluno(cpf);
           const boletimData = Array.isArray(response.data) && response.data.length > 0 
             ? response.data[0] 
             : response.data;
