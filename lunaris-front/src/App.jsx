@@ -62,6 +62,7 @@ function App() {
             <Login />
           }
         />
+        
         <Route path="/desempenho-adm" element={  <div style={{ display: "flex" }}>  <SidebarAdm/> <DesempenhoAdm /> </div>}/>
         <Route path="/alunos-adm" element={ <div style={{ display: "flex" }}> <SidebarAdm /> <AlunosAdm /> </div> } />
         <Route path="/funcionarios-adm" element={ <div style={{ display: "flex" }}> <SidebarAdm /> <FuncionariosAdm /> </div> } />
@@ -112,37 +113,16 @@ function App() {
         />
 
         <Route
-          path="/aluno-dashboard"
-          element={
-            <AlunoLayout>
-              <AlunoDashboard />
-            </AlunoLayout>
-          }
+          path="/aluno-dashboard" element={<div style={{ display: "flex" }}> <SidebarAluno /> <AlunoDashboard /> </div>}
         />
         <Route
-          path="/aluno-materias"
-          element={
-            <AlunoLayout>
-              <AlunoMaterias />
-            </AlunoLayout>
-          }
+          path="/aluno-materias" element={<div style={{ display: "flex" }}> <SidebarAluno /> <AlunoMaterias /> </div>}
         />
         <Route
-          path="/aluno-forum"
-          element={
-            <AlunoLayout>
-              <AlunoForum />
-            </AlunoLayout>
-          }
+          path="/aluno-forum" element={<div style={{ display: "flex" }}> <SidebarAluno /> <AlunoForum /> </div>}
         />
-
         <Route
-          path="/perfil-aluno"
-          element={
-            <AlunoLayout>
-              <PerfilAluno />
-            </AlunoLayout>
-          }
+          path="/perfil-aluno" element={<div style={{ display: "flex" }}> <SidebarAluno /> <PerfilAluno /></div>}
         />
       </Routes>
     </BrowserRouter>

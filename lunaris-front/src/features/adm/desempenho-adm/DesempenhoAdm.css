@@ -23,6 +23,22 @@
     margin-bottom: 70px;
 }
 
+.sem-dados{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100%;
+  font-size:14px;
+  color:#6b6b6b;
+}
+
+.sem-ranking{
+  padding:20px;
+  text-align:center;
+  color:#6b6b6b;
+  font-size:15px;
+}
+
 .div-ranking-desempenho{
     display: flex;
     align-items: center;

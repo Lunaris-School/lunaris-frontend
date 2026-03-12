@@ -1,7 +1,7 @@
 import api from "./api";
 
 export const listarProfessores = () => {
-  return api.get("/api/professor");
+  return api.get("/api/professor/listarTodos");
 };
 
 export const buscarProfessorPorCpf = (cpf) => {

@@ -117,33 +117,6 @@ export default function DesempenhoAdm() {
     cutout: "55%",
   };
 
-  const [alunos] = useState([
-    {
-      id: 1,
-      nome: "Clara Bartolini",
-      turma: turmas[0],
-      matricula: "123456432456",
-      genero: "F",
-      media: "7.5",
-    },
-    {
-      id: 2,
-      nome: "Bea Marioti",
-      turma: turmas[1],
-      matricula: "000000",
-      genero: "F",
-      media: "7.5",
-    },
-    {
-      id: 3,
-      nome: "Clara Bartolini",
-      turma: turmas[2],
-      matricula: "33333333",
-      genero: "F",
-      media: "7.5",
-    },
-  ]);
-
   return (
     <div className="desempenho-adm-container">
 
@@ -197,7 +170,11 @@ export default function DesempenhoAdm() {
                 <p>{turma.nome}</p>
 
                 <div className="grafico-container">
-                  <Doughnut data={data} options={options} />
+                  {valores.length === 0 ? (
+                    <p className="sem-dados">Nenhuma média registrada</p>
+                  ) : (
+                    <Doughnut data={data} options={options} />
+                  )}
                 </div>
               </div>
             );
@@ -219,10 +196,14 @@ export default function DesempenhoAdm() {
         <div className="c4">Professor</div>
       </div>
 
-      {ranking.map((i) => (
+      {ranking.length === 0 && (
+        <div className="sem-ranking">
+          Nenhum aluno encontrado para esse filtro.
+        </div>
+      )}
 
+      {ranking.length > 0 && ranking.map((i) => (
         <div key={i.id} className="card-desempenho">
-
           <div className="aluno-desempenho">
             <img
               className="avatar"

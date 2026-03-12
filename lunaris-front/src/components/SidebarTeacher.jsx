@@ -13,6 +13,9 @@ import notaEscuro from "../assets/icone-nota-escuro.png";
 import alunoClaro from "../assets/icone-aluno-claro.png";
 import alunoEscuro from "../assets/icone-aluno-escuro.png";
 
+import logout from "../assets/icone-logout.png";
+import logoutDark from "../assets/icone-logout-dark.png";
+
 export default function SidebarTeacher() {
   return (
     <div className="sidebar">
@@ -41,6 +44,14 @@ export default function SidebarTeacher() {
         <img src={alunoClaro} className="icon light" alt="" />
         <span className="item-text">Alunos</span>
       </NavLink>
+
+      <div className="logout-area">
+        <NavLink to="/login" className="item" onClick={() => localStorage.clear()}>
+          <img src={logoutDark} className="icon dark" alt="" />
+          <img src={logout} className="icon light" alt="" />
+          <span className="item-text">Sair</span>
+        </NavLink>
+      </div>
     </div>
   );
 }

@@ -4,7 +4,7 @@
 
 .sidebar {
     width: 240px;
-    min-height: 100vh;
+    height: 100vh;
     max-width: 100%;
     background: #6EA1B2;
     padding: 20px;
@@ -15,6 +15,9 @@
     box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .logo-area {
@@ -59,8 +62,8 @@
     background: #6EA1B2;
 }
 
-.logout {
-    margin-top: 320px;  
+.logout-area {
+    margin-top: auto;
 }
 
 .item-text {
