@@ -45,11 +45,13 @@ export default function SidebarAdm() {
           <span className="item-text">Alunos</span>
         </NavLink>
         
-        <NavLink to="/login" className="item logout" onClick={() => localStorage.clear()}>
+      <div className="logout-area">
+        <NavLink to="/login" className="item" onClick={() => localStorage.clear()}>
           <img src={logoutDark} className="icon dark" alt="" />
           <img src={logout} className="icon light" alt="" />
-          <span className="item-text">Sair</span> 
+          <span className="item-text">Sair</span>
         </NavLink>
+      </div>
       </div>
     );
   }

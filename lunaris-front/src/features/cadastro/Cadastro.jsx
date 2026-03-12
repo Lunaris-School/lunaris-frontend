@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Cadastro.css";
 import LargeButton from "../../components/LargeButton";
 import TextInput from "../../components/TextInput";
@@ -16,6 +17,8 @@ export default function Cadastro() {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     async function handleCadastro() {
         setLoading(true);
@@ -38,6 +41,7 @@ export default function Cadastro() {
         try {
             await inserirAluno(dados);
             alert("Cadastro realizado com sucesso!");
+            navigate("/login");
         } catch (error) {
             console.error("Erro ao cadastrar aluno:", error);
             const mensagem = error.response?.data?.message || "Ocorreu um erro ao cadastrar. Tente novamente.";

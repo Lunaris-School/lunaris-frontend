@@ -1,5 +1,5 @@
 import React from "react";
-import "../desempenho-adm/DesempenhoAdm.css";
+import "../adm/desempenho-adm/DesempenhoAdm.css";
 import iconePerfil from "../../assets/icone-perfil.png";
 
 export default function DesempenhoAluno() {
