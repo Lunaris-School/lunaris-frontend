@@ -9,6 +9,7 @@ export default function Select({
   name,
   id,
   required = false,
+  disabled = false,
   options = []
 }) {
   return (
@@ -24,6 +25,7 @@ export default function Select({
         value={value}
         onChange={onChange}
         required={required}
+        disabled={disabled}
         className={`select-field ${!value ? 'select-placeholder-active' : ''}`}
       >
         {placeholder && (

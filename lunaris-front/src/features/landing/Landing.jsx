@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Landing.css";
 
 import logo from "../../assets/logo-escura.png";
@@ -11,9 +12,9 @@ import icon3 from "../../assets/icon3.png";
 import icon4 from "../../assets/icon4.png";
 
 export default function Landing() {
+  const navigate = useNavigate();
   return (
     <div className="landing">
-      {/* NAV */}
       <header className="landing-nav">
         <div className="nav-left">
           <img className="nav-logo" src={logo} alt="Logo" />
@@ -27,8 +28,8 @@ export default function Landing() {
         </nav>
 
         <div className="nav-actions">
-          <button className="btn-outline">Entrar</button>
-          <button className="btn-solid">Cadastre-se</button>
+          <button className="btn-outline" onClick={() => navigate('/login')}>Entrar</button>
+          <button className="btn-solid" onClick={() => navigate('/cadastro-aluno')}>Cadastre-se</button>
         </div>
       </header>
 
@@ -53,7 +54,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* SOBRE */}
       <section id="sobre" className="sobre">
         <div className="sobre-top">
           <div className="sobre-col">
@@ -118,7 +118,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* PLANOS */}
       <section id="planos" className="planos">
         <h2 className="planos-title">Nossos planos</h2>
 

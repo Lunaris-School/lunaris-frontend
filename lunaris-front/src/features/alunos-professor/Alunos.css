@@ -64,10 +64,3 @@ text-decoration: none;
 width: 42px;
 display: block;
 }
-
-.alunos-lista .aluno {
-width: 100%;
-display: flex;
-padding: 44px 28px;
-box-sizing: border-box;
-}

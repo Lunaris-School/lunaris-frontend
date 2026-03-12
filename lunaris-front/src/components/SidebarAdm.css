@@ -21,12 +21,13 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-top: -25px;
     margin-bottom: 40px;
 }
 
-.sidebar-logo {
-    width: 76px;
-    height:72px;
+.sidebar-adm-logo {
+    width: 170px;
+    height: 76px;
     padding:50px 10px 0px 5px;
 }
 
@@ -56,6 +57,10 @@
     border-radius: 10px;
     text-decoration: none;
     background: #6EA1B2;
+}
+
+.logout {
+    margin-top: 320px;  
 }
 
 .item-text {

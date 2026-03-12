@@ -24,5 +24,3 @@ export const deletarProfessor = (cpf) => {
     return api.delete(`/api/professor/deletar/${cpf}`);
 };
 
-// não foi add o endpoit de patch do ProfessorController
-

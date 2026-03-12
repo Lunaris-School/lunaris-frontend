@@ -4,6 +4,8 @@ import LargeButton from "../../components/LargeButton";
 import TextInput from "../../components/TextInput";
 import Select from "../../components/Select";
 import logo from "../../assets/logo.svg";
+import Loading from "../../components/Loading";
+import { inserirAluno } from "../../services/alunoService";
 
 export default function Cadastro() {
 
@@ -13,9 +15,41 @@ export default function Cadastro() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    async function handleCadastro() {
+        setLoading(true);
+        if(password !== password2){
+            alert("As senhas não coincidem!");
+            return;
+        }
+        if(!gender){
+            alert("Selecione um gênero!");
+            return;
+        }
+        const dados = {
+            cpf: cpf,
+            nome: name,
+            matricula: Math.floor(Math.random() * 1000000),
+            email: email,
+            senha: password,
+            generoId: parseInt(gender, 10)
+        };
+        try {
+            await inserirAluno(dados);
+            alert("Cadastro realizado com sucesso!");
+        } catch (error) {
+            console.error("Erro ao cadastrar aluno:", error);
+            const mensagem = error.response?.data?.message || "Ocorreu um erro ao cadastrar. Tente novamente.";
+            alert(mensagem);
+        } finally {
+            setLoading(false);
+        }
+    }
 
     return(
         <div className="cadastro-container">
+            {loading && <Loading />}
             <div className="cadastro-form">
                 <img src={logo} alt="Logo" />
                 <h1 className="cadastro-form-title">Seja Bem-vindo!</h1>
@@ -48,9 +82,9 @@ export default function Cadastro() {
                 onChange={(e) => setGender(e.target.value)}
                 placeholder="Selecione seu gênero"
                 options={[
-                    { value: "masculino", label: "Masculino" },
-                    { value: "feminino", label: "Feminino" },
-                    { value: "outro", label: "Outro" }
+                    { value: 1, label: "Masculino" },
+                    { value: 2, label: "Feminino" },
+                    { value: 3, label: "Outro" }
                 ]}
                 />
 
@@ -81,9 +115,7 @@ export default function Cadastro() {
                 placeholder="********"
                 />
 
-                <LargeButton label="Cadastrar" color="#001E3A" onClick={() => {}} />
-
-
+                <LargeButton label="Cadastrar" color="#001E3A" onClick={handleCadastro} />
             </div>
         </div>
     );

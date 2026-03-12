@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./FuncionariosAdm.css"
-import {listarProfessores} from "../../services/professorService"
-import {listarAdmins, deletarAdmin} from "../../services/adminService"
-import Search from "../../components/Search";
+import {listarProfessores} from "../../../services/professorService"
+import {listarAdmins, deletarAdmin} from "../../../services/adminService"
+import Search from "../../../components/Search";
+import Loading from "../../../components/Loading";
 
-import iconePerfil from "../../assets/icone-perfil.png";
-import iconeProfessor from "../../assets/icone-professor.png";
-import iconeAdm from "../../assets/icone-adm.svg";
-import iconeLixo from "../../assets/icone-lixo.png";
+import iconePerfil from "../../../assets/icone-perfil.png";
+import iconeProfessor from "../../../assets/icone-professor.png";
+import iconeAdm from "../../../assets/icone-adm.svg";
+import iconeLixo from "../../../assets/icone-lixo.png";
 
 import ModalCadastroFuncionario from "./ModalCadastroFuncionario";
 
@@ -22,6 +22,9 @@ export default function FuncionariosAdm() {
   const [professores, setProfessores] = useState([])
   const [admins, setAdmins] = useState([])
   const [adminSelecionado, setAdminSelecionado] = useState("")
+  const [loading, setLoading] = useState(true);
+
+  const userName = localStorage.getItem("userName");
 
   useEffect(() => {
     carregarAdmins();
@@ -34,8 +37,11 @@ export default function FuncionariosAdm() {
       setProfessores(responseProfessor.data);
     } catch (error) {
       console.error("Erro ao buscar professores:", error);
+    }finally{
+      setLoading(false);
     }
   }
+
   async function carregarAdmins() {
     try {
       const responseAdmin = await listarAdmins();
@@ -78,6 +84,8 @@ export default function FuncionariosAdm() {
 
   return(
     <div className="funcionarios-page">
+      {loading && <Loading />}
+
       <div className="topo">
         <Search
           value={busca}
@@ -85,8 +93,7 @@ export default function FuncionariosAdm() {
           placeholder="Buscar funcionário por nome, email ou disciplina"
         />
         <div className="perfil">
-          {/* depois substituir pelo nome do professor atual (mock) */}
-          <span>Prof. João Jonas</span>
+          <span>{userName}</span>
           <div className="bolinha">
             <img src={iconePerfil} alt="" />
           </div>
