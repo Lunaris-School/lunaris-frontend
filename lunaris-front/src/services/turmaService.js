@@ -15,3 +15,7 @@ export const inserirTurma = (dados) => {
 export const deletarTurma = (id) => {
     return api.delete(`/v1/turma/${id}`);
 };
+
+export const listarTurmasPorProfessor = (cpf) => {
+  return api.get(`/v1/turma/listarTurmaPorProfessor/${cpf}`);
+};

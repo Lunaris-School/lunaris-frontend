@@ -12,8 +12,13 @@ import {
   buscarProfessorPorCpf,
 } from "../../services/professorService";
 import { buscarDetalhesUsuario } from "../../services/loginService";
-import { buscarBoletinsPorAluno } from "../../services/boletimService";
-import { lancarNota } from "../../services/notasService";
+import {
+  buscarBoletinsPorAluno,
+  criarBoletim,
+} from "../../services/boletimService";
+import { lancarNota, atualizarNota } from "../../services/notasService";
+import { buscarAlunoPorCpf } from "../../services/alunoService";
+import { listarTurmas } from "../../services/turmaService";
 
 export default function Notas() {
   const [busca, setBusca] = useState("");
@@ -21,21 +26,118 @@ export default function Notas() {
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState("");
   const [disciplinaId, setDisciplinaId] = useState(null);
+  const [salvandoId, setSalvandoId] = useState(null);
+  const [nomeProfessor, setNomeProfessor] = useState("Professor");
 
   useEffect(() => {
     carregarDados();
   }, []);
 
+  function obterIconeGenero(generoId, genero) {
+    if (generoId != null) {
+      const id = Number(generoId);
+      if (!Number.isNaN(id)) {
+        return id % 2 !== 0 ? iconeMasculino : iconeFeminino;
+      }
+    }
+
+    const generoTexto = String(genero || "").trim().toLowerCase();
+    if (generoTexto === "masculino") return iconeMasculino;
+    return iconeFeminino;
+  }
+
   function parseNota(valor) {
-    if (!valor || String(valor).trim() === "") return null;
+    if (valor === "" || valor == null) return null;
     const n = Number(String(valor).replace(",", "."));
     return Number.isNaN(n) ? null : n;
+  }
+
+  function formatarNota(valor) {
+    if (valor == null) return "";
+    return String(valor).replace(".", ",");
   }
 
   function mudarNota(id, campo, valor) {
     setAlunos((prev) =>
       prev.map((a) => (a.id === id ? { ...a, [campo]: valor } : a))
     );
+  }
+
+  function normalizarStatus(status) {
+    const statusNormalizado = String(status || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+    if (statusNormalizado.includes("aprov")) {
+      return { classe: "Aprovado", texto: "Aprovado" };
+    }
+
+    if (statusNormalizado.includes("reprov")) {
+      return { classe: "Reprovado", texto: "Reprovado" };
+    }
+
+    return { classe: "Processando", texto: "Processando" };
+  }
+
+  function extrairMensagemErro(error, fallback = "Erro inesperado.") {
+    const data = error?.response?.data;
+
+    if (typeof data === "string") return data;
+    if (typeof data?.message === "string") return data.message;
+    if (typeof data?.erro === "string") return data.erro;
+    if (typeof data?.error === "string") return data.error;
+
+    if (Array.isArray(data?.errors)) {
+      return data.errors.join(", ");
+    }
+
+    if (data && typeof data === "object") {
+      try {
+        return JSON.stringify(data);
+      } catch {
+        return fallback;
+      }
+    }
+
+    return error?.message || fallback;
+  }
+
+  async function obterBoletimValido(cpfAluno) {
+    try {
+      let respBusca = await buscarBoletinsPorAluno(cpfAluno);
+      let boletins = Array.isArray(respBusca?.data) ? respBusca.data : [];
+
+      if (boletins.length > 0) {
+        boletins = boletins
+          .filter((b) => b?.id != null)
+          .sort((a, b) => Number(b.id) - Number(a.id));
+
+        return boletins[0] ?? null;
+      }
+
+      await criarBoletim(Number(cpfAluno));
+
+      respBusca = await buscarBoletinsPorAluno(cpfAluno);
+      boletins = Array.isArray(respBusca?.data) ? respBusca.data : [];
+
+      if (boletins.length > 0) {
+        boletins = boletins
+          .filter((b) => b?.id != null)
+          .sort((a, b) => Number(b.id) - Number(a.id));
+
+        return boletins[0] ?? null;
+      }
+
+      return null;
+    } catch (error) {
+      console.log(
+        "Erro ao obter/criar boletim do aluno:",
+        cpfAluno,
+        error?.response?.data || error
+      );
+      return null;
+    }
   }
 
   async function carregarDados() {
@@ -48,98 +150,121 @@ export default function Notas() {
       const detalhesResp = await buscarDetalhesUsuario();
       const data = detalhesResp?.data;
 
-      const role = data?.role ?? localStorage.getItem("role");
-      if (role && role !== "PROFESSOR") {
-        setErro("Usuário logado não é PROFESSOR.");
-        return;
-      }
-
-      const cpfProfessor = data?.id != null ? String(data.id) : null;
+      const cpfProfessor = data?.id;
       if (!cpfProfessor) {
-        setErro("Não foi possível identificar o CPF do professor logado.");
+        setErro("Não foi possível identificar o professor logado.");
         return;
       }
 
-      const professorResp = await buscarProfessorPorCpf(cpfProfessor);
-      const professor = professorResp?.data;
+      const [professorResp, alunosResp, turmasResp] = await Promise.all([
+        buscarProfessorPorCpf(cpfProfessor),
+        bucarAlunosPorProfessor(cpfProfessor),
+        listarTurmas(),
+      ]);
 
-      const dId = professor?.disciplinaId ?? null;
-      if (!dId) {
+      const professor = professorResp?.data;
+      const listaApi = Array.isArray(alunosResp?.data) ? alunosResp.data : [];
+      const listaTurmas = Array.isArray(turmasResp?.data) ? turmasResp.data : [];
+
+      if (!professor?.disciplinaId) {
         setErro("Não foi possível identificar a disciplina do professor.");
         return;
       }
 
-      setDisciplinaId(Number(dId));
+      setDisciplinaId(Number(professor.disciplinaId));
+      setNomeProfessor(professor?.nome || "Professor");
 
-      const alunosResp = await bucarAlunosPorProfessor(cpfProfessor);
-
-      if (alunosResp.status === 204) {
-        setErro("Professor não possui alunos.");
-        return;
-      }
-
-      const listaApi = alunosResp.data;
-      if (!Array.isArray(listaApi)) {
-        setErro("O backend não retornou uma lista de alunos.");
-        return;
-      }
-
-      const alunosBase = listaApi.map((a) => ({
-        id: a.cpf ?? a.matricula ?? crypto.randomUUID(),
-        cpf: a.cpf,
-        nome: a.nome ?? "",
-        matricula: String(a.matricula ?? ""),
-        turma: a.turma?.nome ?? "-",
-        genero: a.generoId === 1 || a.genero === "M" ? "M" : "F",
-        nota1: "",
-        nota2: "",
-        boletimId: null,
-      }));
-
-      const boletimCache = new Map();
-
-      const alunosComBoletim = await Promise.all(
-        alunosBase.map(async (al) => {
-          const cpfAluno = al.cpf;
-          if (!cpfAluno) return al;
-
-          if (boletimCache.has(cpfAluno)) {
-            return { ...al, boletimId: boletimCache.get(cpfAluno) };
-          }
+      const alunosProcessados = await Promise.all(
+        listaApi.map(async (a) => {
+          let boletimId = null;
+          let notaId = null;
+          let nota1 = "";
+          let nota2 = "";
+          let status = "Processando";
+          let turmaNome = a?.turma?.nome || "-";
+          let generoId = a?.generoId ?? null;
+          let genero = a?.genero ?? "";
 
           try {
-            const resp = await buscarBoletinsPorAluno(cpfAluno);
-            const boletins = resp?.data;
+            const alunoCompletoResp = await buscarAlunoPorCpf(a.cpf);
+            const alunoCompleto = alunoCompletoResp?.data ?? {};
 
-            const boletimId =
-              Array.isArray(boletins) && boletins.length > 0
-                ? boletins[0]?.id
-                : null;
+            generoId = alunoCompleto?.generoId ?? generoId;
+            genero = alunoCompleto?.genero ?? genero;
 
-            boletimCache.set(cpfAluno, boletimId ?? null);
-            return { ...al, boletimId: boletimId ?? null };
-          } catch {
-            boletimCache.set(cpfAluno, null);
-            return { ...al, boletimId: null };
+            const turmaId = alunoCompleto?.turmaId;
+            if (turmaId != null) {
+              const turmaEncontrada = listaTurmas.find(
+                (t) => Number(t?.id) === Number(turmaId)
+              );
+
+              if (turmaEncontrada?.nome) {
+                turmaNome = turmaEncontrada.nome;
+              }
+            }
+          } catch (error) {
+            console.log(
+              "Erro ao buscar aluno por CPF:",
+              a?.cpf,
+              error?.response?.data || error
+            );
           }
+
+          const boletim = await obterBoletimValido(a.cpf);
+
+          if (boletim) {
+            boletimId = boletim.id ?? null;
+
+            if (turmaNome === "-" && boletim?.turmaNome) {
+              turmaNome = boletim.turmaNome;
+            }
+
+            const notasDaDisciplina =
+              Array.isArray(boletim.notas) && boletim.notas.length > 0
+                ? boletim.notas
+                    .filter(
+                      (n) =>
+                        Number(n.disciplinaId) === Number(professor.disciplinaId)
+                    )
+                    .sort((a, b) => Number(b.id) - Number(a.id))
+                : [];
+
+            const notaDaDisciplina = notasDaDisciplina.length
+              ? notasDaDisciplina[0]
+              : null;
+
+            if (notaDaDisciplina) {
+              notaId = notaDaDisciplina.id ?? null;
+              nota1 = formatarNota(notaDaDisciplina.valorNota);
+              nota2 = formatarNota(notaDaDisciplina.valorNota2);
+              status = notaDaDisciplina.status || "Processando";
+            }
+          }
+
+          return {
+            id: a.cpf ?? a.matricula ?? crypto.randomUUID(),
+            cpf: a.cpf,
+            nome: a.nome ?? "",
+            matricula: String(a.matricula ?? ""),
+            turma: turmaNome,
+            generoId,
+            genero,
+            boletimId,
+            notaId,
+            nota1,
+            nota2,
+            status,
+          };
         })
       );
 
-      setAlunos(alunosComBoletim);
-
-      if (alunosComBoletim.length === 0) {
-        setErro("Lista vazia: o professor pode não ter turmas/alunos vinculados.");
-      }
+      setAlunos(alunosProcessados);
     } catch (error) {
-      const status = error?.response?.status;
-      const msg =
-        error?.response?.data?.message ||
-        error?.response?.data ||
-        error?.message ||
-        "Erro desconhecido";
-
-      setErro(`Erro ao carregar dados. Status: ${status ?? "?"} - ${String(msg)}`);
-      setAlunos([]);
+      console.log(
+        "Erro ao carregar dados da tela de notas:",
+        error?.response?.data || error
+      );
+      setErro(extrairMensagemErro(error, "Não foi possível carregar os dados."));
     } finally {
       setLoading(false);
     }
@@ -148,51 +273,96 @@ export default function Notas() {
   async function salvarNotas(aluno) {
     try {
       setErro("");
+      setSalvandoId(aluno.id);
 
       const n1 = parseNota(aluno.nota1);
       const n2 = parseNota(aluno.nota2);
 
       if (n1 == null || n2 == null) {
-        setErro("Preencha as duas notas com números válidos.");
+        setErro("Preencha as duas notas.");
+        return;
+      }
+
+      if (n1 < 0 || n2 < 0) {
+        setErro("Não é permitido lançar notas negativas.");
+        return;
+      }
+
+      if (n1 > 10 || n2 > 10) {
+        setErro("As notas devem estar entre 0 e 10.");
+        return;
+      }
+      
+      if (n1 < 0 || n2 < 0) {
+        setErro("Não é permitido lançar notas negativas.");
+        return;
+      }
+      
+      if (n1 > 10 || n2 > 10) {
+        setErro("As notas devem estar entre 0 e 10.");
         return;
       }
 
       if (!disciplinaId) {
-        setErro("disciplinaId não encontrado.");
+        setErro("Disciplina não encontrada.");
         return;
       }
 
-      if (!aluno.boletimId) {
-        setErro("boletimId não encontrado para esse aluno. Verifique se existe boletim criado para ele.");
+      const respBoletins = await buscarBoletinsPorAluno(aluno.cpf);
+      const boletins = Array.isArray(respBoletins.data) ? respBoletins.data : [];
+
+      if (!boletins.length) {
+        setErro("Boletim não encontrado.");
         return;
       }
 
-      const payload = {
-        boletimId: Number(aluno.boletimId),
-        valorNota: n1,
-        valorNota2: n2,
-        disciplinaId: Number(disciplinaId),
-        tipoAvaliacao: "BIMESTRAL",
-        dataLancamento: new Date().toISOString().slice(0, 10),
-      };
+      const boletimMaisRecente = boletins
+        .filter((b) => b?.id != null)
+        .sort((a, b) => Number(b.id) - Number(a.id))[0];
 
-      await lancarNota(payload);
+      if (!boletimMaisRecente?.id) {
+        setErro("Boletim não encontrado.");
+        return;
+      }
+
+      const notasDaDisciplina = (boletimMaisRecente.notas || [])
+        .filter((n) => Number(n.disciplinaId) === Number(disciplinaId))
+        .sort((a, b) => Number(b.id) - Number(a.id));
+
+      const ultimaNota = notasDaDisciplina.length ? notasDaDisciplina[0] : null;
+
+      if (ultimaNota?.id) {
+        await atualizarNota(Number(ultimaNota.id), {
+          boletimId: Number(boletimMaisRecente.id),
+          valorNota: n1,
+          valorNota2: n2,
+          tipoAvaliacao: "Bimestre",
+        });
+      } else {
+        await lancarNota({
+          boletimId: Number(boletimMaisRecente.id),
+          valorNota: n1,
+          valorNota2: n2,
+          disciplinaId: Number(disciplinaId),
+          tipoAvaliacao: "Bimestre",
+          dataLancamento: new Date().toISOString().slice(0, 10),
+        });
+      }
+
+      await carregarDados();
+      alert("Nota salva com sucesso.");
     } catch (error) {
-      const status = error?.response?.status;
-      const msg =
-        error?.response?.data?.message ||
-        error?.response?.data ||
-        error?.message ||
-        "Erro desconhecido";
-
-      setErro(`Erro ao salvar nota. Status: ${status ?? "?"} - ${String(msg)}`);
+      console.log("Erro ao salvar nota:", error?.response?.data || error);
+      setErro(extrairMensagemErro(error, "Erro ao salvar nota."));
+    } finally {
+      setSalvandoId(null);
     }
   }
 
   const listaFiltrada = alunos.filter((a) => {
     if (busca.trim() === "") return true;
     return (
-      a.matricula.includes(busca) ||
+      String(a.matricula).includes(busca) ||
       a.nome.toLowerCase().includes(busca.toLowerCase())
     );
   });
@@ -207,7 +377,8 @@ export default function Notas() {
         />
 
         <div className="perfil">
-          <span>Prof. João Jonas</span>
+          <span>{nomeProfessor}</span>
+
           <div className="bolinha">
             <Link className="perfil-professor" to="/perfil-professor">
               <img src={iconePerfil} alt="" />
@@ -218,7 +389,6 @@ export default function Notas() {
 
       {loading && <p>Carregando...</p>}
       {!loading && erro && <p style={{ color: "red" }}>{erro}</p>}
-      {!loading && !erro && alunos.length === 0 && <p>Nenhum aluno encontrado.</p>}
 
       <div className="cabecalho">
         <div className="c1">Nome e turma</div>
@@ -231,7 +401,7 @@ export default function Notas() {
 
       {listaFiltrada.map((i) => {
         let media = "-";
-        let status = "Processando";
+        let statusAtual = "Processando";
 
         const n1 = parseNota(i.nota1);
         const n2 = parseNota(i.nota2);
@@ -239,21 +409,32 @@ export default function Notas() {
         if (n1 != null && n2 != null) {
           const m = (n1 + n2) / 2;
           media = m.toFixed(1).replace(".", ",");
-          status = m >= 7 ? "Aprovado" : "Reprovado";
+
+          if (m >= 7) {
+            statusAtual = "Aprovado";
+          } else {
+            statusAtual = "Reprovado";
+          }
+        } else if (i.status) {
+          statusAtual = i.status;
         }
+
+        const statusInfo = normalizarStatus(statusAtual);
 
         return (
           <div key={i.id} className="card">
             <div className="notas-aluno">
               <img
                 className="avatar"
-                src={i.genero === "M" ? iconeMasculino : iconeFeminino}
+                src={obterIconeGenero(i.generoId, i.genero)}
                 alt=""
               />
+
               <div>
                 <div className="nome">
                   {i.nome}, {i.turma}
                 </div>
+
                 <div className="matricula">{i.matricula}</div>
               </div>
             </div>
@@ -275,12 +456,18 @@ export default function Notas() {
             <div className="media">{media}</div>
 
             <div className="status-div">
-              <div className={`status ${status}`}>{status}</div>
+              <div className={`status ${statusInfo.classe}`}>
+                {statusInfo.texto}
+              </div>
             </div>
 
             <div className="btn-wrap">
-              <button className="btn-salvar" onClick={() => salvarNotas(i)}>
-                Salvar
+              <button
+                className="btn-salvar"
+                onClick={() => salvarNotas(i)}
+                disabled={salvandoId === i.id}
+              >
+                {salvandoId === i.id ? "Salvando..." : "Salvar"}
               </button>
             </div>
           </div>
