@@ -3,6 +3,7 @@
   min-width: 240px;
   max-width: 100%;
   min-height: 100vh;
+  height: 100vh;
   background: #112A61;
   color: #FFFFFF;
   padding: 32px 24px;
@@ -14,6 +15,15 @@
   flex-shrink: 0;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+@media (min-width: 993px) {
+  .aluno-right {
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 15;
+  }
 }
 
 .aluno-right-perfil {
@@ -96,23 +106,30 @@
   color: #FFFFFF;
 }
 
-.seta {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
+.calendario-btn-nav {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s;
+  transition: background 0.2s ease, transform 0.15s ease;
+  flex-shrink: 0;
 }
 
-.seta:hover {
-  background: rgba(255, 255, 255, 0.2);
+.calendario-btn-nav:active {
+  transform: scale(0.95);
+}
+
+.calendario-btn-chevron {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+  opacity: 0.95;
 }
 
 .calendario-grid {

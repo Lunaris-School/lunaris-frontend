@@ -5,7 +5,7 @@ import { buscarBoletimAluno } from "../../services/boletimService";
 
 import iconePerfil from "../../assets/icone-perfil.png";
 
-const gerarAvatarUrl = (cpf, nome) => {
+const gerarAvatarUrl = (cpf) => {
   if (!cpf) return iconePerfil;
   
   const seed = cpf.toString();
@@ -61,11 +61,15 @@ export default function AlunoRightPanel() {
 
       <div className="aluno-right-calendario">
         <div className="calendario-topo">
-          <button className="seta" onClick={() => setDataAtual(new Date(dataAtual.getFullYear(), dataAtual.getMonth() - 1))}>{"<"}</button>
+          <button type="button" className="calendario-btn-nav" aria-label="Mês anterior" onClick={() => setDataAtual(new Date(dataAtual.getFullYear(), dataAtual.getMonth() - 1))}>
+            <span className="calendario-btn-chevron" aria-hidden>‹</span>
+          </button>
           <span className="calendario-mes">
             {dataAtual.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' }).replace(/^\w/, (c) => c.toUpperCase())}
           </span>
-          <button className="seta" onClick={() => setDataAtual(new Date(dataAtual.getFullYear(), dataAtual.getMonth() + 1))}>{">"}</button>
+          <button type="button" className="calendario-btn-nav" aria-label="Próximo mês" onClick={() => setDataAtual(new Date(dataAtual.getFullYear(), dataAtual.getMonth() + 1))}>
+            <span className="calendario-btn-chevron" aria-hidden>›</span>
+          </button>
         </div>
 
         <div className="calendario-grid">

@@ -4,9 +4,6 @@
   max-width: 100%;
   background: #112A61;
   padding: 24px 16px;
-  position: sticky;
-  top: 0;
-  left: 0;
   flex-shrink: 0;
   box-sizing: border-box;
   display: flex;
@@ -18,31 +15,15 @@
 .sidebar-aluno .logo-area {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: flex-start;
+  margin-top: 16px;
   margin-bottom: 40px;
 }
 
-.sidebar-aluno .sidebar-logo {
-  width: 56px;
-  height: 56px;
-  padding: 0;
-  filter: brightness(0) invert(1);
-  opacity: 0.95;
-}
-
-.sidebar-aluno .logo-text {
-  margin-top: 0;
-  font-size: 26px;
-  font-weight: 700;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  color: #FFFFFF;
-}
-
-.sidebar-aluno .logo-dark,
-.sidebar-aluno .logo-light {
-  color: #FFFFFF;
+.sidebar-aluno .sidebar-logo-aluno {
+  width: 160px;
+  height: auto;
+  display: block;
 }
 
 .sidebar-aluno .item {
@@ -118,13 +99,9 @@
     margin-bottom: 28px;
   }
 
-  .sidebar-aluno .logo-text {
-    display: none;
-  }
-
-  .sidebar-aluno .sidebar-logo {
-    width: 44px;
-    height: 44px;
+  .sidebar-aluno .sidebar-logo-aluno {
+    width: 90px;
+    height: auto;
   }
 
   .sidebar-aluno .item {
@@ -159,14 +136,9 @@
     margin-right: auto;
   }
 
-  .sidebar-aluno .logo-text {
-    display: flex;
-    font-size: 20px;
-  }
-
-  .sidebar-aluno .sidebar-logo {
-    width: 36px;
-    height: 36px;
+  .sidebar-aluno .sidebar-logo-aluno {
+    width: 120px;
+    height: auto;
   }
 
   .sidebar-aluno .item {
@@ -203,13 +175,9 @@
     gap: 4px;
   }
 
-  .sidebar-aluno .logo-text {
-    font-size: 18px;
-  }
-
-  .sidebar-aluno .sidebar-logo {
-    width: 32px;
-    height: 32px;
+  .sidebar-aluno .sidebar-logo-aluno {
+    width: 100px;
+    height: auto;
   }
 
   .sidebar-aluno .item {

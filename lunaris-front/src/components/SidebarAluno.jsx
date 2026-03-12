@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./SidebarAluno.css";
 
-import logo from "../assets/logo-escura.png";
+import logoAluno from "../assets/logo_aluno.svg";
 
 import desempenhoClaro from "../assets/icone-desempenho-claro.png";
 import desempenhoEscuro from "../assets/icone-desempenho-escuro.png";
@@ -15,11 +15,7 @@ export default function SidebarAluno() {
   return (
     <div className="sidebar-aluno">
       <div className="logo-area">
-        <img src={logo} className="sidebar-logo" alt="Logo" />
-        <span className="logo-text">
-          <span className="logo-dark">Luna</span>
-          <span className="logo-light">ris</span>
-        </span>
+        <img src={logoAluno} className="sidebar-logo-aluno" alt="Lunaris" />
       </div>
 
       <NavLink
