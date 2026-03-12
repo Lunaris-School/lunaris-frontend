@@ -57,6 +57,19 @@
     scroll-behavior: smooth;
 }
 
+/* .btn-salvar-desempenho {
+  background: #49769f;
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  height: 34px;
+  white-space: nowrap;
+} */
+
 .media-turma {
     flex: 0 0 520px;
     height: 25rem;

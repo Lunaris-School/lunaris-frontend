@@ -8,12 +8,13 @@ font-family: "Poppins", sans-serif;
   max-width: 100%;
   background: #ffffff;
   padding: 20px;
+
   position: sticky;
   top: 0;
   left: 0;
+
   flex-shrink: 0;
   box-sizing: border-box;
-  overflow-x: hidden;
   overflow-y: auto;
 
   display: flex;
@@ -69,6 +70,10 @@ background: #ffffff;
 color: #0b2a4a;
 font-size: 14px;
 font-weight: 500;
+}
+
+.logout-area {
+    margin-top: auto;
 }
 
 .icon {

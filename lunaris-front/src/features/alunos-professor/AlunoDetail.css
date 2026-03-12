@@ -15,6 +15,22 @@
     margin-bottom: 15px;
   }
   
+  .aluno-detail-content{
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.btn-voltar{
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #0b2a4a;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
   .aluno-detail-prof {
     display: flex;
     align-items: center;

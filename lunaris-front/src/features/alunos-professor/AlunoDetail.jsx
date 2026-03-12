@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import "./AlunoDetail.css";
 
 import iconePerfil from "../../assets/icone-perfil.png";
@@ -18,6 +18,7 @@ import { listarTurmas } from "../../services/turmaService";
 
 export default function AlunoDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [professorAtual, setProfessorAtual] = useState({
     cpf: null,
@@ -127,10 +128,12 @@ export default function AlunoDetail() {
           turmaNome = turmaEncontrada.nome;
         }
       }
+
       setProfessorAtual({
         cpf: cpfProfessor,
         nome: professor?.nome ?? "Professor",
       });
+
       setAluno({
         id: alunoData?.cpf ?? id,
         nome: alunoData?.nome ?? "",
@@ -140,7 +143,9 @@ export default function AlunoDetail() {
         status: normalizarStatus(alunoData?.status),
       });
 
-      const observacoesFormatadas = await montarObservacoesComNome(listaObservacoes);
+      const observacoesFormatadas =
+        await montarObservacoesComNome(listaObservacoes);
+
       setObservacoes(observacoesFormatadas);
     } catch (error) {
       const msg =
@@ -178,7 +183,9 @@ export default function AlunoDetail() {
         ? observacoesResp.data
         : [];
 
-      const observacoesFormatadas = await montarObservacoesComNome(listaObservacoes);
+      const observacoesFormatadas =
+        await montarObservacoesComNome(listaObservacoes);
+
       setObservacoes(observacoesFormatadas);
     } catch (error) {
       const msg =
@@ -201,6 +208,22 @@ export default function AlunoDetail() {
             <img src={iconePerfil} alt="" />
           </Link>
         </div>
+      </div>
+
+      <div style={{ marginBottom: "20px" }}>
+        <button
+          onClick={() => navigate(-1)}
+          style={{
+            background: "none",
+            border: "none",
+            fontSize: "18px",
+            cursor: "pointer",
+            color: "#0b2a4a",
+            fontWeight: "600",
+          }}
+        >
+          {"<"} Voltar
+        </button>
       </div>
 
       {loading && <p>Carregando...</p>}
@@ -260,6 +283,7 @@ export default function AlunoDetail() {
                 onChange={(e) => setTextoObs(e.target.value)}
                 placeholder="Enviar observação"
               />
+
               <button
                 className="btn-enviar"
                 onClick={enviarObs}

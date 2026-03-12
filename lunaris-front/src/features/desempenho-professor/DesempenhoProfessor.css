@@ -119,7 +119,6 @@ transform: translateY(-3px);
 box-shadow: 0 12px 24px rgba(0, 30, 58, 0.12);
 }
 .aluno {
-margin-top: 20px;
 display: flex;
 align-items: center;
 gap: 12px;

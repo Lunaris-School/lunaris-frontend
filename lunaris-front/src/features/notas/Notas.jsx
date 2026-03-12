@@ -463,7 +463,7 @@ export default function Notas() {
 
             <div className="btn-wrap">
               <button
-                className="btn-salvar"
+                className="btn-salvar-notas"
                 onClick={() => salvarNotas(i)}
                 disabled={salvandoId === i.id}
               >

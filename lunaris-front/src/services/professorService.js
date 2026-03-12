@@ -13,7 +13,7 @@ export const bucarAlunosPorProfessor = (cpf) => {
 };
 
 export const inserirProfessor = (dados) => {
-  return api.post("/api/professor", dados);
+  return api.post("/api/professor/inserir", dados);
 };
 
 export const atualizarProfessor = (cpf, dados) => {

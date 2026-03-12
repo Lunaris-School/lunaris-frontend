@@ -3,13 +3,18 @@
   height: 100vh;
   max-width: 100%;
   background: #112A61;
-  padding: 24px 16px;
+  padding: 20px;
+  
+  position: sticky;
+  top: 0;
+  left: 0;
+
   flex-shrink: 0;
   box-sizing: border-box;
+  overflow-y: auto;
+
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 
 .sidebar-aluno .logo-area {

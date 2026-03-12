@@ -4,6 +4,7 @@ import "./AlunoMaterias.css";
 import AlunoRightPanel from "../AlunoRightPanel";
 import Search from "../../../components/Search";
 import { listarDisciplinas } from "../../../services/disciplinaService";
+import { listarProfessores } from "../../../services/professorService";
 import Loading from "../../../components/Loading";
 
 export default function AlunoMaterias() {
@@ -11,6 +12,7 @@ export default function AlunoMaterias() {
   const [materias, setMaterias] = useState([]);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(null);
+  const [professores, setProfessores] = useState([]);
 
   useEffect(() => {
     const carregarDisciplinas = async () => {
@@ -29,6 +31,16 @@ export default function AlunoMaterias() {
       }
     };
 
+    const carregarProfessores = async () => {
+      try {
+        const response = await listarProfessores();
+        setProfessores(response.data);
+      } catch (error) {
+        console.error("Erro ao carregar professores:", error);
+      }
+    };
+
+    carregarProfessores();
     carregarDisciplinas();
   }, []);
 
@@ -40,6 +52,11 @@ export default function AlunoMaterias() {
       m.professor?.toLowerCase().includes(termo)
     );
   });
+
+    const professorPorDisciplina = professores.reduce((map, professor) => {
+      map[professor.disciplinaId] = professor.nome;
+      return map;
+    }, {});
 
   return (
     <div className="aluno-page">
@@ -71,9 +88,11 @@ export default function AlunoMaterias() {
                 <div key={m.id} className="materia-card">
                   <div className="materia-card-content">
                     <h2>{m.nome}</h2>
-                    <p className="materia-professor">
-                      {m.professor ? `Professor(a) ${m.professor}` : "Professor não atribuído"}
-                    </p>
+                        <p className="materia-professor">
+                          {professorPorDisciplina[m.id]
+                            ? `Professor(a) ${professorPorDisciplina[m.id]}`
+                            : "Professor não atribuído"}
+                        </p>
                   </div>
                   <div className="materia-card-icon" />
                 </div>

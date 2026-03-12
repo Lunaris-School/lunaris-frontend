@@ -126,7 +126,7 @@ export default function Alunos() {
         <Search
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
-          placeholder="Buscar aluno por nome ou CPF"
+          placeholder="Buscar aluno por nome, cpf ou CPF"
         />
 
         <div className="perfil">
@@ -240,7 +240,6 @@ export default function Alunos() {
       {abrirModal && (
 
         <div className="modal-overlay">
-          {Loading && <Loading />}
 
           <div className="modal-container">
             <h2>Matricular Aluno</h2>

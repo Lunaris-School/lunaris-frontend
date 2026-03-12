@@ -6,7 +6,7 @@ import TextInput from "../../../components/TextInput";
 import Select from "../../../components/Select";
 import { listarDisciplinas } from "../../../services/disciplinaService";
 import { listarMediasPorTurma, listarTurmas } from "../../../services/turmaService";
-import { listarRankingAlunos } from "../../../services/alunoService";
+import { listarRankingAlunos, listarRankingAlunosAdm } from "../../../services/alunoService";
 
 import iconePerfil from "../../../assets/icone-perfil.png";
 import iconeMasculino from "../../../assets/icone-masculino.png";
@@ -83,7 +83,7 @@ export default function DesempenhoAdm() {
 
   async function carregarRanking() {
     try{
-      const response = await listarRankingAlunos(form.disciplinaId, form.quantidadeAlunos);
+      const response = await listarRankingAlunosAdm(form.disciplinaId, form.quantidadeAlunos);
       setRanking(response.data);
     }catch(error){
       console.error("Erro ao buscar ranking:", error);
