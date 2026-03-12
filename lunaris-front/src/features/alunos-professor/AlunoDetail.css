@@ -278,6 +278,7 @@
   }
   
   .btn-enviar {
+    margin-bottom: 10px;
     width: 44px;
     height: 38px;
     border: none;

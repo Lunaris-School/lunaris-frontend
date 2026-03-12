@@ -3,7 +3,7 @@ import "../AlunoPages.css";
 import "./AlunoDashboard.css";
 import AlunoRightPanel from "../AlunoRightPanel";
 import Loading from "../../../components/Loading";
-import { buscarBoletimAluno } from "../../../services/boletimService";
+import { buscarBoletinsPorAluno } from "../../../services/boletimService";
 
 import { Doughnut } from "react-chartjs-2";
 import {
@@ -31,7 +31,7 @@ export default function AlunoDashboard() {
           return;
         }
 
-        const response = await buscarBoletimAluno(cpf);
+        const response = await buscarBoletinsPorAluno(cpf);
         console.log("Resposta da API:", response.data);
         
         const boletimData = Array.isArray(response.data) && response.data.length > 0 

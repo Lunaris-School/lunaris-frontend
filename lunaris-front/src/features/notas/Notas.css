@@ -1,20 +1,9 @@
 input {
   padding: 0 6px;
-  background: white;    
+  background: white;
   font-size: 12px;
   color: black;
-}
-
-.status.Aprovado {
-  background: #59c11a;
-}
-
-.status.Reprovado {
-  background: #e20000;
-}
-
-.status.Processando {
-  background: #555;
+  box-sizing: border-box;
 }
 
 .notas {
@@ -82,7 +71,8 @@ input {
   font-weight: 600;
   font-size: 16px;
   color: #0b2a4a;
-} 
+}
+
 a.perfil-professor {
   display: flex;
   align-items: center;
@@ -116,28 +106,33 @@ a.perfil-professor {
   color: #0b2a4a;
 }
 
-.c1 { 
-  width: 45%; 
+.c1 {
+  width: 45%;
 }
 
-.c2 { 
-  width: 12%; 
-  text-align: center; 
+.c2 {
+  width: 12%;
+  text-align: center;
 }
 
-.c3 { 
-  width: 12%; 
-  text-align: center; 
+.c3 {
+  width: 12%;
+  text-align: center;
 }
 
-.c4 { 
-  width: 10%; 
-  text-align: center; 
+.c4 {
+  width: 10%;
+  text-align: center;
 }
 
-.c5 { 
-  width: 21%; 
-  text-align: center; 
+.c5 {
+  width: 15%;
+  text-align: center;
+}
+
+.c6 {
+  width: 16%;
+  text-align: center;
 }
 
 .card {
@@ -172,108 +167,92 @@ a.perfil-professor {
   color: #7b8794;
 }
 
-.n1, .n2 { 
-  width: 12%; 
-  text-align: center; 
+.n1,
+.n2 {
+  width: 12%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.n1 input, .n2 input {
+
+.n1 input,
+.n2 input {
   width: 45px;
   height: 24px;
   border-radius: 10px;
   border: 1px solid #222;
   outline: none;
-  padding: 0 8px;
-  margin-left:25px
+  padding: 0 6px;
+  text-align: center;
 }
 
 .media {
-  margin-left:20px;
   width: 10%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 700;
   color: #0b2a4a;
+  text-align: center;
 }
 
 .status-div {
-  width: 17%;
+  width: 15%;
   display: flex;
-  justify-content: flex-end;
-  margin-right: 40px;
+  justify-content: center;
+  align-items: center;
 }
 
 .status {
+  min-width: 110px;
+  min-height: 32px;
   padding: 7px 14px;
   border-radius: 999px;
   color: white;
   font-weight: 700;
   font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
 }
 
-.status.verde { 
-  background: #59c11a; 
-}
-.status.vermelho { 
-  background: #e20000; 
-}
-.status.cinza { 
-  background: #555; 
+.status.Aprovado {
+  background: #59c11a;
+  color: #fff;
 }
 
-@media (max-width: 992px) {
-  .cabecalho,
-  .card {
-    flex-wrap: wrap;
-  }
-
-  .c1, .notas-aluno { width: 100%; max-width: 100%; }
-  .c2, .c3, .c4, .c5, .n1, .n2, .media, .status-div {
-    min-width: 0;
-  }
+.status.Reprovado {
+  background: #e20000;
+  color: #fff;
 }
 
-@media (max-width: 768px) {
-  .notas {
-    padding: 16px;
-  }
-
-  .topo {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 20px;
-  }
-
-  .busca input {
-    width: 100%;
-  }
-
-  .card {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 12px;
-  }
-
-  .notas-aluno {
-    width: 100%;
-  }
-
-  .cabecalho {
-    display: none;
-  }
-
-  .n1, .n2, .media, .status-div {
-    width: 100%;
-    justify-content: flex-start;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .n1 input, .n2 input {
-    margin-left: 0;
-  }
+.status.Processando {
+  background: #555;
+  color: #fff;
 }
 
-@media (max-width: 480px) {
-  .notas {
-    padding: 12px;
-  }
+.btn-wrap {
+  width: 16%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-salvar {
+  background: #49769f;
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  height: 34px;
+  white-space: nowrap;
+}
+
+.btn-salvar:hover {
+  filter: brightness(0.95);
 }
